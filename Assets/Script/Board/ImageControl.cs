@@ -61,7 +61,7 @@ public class ImageControl : MonoBehaviour
 
         return _image.transform.DOLocalMoveY(_bottomPoint, _DotweenLocalMoveDuration, true)
         .SetEase(Ease.Linear)
-        .OnStepComplete(() => TopPointToOriginPoint(boardNum));
+        .OnComplete(() => TopPointToOriginPoint(boardNum));
     }
 
     void TopPointToOriginPoint(int boardNum)
@@ -74,7 +74,7 @@ public class ImageControl : MonoBehaviour
 
     void ChangeFinalSprite(Image eachImage, int boardNum)
     {
-        eachImage.transform.localPosition = new Vector3(0, 100, 0);
+        eachImage.transform.localPosition = new Vector3(0, _topPoint, 0);
         eachImage.sprite = _imageData.RollingImage[boardNum];
     }
 

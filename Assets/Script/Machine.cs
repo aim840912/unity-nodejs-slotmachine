@@ -27,7 +27,7 @@ public class Machine : MonoBehaviour
     void StartSpin()
     {
         SpinCoroutine.StartSpin();
-        _server.ServerStep(_inputValue);
+        _server.ServerStep(_uiManager.GetBet());
     }
 
     void StopSpin()

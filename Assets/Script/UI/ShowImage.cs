@@ -4,10 +4,10 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Button))]
 public class ShowImage : MonoBehaviour
 {
-    [SerializeField] private Image _image;
+    [SerializeField] private GameObject _gameObject;
 
     public void IsShowing()
     {
-        _image.enabled = !_image.enabled;
+        _gameObject.SetActive(!_gameObject.activeSelf);
     }
 }

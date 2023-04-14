@@ -1,13 +1,14 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LineControl : MonoBehaviour
 {
     [SerializeField] private int[] _lineIndex;
-    [SerializeField] private LineRenderer _lineRenderer;
+    [SerializeField] private Image _lineImage;
 
     private void Start()
     {
-        _lineRenderer = GetComponent<LineRenderer>();
+        _lineImage = GetComponent<Image>();
     }
 
     private Odds[] IntTurnToOdds(int[] boardNum)
@@ -25,12 +26,12 @@ public class LineControl : MonoBehaviour
 
     public void LineEnabled(int[] boardNum)
     {
-        _lineRenderer.enabled = IsLineEnabled(IntTurnToOdds(boardNum));
+        _lineImage.enabled = IsLineEnabled(IntTurnToOdds(boardNum));
     }
 
     public void LineDisabled()
     {
-        _lineRenderer.enabled = false;
+        _lineImage.enabled = false;
     }
 
     private bool IsLineEnabled(params Odds[] lineIndex)
