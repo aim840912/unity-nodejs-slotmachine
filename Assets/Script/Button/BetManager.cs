@@ -9,35 +9,39 @@ public class BetManager : MonoBehaviour
     public Button MinusBtn;
     public Button MaxBtn;
 
+    [SerializeField] TMP_Text _betValue;
+
     public int CurrentBet = 80;
 
-    public int AddBet()
+    private void Update()
     {
-        if (CurrentBet + 80 > PlayerManager.instance.Money)
-            return CurrentBet;
-        else
-            return CurrentBet + 80;
+        _betValue.text = $"{CurrentBet}";
+    }
+
+    public void AddBet()
+    {
+        if (CurrentBet + 80 <= PlayerManager.instance.Money)
+            CurrentBet += 80;
 
     }
 
-    public int MinusBet()
+    public void MinusBet()
     {
-        if (CurrentBet - 80 > 0)
-            return CurrentBet;
-        else
-            return CurrentBet - 80;
+        if (CurrentBet - 80 >= 0)
+            CurrentBet -= 80;
     }
 
-    public int MaxBet()
+    public void MaxBet()
     {
         if (PlayerManager.instance.Money % 80 > 0)
         {
-            int current = PlayerManager.instance.Money / 80;
-            return current * 80;
+            int current = (int)(PlayerManager.instance.Money / 80);
+            CurrentBet = 80 * current;
         }
         else
         {
-            return PlayerManager.instance.Money;
+            CurrentBet = 0;
         }
+
     }
 }

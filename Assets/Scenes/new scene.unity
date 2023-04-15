@@ -886,7 +886,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b33ed14e81b689245893bd154bde33e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Money: 0
+  Money: 1000
 --- !u!4 &227211342
 Transform:
   m_ObjectHideFlags: 0
@@ -1709,7 +1709,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 474464162}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1560383115}
+        m_TargetAssemblyTypeName: BetManager, Assembly-CSharp
+        m_MethodName: MinusBet
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &474464162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2007,6 +2019,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _winMoneyText: {fileID: 1953902946}
   _playerMoneyText: {fileID: 1528502112}
+  _betManager: {fileID: 0}
 --- !u!4 &651812589
 Transform:
   m_ObjectHideFlags: 0
@@ -2711,7 +2724,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 856625886}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -3153,7 +3166,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &856625886
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3168,8 +3181,8 @@ RectTransform:
   m_Children:
   - {fileID: 1728366106}
   - {fileID: 474464160}
-  - {fileID: 804922895}
   - {fileID: 1208598392}
+  - {fileID: 804922895}
   m_Father: {fileID: 1560383110}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4073,7 +4086,7 @@ RectTransform:
   m_Children:
   - {fileID: 175579783}
   m_Father: {fileID: 856625886}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -4123,7 +4136,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1208598394}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1560383115}
+        m_TargetAssemblyTypeName: BetManager, Assembly-CSharp
+        m_MethodName: MaxBet
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1208598394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5907,6 +5932,7 @@ GameObject:
   - component: {fileID: 1560383112}
   - component: {fileID: 1560383111}
   - component: {fileID: 1560383114}
+  - component: {fileID: 1560383115}
   m_Layer: 5
   m_Name: Bet Button
   m_TagString: Untagged
@@ -6043,6 +6069,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameObject: {fileID: 856625885}
+--- !u!114 &1560383115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1560383109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6811dc2605011747af3b9931ac31ee7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlusBtn: {fileID: 1728366107}
+  MinusBtn: {fileID: 474464161}
+  MaxBtn: {fileID: 1208598393}
+  _betValue: {fileID: 804922896}
+  CurrentBet: 80
 --- !u!1 &1564355826
 GameObject:
   m_ObjectHideFlags: 0
@@ -6352,7 +6395,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1728366108}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1560383115}
+        m_TargetAssemblyTypeName: BetManager, Assembly-CSharp
+        m_MethodName: AddBet
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1728366108
 MonoBehaviour:
   m_ObjectHideFlags: 0

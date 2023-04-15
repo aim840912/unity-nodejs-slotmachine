@@ -10,7 +10,7 @@ public class Machine : MonoBehaviour
     [SerializeField] private Toggle _spinToggle;
     [SerializeField] private UiManager _uiManager;
     private Server _server = new Server();
-    private int _inputValue = 1;
+    // private int _inputValue = 1;
 
     public void SpinToggleOnClick()
     {
