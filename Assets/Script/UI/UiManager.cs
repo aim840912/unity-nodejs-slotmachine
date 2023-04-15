@@ -5,20 +5,20 @@ public class UiManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text _winMoneyText;
     [SerializeField] private TMP_Text _playerMoneyText;
-    [SerializeField] private BetManager _betManager;
+    [SerializeField] private BetControl _betControl;
 
     public void UpdatedPlayerUI(Server server)
     {
         int winMoney = server.WinMoney;
         // int playerMoney = server.GetPlayerMoney();
 
-        _winMoneyText.text = $"{winMoney}";
+        _winMoneyText.text = $"Win: {winMoney}";
         // _playerMoneyText.text = $"{playerMoney}";
     }
 
     public int GetBet()
     {
-        return _betManager.CurrentBet;
+        return _betControl.CurrentBet;
     }
 
 }
