@@ -6,7 +6,7 @@ public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager instance;
 
-    public int Money;
+    public int PlayerMoney = 1000;
 
     private void Awake()
     {
@@ -18,11 +18,11 @@ public class PlayerManager : MonoBehaviour
 
     public void LoadData(GameData _data)
     {
-        this.Money = _data.Money;
+        this.PlayerMoney = _data.Money;
     }
 
     public void SaveData(ref GameData _data)
     {
-        _data.Money = this.Money;
+        _data.Money = this.PlayerMoney;
     }
 }

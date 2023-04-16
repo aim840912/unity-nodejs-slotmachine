@@ -12,10 +12,10 @@ public class BetControl : MonoBehaviour
 
     public void AddBet()
     {
-        if (CurrentBet + 80 <= PlayerManager.instance.Money)
+        if (CurrentBet + 80 <= PlayerManager.instance.PlayerMoney)
             CurrentBet += 80;
 
-        UpdateBetNumber();
+        CheckBetNumber();
     }
 
     public void MinusBet()
@@ -23,14 +23,14 @@ public class BetControl : MonoBehaviour
         if (CurrentBet - 80 >= 0)
             CurrentBet -= 80;
 
-        UpdateBetNumber();
+        CheckBetNumber();
     }
 
     public void MaxBet()
     {
-        if (PlayerManager.instance.Money / 80 > 0)
+        if (PlayerManager.instance.PlayerMoney / 80 > 0)
         {
-            int current = (int)(PlayerManager.instance.Money / 80);
+            int current = (int)(PlayerManager.instance.PlayerMoney / 80);
             CurrentBet = 80 * current;
         }
         else
@@ -38,24 +38,24 @@ public class BetControl : MonoBehaviour
             CurrentBet = 0;
         }
 
-        UpdateBetNumber();
+        CheckBetNumber();
     }
 
-    void UpdateBetNumber()
+    void CheckBetNumber()
     {
-        if (CurrentBet > PlayerManager.instance.Money)
+        if (CurrentBet > PlayerManager.instance.PlayerMoney)
             CurrentBet = 0;
 
         _betValue.text = $"{CurrentBet}";
 
-        for (int i = 0; i < EachBetGroup.Length; i++)
-        {
-            EachBetGroup[i].text = $"{GetEachBet()}";
-        }
+        SetEachBet();
     }
 
-    public int GetEachBet()
+    public void SetEachBet()
     {
-        return CurrentBet / 8;
+        for (int i = 0; i < EachBetGroup.Length; i++)
+        {
+            EachBetGroup[i].text = $"{CurrentBet / 8}";
+        }
     }
 }

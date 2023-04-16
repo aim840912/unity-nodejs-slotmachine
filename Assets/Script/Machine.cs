@@ -10,7 +10,7 @@ public class Machine : MonoBehaviour
     [SerializeField] private Toggle _spinToggle;
     [SerializeField] private UiManager _uiManager;
     private Server _server = new Server();
-    // private int _inputValue = 1;
+
 
     public void SpinToggleOnClick()
     {
@@ -32,7 +32,7 @@ public class Machine : MonoBehaviour
 
     void StopSpin()
     {
-        SpinCoroutine.StopSpin(_server.GetBoard());
+        SpinCoroutine.StopSpin(_server.SlotNumber);
         _uiManager.UpdatedPlayerUI(_server);
     }
 

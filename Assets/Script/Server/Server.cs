@@ -5,9 +5,8 @@ using UnityEngine;
 public class Server
 {
     public int WinMoney { get; private set; } = 0;
+    public int[] SlotNumber { get; private set; } = new int[9];
 
-    private int[] _slotNumber = new int[9];
-    private int _multiple;
     private int _winLine = 8;
     private Board _board = new Board(0, 10);
     private CalcMultiple _calcMultiple = new CalcMultiple();
@@ -15,24 +14,19 @@ public class Server
 
     public void ServerStep(int inputValue)
     {
-        _slotNumber = _board.GenerateNumber();
-        foreach (var item in _slotNumber)
-        {
-            Debug.Log($"{item}");
-        }
-
-        _multiple = GetMultiple();
+        SlotNumber = _board.GenerateNumber();
 
         WinMoney = GetWinMoney(inputValue);
+
+        CalculatePlayerTotalMoney();
     }
 
 
     private int GetMultiple()
     {
-        Debug.Log($"{_calcMultiple.GetMultiples(_slotNumber)}");
+        Debug.Log($"{_calcMultiple.GetMultiples(SlotNumber)}");// ! 查看倍率用
 
-        return _calcMultiple.GetMultiples(_slotNumber);
-
+        return _calcMultiple.GetMultiples(SlotNumber);
     }
 
     private int GetWinMoney(int inputValue)
@@ -40,9 +34,9 @@ public class Server
         return GetMultiple() * inputValue - _winLine * inputValue;
     }
 
-    public int[] GetBoard()
+    private void CalculatePlayerTotalMoney()
     {
-        return _slotNumber;
+        PlayerManager.instance.PlayerMoney += WinMoney;
     }
 
 }
