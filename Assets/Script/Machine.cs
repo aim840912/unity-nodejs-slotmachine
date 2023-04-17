@@ -9,7 +9,7 @@ public class Machine : MonoBehaviour
 
     [SerializeField] private Toggle _spinToggle;
     [SerializeField] private UiManager _uiManager;
-    private Server _server = new Server();
+    [SerializeField] private Server _server;
 
 
     public void SpinToggleOnClick()
@@ -27,11 +27,14 @@ public class Machine : MonoBehaviour
     void StartSpin()
     {
         SpinCoroutine.StartSpin();
-        _server.ServerStep(_uiManager.GetBet());
+
+        StartCoroutine(_server.ServerCor(_uiManager.GetBet()));
+        // _server.ServerStep(_uiManager.GetBet());
     }
 
     void StopSpin()
     {
+
         SpinCoroutine.StopSpin(_server.SlotNumber);
         _uiManager.UpdatedPlayerUI(_server);
     }

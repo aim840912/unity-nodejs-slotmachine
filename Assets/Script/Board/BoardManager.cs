@@ -16,6 +16,10 @@ public class BoardManager : MonoBehaviour
 
     public void Stop(int[] boardNum)
     {
+        foreach (var item in boardNum)
+        {
+            Debug.Log(item);
+        }
         for (int i = 0; i < _imageControls.Length; i++)
         {
             StartCoroutine(_imageControls[i].SetTimeToStopSpin(boardNum[i]));

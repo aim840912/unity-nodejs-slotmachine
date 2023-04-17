@@ -1196,7 +1196,7 @@ GameObject:
   - component: {fileID: 405103629}
   - component: {fileID: 405103628}
   m_Layer: 0
-  m_Name: ServerTest
+  m_Name: ServerOnline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1807,6 +1807,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 474464159}
   m_CullTransparentMesh: 1
+--- !u!1 &475138891
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 475138893}
+  - component: {fileID: 475138892}
+  m_Layer: 0
+  m_Name: Server
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &475138892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 475138891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e9b1edd7722f5f45a60673d037903a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serverOnline: {fileID: 405103628}
+--- !u!4 &475138893
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 475138891}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.3475729, y: 0.5569056, z: 641.79517}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &491307580
 GameObject:
   m_ObjectHideFlags: 0
@@ -7106,6 +7151,7 @@ MonoBehaviour:
   SpinCoroutine: {fileID: 836439519}
   _spinToggle: {fileID: 1063499528}
   _uiManager: {fileID: 651812588}
+  _server: {fileID: 475138892}
 --- !u!4 &1900489946
 Transform:
   m_ObjectHideFlags: 0
