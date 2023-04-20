@@ -8,13 +8,19 @@ public class PlayerManager : MonoBehaviour
 
     public int PlayerMoney = 1000;
 
+    public PlayerData PlayerData;
+
     private void Awake()
     {
+        Debug.Log("playerManager Awake");
         if (instance != null)
             Destroy(instance.gameObject);
         else
             instance = this;
+
+        DontDestroyOnLoad(this);
     }
+
 
     public void LoadData(GameData _data)
     {
