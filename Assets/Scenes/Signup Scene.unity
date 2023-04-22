@@ -329,6 +329,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerMoney: 1000
+  PlayerData:
+    userId: 
+    name: 0
+    money: 0
 --- !u!4 &278167723
 Transform:
   m_ObjectHideFlags: 0
@@ -876,8 +880,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1312091968}
-        m_TargetAssemblyTypeName: ServerSignUp, Assembly-CSharp
-        m_MethodName: CheckToSignup
+        m_TargetAssemblyTypeName: ServerAccount, Assembly-CSharp
+        m_MethodName: ClickToConnectServer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

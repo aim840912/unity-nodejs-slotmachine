@@ -12,7 +12,6 @@ public class PlayerManager : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log("playerManager Awake");
         if (instance != null)
             Destroy(instance.gameObject);
         else
@@ -20,15 +19,13 @@ public class PlayerManager : MonoBehaviour
 
         DontDestroyOnLoad(this);
     }
+    // public void LoadData(GameData _data)
+    // {
+    //     this.PlayerMoney = _data.Money;
+    // }
 
-
-    public void LoadData(GameData _data)
-    {
-        this.PlayerMoney = _data.Money;
-    }
-
-    public void SaveData(ref GameData _data)
-    {
-        _data.Money = this.PlayerMoney;
-    }
+    // public void SaveData(ref GameData _data)
+    // {
+    //     _data.Money = this.PlayerMoney;
+    // }
 }

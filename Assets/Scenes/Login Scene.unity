@@ -329,6 +329,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerMoney: 1000
+  PlayerData:
+    userId: 
+    name: 0
+    money: 0
 --- !u!4 &278167723
 Transform:
   m_ObjectHideFlags: 0
@@ -587,8 +591,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1312091966}
-        m_TargetAssemblyTypeName: ServerLogin, Assembly-CSharp
-        m_MethodName: CheckToLogin
+        m_TargetAssemblyTypeName: ServerAccount, Assembly-CSharp
+        m_MethodName: ClickToConnectServer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1149,10 +1153,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 982275371fa000b4b9075a23e7f890fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _name: {fileID: 0}
   _email: {fileID: 961332776}
-  password: {fileID: 125117760}
-  message: {fileID: 1978372691}
+  _password: {fileID: 125117760}
+  _message: {fileID: 1978372691}
   connectUrl: http://localhost:3000/user/login
+  _sceneIndexToMainScene: 1
 --- !u!4 &1312091967
 Transform:
   m_ObjectHideFlags: 0
