@@ -5,11 +5,20 @@ using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-public class GetServerData : MonoBehaviour
+[System.Serializable]
+public struct ServerReturnData
+{
+    public int[] Arr;
+    public int WinMoney;
+    public int Money;
+    public bool HasGetData;
+}
+
+public class ServerData : MonoBehaviour
 {
     [SerializeField] private string connectUrl = "";
     [SerializeField] private TMP_Text _betInputValue;
-    public ServerData ServerData { get; private set; }
+    public ServerReturnData ServerReturnData { get; private set; }
     public bool HasGetData { get; private set; }
 
     public void ClickToConnectServer()
@@ -32,20 +41,13 @@ public class GetServerData : MonoBehaviour
         {
             HasGetData = true;
 
-            Debug.Log(www.downloadHandler.text);
+            ServerReturnData = JsonUtility.FromJson<ServerReturnData>(www.downloadHandler.text);
 
-            ServerData = JsonUtility.FromJson<ServerData>(www.downloadHandler.text);
-            Debug.Log(ServerData.Arr);
-            Debug.Log(ServerData.Money);
-            Debug.Log(ServerData.HasGetData);
-            Debug.Log(ServerData.WinMoney);
+            PlayerManager.instance.PlayerData.Money = ServerReturnData.Money;
         }
-        else
+        else if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
         {
-            Debug.Log(www.error);
+            Debug.Log(www.result);
         }
     }
-
-
-
 }

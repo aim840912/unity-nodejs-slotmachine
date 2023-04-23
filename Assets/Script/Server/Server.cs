@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class Server : MonoBehaviour
 {
-    public int WinMoney;
-    public int[] SlotNumber = new int[9];
-    [SerializeField] private GetServerData _getServerData;
+    public int WinMoney { get; private set; }
+    public int[] SlotNumber { get; private set; } = new int[9];
+    [SerializeField] private ServerData _serverData;
 
-    public IEnumerator ServerCor()
+    public IEnumerator GetServerData()
     {
-        StartCoroutine(_getServerData.PostServerData());
+        StartCoroutine(_serverData.PostServerData());
 
-        yield return new WaitUntil(() => _getServerData.HasGetData == true);
+        yield return new WaitUntil(() => _serverData.HasGetData == true);
 
-        SlotNumber = _getServerData.ServerData.Arr;
-        WinMoney = _getServerData.ServerData.WinMoney;
+        SlotNumber = _serverData.ServerReturnData.Arr;
+        WinMoney = _serverData.ServerReturnData.WinMoney;
     }
 }

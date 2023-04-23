@@ -6,8 +6,6 @@ public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager instance;
 
-    public int PlayerMoney { get; set; } = 1000;
-
     public PlayerData PlayerData;
 
     private void Awake()
