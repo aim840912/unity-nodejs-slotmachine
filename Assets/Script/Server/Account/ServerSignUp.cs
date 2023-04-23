@@ -22,10 +22,9 @@ public class ServerSignUp : ServerAccount
             Debug.Log("Form upload complete!");
             _message.text = "sign up Success";
         }
-        else
+        else if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
         {
-            Debug.Log(www.error);
-            _message.text = www.error;
+            _message.text = www.downloadHandler.text;
         }
     }
 }

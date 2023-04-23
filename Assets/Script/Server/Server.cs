@@ -4,52 +4,17 @@ using UnityEngine;
 
 public class Server : MonoBehaviour
 {
-    public int WinMoney { get; private set; } = 0;
+    public int WinMoney;
     public int[] SlotNumber = new int[9];
+    [SerializeField] private GetServerData _getServerData;
 
-    private int _winLine = 8;
-    private Board _board = new Board(0, 10);
-    private CalcMultiple _calcMultiple = new CalcMultiple();
-
-    [SerializeField] private ServerOnline serverOnline;
-
-    public IEnumerator ServerCor(int inputValue)
+    public IEnumerator ServerCor()
     {
-        StartCoroutine(serverOnline.GetBoardNum());
+        StartCoroutine(_getServerData.PostServerData());
 
-        yield return new WaitUntil(() => serverOnline.isGetData);
+        yield return new WaitUntil(() => _getServerData.HasGetData == true);
 
-        SlotNumber = serverOnline.gameData.BoardNum;
-
+        SlotNumber = _getServerData.ServerData.Arr;
+        WinMoney = _getServerData.ServerData.WinMoney;
     }
-
-    public void ServerStep(int inputValue)
-    {
-        StartCoroutine(serverOnline.GetBoardNum());
-
-        SlotNumber = serverOnline.gameData.BoardNum;
-
-        // WinMoney = GetWinMoney(inputValue);
-
-        // CalculatePlayerTotalMoney();
-    }
-
-
-    private int GetMultiple()
-    {
-        Debug.Log($"{_calcMultiple.GetMultiples(SlotNumber)}");// ! 查看倍率用
-
-        return _calcMultiple.GetMultiples(SlotNumber);
-    }
-
-    private int GetWinMoney(int inputValue)
-    {
-        return GetMultiple() * inputValue - _winLine * inputValue;
-    }
-
-    private void CalculatePlayerTotalMoney()
-    {
-        PlayerManager.instance.PlayerMoney += WinMoney;
-    }
-
 }

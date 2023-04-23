@@ -10,7 +10,7 @@ public class UiManager : MonoBehaviour
     public void UpdatedPlayerUI(Server server)
     {
         int winMoney = server.WinMoney;
-        int playerMoney = PlayerManager.instance.PlayerMoney;
+        // int playerMoney = PlayerManager.instance.PlayerMoney;
 
         _winMoneyText.text = $"Win: {winMoney}";
         // _playerMoneyText.text = $"{playerMoney}";

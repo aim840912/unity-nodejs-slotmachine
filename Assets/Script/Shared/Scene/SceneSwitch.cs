@@ -5,20 +5,16 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
 
-
-
-
 public class SceneSwitch : MonoBehaviour
 {
     public enum ScenePattern
     {
         ONLINE,
-        OFFLINE
+        PC // Personal computer 單機模式
     }
 
     [SerializeField] ScenePattern _scenePattern;
     [SerializeField] Button _button;
-
 
     private void Reset()
     {
@@ -34,7 +30,7 @@ public class SceneSwitch : MonoBehaviour
     {
         switch (_scenePattern)
         {
-            case ScenePattern.OFFLINE:
+            case ScenePattern.PC:
                 SceneManager.LoadScene("Machine Scene");
                 break;
 

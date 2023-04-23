@@ -11,7 +11,6 @@ public class Machine : MonoBehaviour
     [SerializeField] private UiManager _uiManager;
     [SerializeField] private Server _server;
 
-
     public void SpinToggleOnClick()
     {
         if (_spinToggle.isOn)
@@ -28,13 +27,11 @@ public class Machine : MonoBehaviour
     {
         SpinCoroutine.StartSpin();
 
-        StartCoroutine(_server.ServerCor(_uiManager.GetBet()));
-        // _server.ServerStep(_uiManager.GetBet());
+        StartCoroutine(_server.ServerCor());
     }
 
     void StopSpin()
     {
-
         SpinCoroutine.StopSpin(_server.SlotNumber);
         _uiManager.UpdatedPlayerUI(_server);
     }

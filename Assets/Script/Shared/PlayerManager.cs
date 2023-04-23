@@ -6,7 +6,7 @@ public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager instance;
 
-    public int PlayerMoney = 1000;
+    public int PlayerMoney { get; set; } = 1000;
 
     public PlayerData PlayerData;
 
@@ -19,13 +19,4 @@ public class PlayerManager : MonoBehaviour
 
         DontDestroyOnLoad(this);
     }
-    // public void LoadData(GameData _data)
-    // {
-    //     this.PlayerMoney = _data.Money;
-    // }
-
-    // public void SaveData(ref GameData _data)
-    // {
-    //     _data.Money = this.PlayerMoney;
-    // }
 }

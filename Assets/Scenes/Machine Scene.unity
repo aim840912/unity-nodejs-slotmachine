@@ -1149,31 +1149,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 405103629}
-  - component: {fileID: 405103628}
   - component: {fileID: 405103630}
   m_Layer: 0
-  m_Name: ServerOnline
+  m_Name: GetServerData
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &405103628
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 405103627}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca0d17f8bc34cc349b85d2bc89c4f68f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameData:
-    Money: 0
-    BoardNum: 
-  isGetData: 0
 --- !u!4 &405103629
 Transform:
   m_ObjectHideFlags: 0
@@ -1181,13 +1164,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 405103627}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.3475729, y: 0.5569056, z: 641.79517}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_Father: {fileID: 475138893}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &405103630
 MonoBehaviour:
@@ -1198,11 +1181,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 405103627}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a1364071fcdeec4a81db48cdf0bfd04, type: 3}
+  m_Script: {fileID: 11500000, guid: 6349473b45d67a5428dc51c1e925cfe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   connectUrl: http://localhost:3000/machine/spinAction
-  _inputField: {fileID: 804922896}
+  _betInputValue: {fileID: 804922896}
 --- !u!1 &413176574
 GameObject:
   m_ObjectHideFlags: 0
@@ -1807,8 +1790,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e9b1edd7722f5f45a60673d037903a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WinMoney: 0
   SlotNumber: 000000000000000000000000000000000000000000000000000000000000000000000000
-  serverOnline: {fileID: 405103628}
+  _getServerData: {fileID: 405103630}
 --- !u!4 &475138893
 Transform:
   m_ObjectHideFlags: 0
@@ -1820,9 +1804,10 @@ Transform:
   m_LocalPosition: {x: -1.3475729, y: 0.5569056, z: 641.79517}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 405103629}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &491307580
 GameObject:
@@ -3679,18 +3664,6 @@ MonoBehaviour:
       - m_Target: {fileID: 1900489945}
         m_TargetAssemblyTypeName: Machine, Assembly-CSharp
         m_MethodName: SpinToggleOnClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 405103630}
-        m_TargetAssemblyTypeName: ServerProcess, Assembly-CSharp
-        m_MethodName: ClickToConnectServer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
