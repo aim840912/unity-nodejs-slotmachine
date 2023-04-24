@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    public static PlayerManager instance;
+    public static PlayerManager instance = null;
 
     public PlayerData PlayerData;
 
     private void Awake()
     {
         if (instance != null)
-            Destroy(instance.gameObject);
+            Destroy(gameObject);
         else
+        {
             instance = this;
-
-        DontDestroyOnLoad(this);
+            DontDestroyOnLoad(gameObject);
+        }
     }
 }

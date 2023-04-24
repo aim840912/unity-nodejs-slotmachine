@@ -58,4 +58,12 @@ public class BetControl : MonoBehaviour
             EachBetGroup[i].text = $"{CurrentBet / 8}";
         }
     }
+
+    public void SetZero()
+    {
+        CurrentBet = 0;
+        _betValue.text = $"{CurrentBet}";
+
+        SetEachBet();
+    }
 }

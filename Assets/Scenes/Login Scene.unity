@@ -328,11 +328,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b33ed14e81b689245893bd154bde33e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerMoney: 1000
   PlayerData:
-    userId: 
-    name: 0
-    money: 0
+    UserId: 
+    Name: 
+    Money: 0
 --- !u!4 &278167723
 Transform:
   m_ObjectHideFlags: 0
@@ -346,7 +345,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &398351674
 GameObject:
@@ -1172,7 +1171,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1366594445
 GameObject:
