@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 
 public class Machine : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class Machine : MonoBehaviour
 
     public void SpinToggleOnClick()
     {
+        _uiManager.CloseAllPanel();
+
         if (_spinToggle.isOn)
         {
             StartSpin();
@@ -30,7 +33,7 @@ public class Machine : MonoBehaviour
 
         SpinCoroutine.StartSpin();
 
-        _uiManager.TurnValueToZero();
+        _uiManager.TurnWinMoneyToZero();
     }
 
     void StopSpin()
@@ -40,4 +43,19 @@ public class Machine : MonoBehaviour
         _uiManager.UpdatedPlayerUI(_server);
     }
 
+    public void Auto(int time)
+    {
+        StartCoroutine(AutoSpin(time));
+    }
+
+    private IEnumerator AutoSpin(int time)
+    {
+        for (int i = 0; i < time; i++)
+        {
+            StartSpin();
+            yield return new WaitForSecondsRealtime(5);
+            StopSpin();
+            yield return new WaitForSecondsRealtime(5);
+        }
+    }
 }

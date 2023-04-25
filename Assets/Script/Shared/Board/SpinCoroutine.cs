@@ -23,7 +23,7 @@ public class SpinCoroutine : MonoBehaviour
     {
         _boardManager.Stop(boardNum);
 
-        yield return new WaitForSecondsRealtime(5);
+        yield return new WaitUntil(() => _boardManager.IsOver == true);
 
         _lineManager.Stop(boardNum);
     }

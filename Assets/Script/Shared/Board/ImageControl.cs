@@ -82,7 +82,7 @@ public class ImageControl : MonoBehaviour
 
     public IEnumerator SetTimeToStopSpin(int boardNum)
     {
-        int time = Random.Range(0, 2);
+        int time = Random.Range(0, 1);
         yield return new WaitForSeconds(time);
         LoopStop(boardNum);
     }

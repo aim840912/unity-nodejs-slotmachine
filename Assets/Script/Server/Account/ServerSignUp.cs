@@ -19,7 +19,6 @@ public class ServerSignUp : ServerAccount
 
         if (www.result == UnityWebRequest.Result.Success)
         {
-            Debug.Log("Form upload complete!");
             _message.text = "sign up Success";
         }
         else if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)

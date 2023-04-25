@@ -4,14 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
+public enum ScenePattern
+{
+    ONLINE,
+    SINGLE_GAME // Personal computer 單機模式
+}
 
 public class SceneSwitch : MonoBehaviour
 {
-    public enum ScenePattern
-    {
-        ONLINE,
-        PC // Personal computer 單機模式
-    }
 
     [SerializeField] ScenePattern _scenePattern;
     [SerializeField] Button _button;
@@ -30,11 +30,13 @@ public class SceneSwitch : MonoBehaviour
     {
         switch (_scenePattern)
         {
-            case ScenePattern.PC:
+            case ScenePattern.SINGLE_GAME:
+                GameManager.instance._scenePattern = ScenePattern.SINGLE_GAME;
                 SceneManager.LoadScene("Machine Scene");
                 break;
 
             case ScenePattern.ONLINE:
+                GameManager.instance._scenePattern = ScenePattern.ONLINE;
                 SceneManager.LoadScene("Login Scene");
                 break;
 

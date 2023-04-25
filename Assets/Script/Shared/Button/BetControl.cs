@@ -6,7 +6,6 @@ using System;
 public class BetControl : MonoBehaviour
 {
     [SerializeField] TMP_Text _betValue;
-
     public int CurrentBet { get; private set; } = 0;
     public TMP_Text[] EachBetGroup;
 
