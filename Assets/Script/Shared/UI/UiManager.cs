@@ -10,13 +10,13 @@ public class UiManager : MonoBehaviour
     [SerializeField] private GameObject[] _panel;
 
 
-    private void Start()
-    {
-        int playerMoney = PlayerManager.instance.PlayerData.Money;
-        _playerMoneyText.text = $"{playerMoney}";
-    }
+    // private void Start()
+    // {
+    //     int playerMoney = PlayerManager.instance.PlayerData.Money;
+    //     _playerMoneyText.text = $"{playerMoney}";
+    // }
 
-    public void UpdatedPlayerUI(Server server)
+    public void UpdatedPlayerUI(IGameMode server)
     {
         int winMoney = server.WinMoney;
         int playerMoney = PlayerManager.instance.PlayerData.Money;

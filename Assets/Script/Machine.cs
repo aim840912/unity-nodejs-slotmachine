@@ -11,7 +11,24 @@ public class Machine : MonoBehaviour
     [SerializeField] private Toggle _spinToggle;
     [SerializeField] private UiManager _uiManager;
     [SerializeField] private Server _server;
+    [SerializeField] private SingleGame _singleGame;
 
+    private IGameMode _gameMode;
+
+    private void Start()
+    {
+        if (GameManager.instance._scenePattern == ScenePattern.ONLINE)
+        {
+            _gameMode = _server;
+        }
+        else if (GameManager.instance._scenePattern == ScenePattern.SINGLE_GAME)
+        {
+            _gameMode = _singleGame;
+        }
+
+        _uiManager.UpdatedPlayerUI(_gameMode);
+
+    }
 
     public void SpinToggleOnClick()
     {
@@ -29,7 +46,7 @@ public class Machine : MonoBehaviour
 
     void StartSpin()
     {
-        StartCoroutine(_server.GetServerData());
+        StartCoroutine(_gameMode.GetServerData());
 
         SpinCoroutine.StartSpin();
 
@@ -38,9 +55,9 @@ public class Machine : MonoBehaviour
 
     void StopSpin()
     {
-        SpinCoroutine.StopSpin(_server.SlotNumber);
+        SpinCoroutine.StopSpin(_gameMode.SlotNumber);
 
-        _uiManager.UpdatedPlayerUI(_server);
+        _uiManager.UpdatedPlayerUI(_gameMode);
     }
 
     public void Auto(int time)

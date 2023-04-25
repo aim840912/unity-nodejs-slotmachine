@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Server : MonoBehaviour
+public class Server : MonoBehaviour, IGameMode
 {
-    public int WinMoney { get; private set; }
-    public int[] SlotNumber { get; private set; } = new int[9];
+    public int WinMoney { get; set; }
+    public int[] SlotNumber { get; set; } = new int[9];
     [SerializeField] private ServerData _serverData;
 
     public IEnumerator GetServerData()
