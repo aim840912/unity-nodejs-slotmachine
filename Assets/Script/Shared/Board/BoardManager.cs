@@ -7,11 +7,12 @@ public class BoardManager : MonoBehaviour
 {
     [SerializeField] private ImageControl[] _imageControls;
 
-    public bool IsOver = false;
+    public bool CanNextStep;
 
     public void Spin()
     {
-        IsOver = false;
+        CanNextStep = false;
+
         for (int i = 0; i < _imageControls.Length; i++)
         {
             _imageControls[i].StartLoop();
@@ -25,13 +26,32 @@ public class BoardManager : MonoBehaviour
             StartCoroutine(_imageControls[i].SetTimeToStopSpin(boardNum[i]));
         }
 
-        StartCoroutine(WaitTime(2));
+        StartCoroutine(WaitCanNextStep());
     }
 
-    private IEnumerator WaitTime(int time)
+    private IEnumerator WaitCanNextStep()
     {
-        yield return new WaitForSeconds(time);
-        IsOver = true;
+        yield return new WaitUntil(() => CheckCanNextStep());
+
+        CanNextStep = true;
+    }
+
+    public bool CheckCanNextStep()
+    {
+        int boolCount = 0;
+        for (int i = 0; i < _imageControls.Length; i++)
+        {
+            if (_imageControls[i].IsOver == true)
+            {
+                boolCount++;
+            }
+        }
+        if (boolCount == 9)
+        {
+            return true;
+        }
+        else
+            return false;
     }
 
 }

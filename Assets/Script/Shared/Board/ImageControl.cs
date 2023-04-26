@@ -14,6 +14,8 @@ public class ImageControl : MonoBehaviour
     private float _topPoint;
     private float _bottomPoint;
 
+    public bool IsOver = false;
+
     private void Start()
     {
         SetDotween();
@@ -33,6 +35,7 @@ public class ImageControl : MonoBehaviour
     #region Spin
     public Tween StartLoop()
     {
+        IsOver = false;
         return _image.transform.DOLocalMoveY(_bottomPoint, _DotweenLocalMoveDuration, true)
         .SetEase(Ease.InCubic)
         .OnComplete(() => Loop());
@@ -69,7 +72,7 @@ public class ImageControl : MonoBehaviour
         ChangeFinalSprite(_image, boardNum);
         _image.transform
             .DOLocalMoveY(0, Random.Range(1, 1.5f), true)
-            .SetEase(Ease.OutBack);
+            .SetEase(Ease.OutBack).OnComplete(() => IsOver = true);
     }
 
     void ChangeFinalSprite(Image eachImage, int boardNum)
@@ -82,9 +85,8 @@ public class ImageControl : MonoBehaviour
 
     public IEnumerator SetTimeToStopSpin(int boardNum)
     {
-        int time = Random.Range(0, 1);
+        int time = Random.Range(0, 2);
         yield return new WaitForSeconds(time);
         LoopStop(boardNum);
     }
-
 }
