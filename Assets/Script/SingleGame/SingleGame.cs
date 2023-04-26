@@ -4,37 +4,18 @@ using UnityEngine;
 using TMPro;
 public class SingleGame : MonoBehaviour, IGameMode
 {
-    int _currentMoney;
     public int WinMoney { get; set; }
     public int[] SlotNumber { get; set; } = new int[9];
-    public int InputValue
-    {
-        get
-        {
-            return int.Parse(_betInputValue.text);
-        }
-    }
+
     [SerializeField] private TMP_Text _betInputValue;
-    int PlayerMoney
-    {
-        get
-        {
-            return PlayerPrefs.HasKey("playerMoney") ? PlayerPrefs.GetInt("playerMoney") : 10000;
-        }
-        set
-        {
-            PlayerPrefs.SetInt("playerMoney", value);
-        }
-    }
 
     readonly int _minBoardNumber = 0;
     readonly int _maxBoardNumber = 10;
-    CalcMultiple _calcMultiple = new CalcMultiple();
+    private CalcMultiple _calcMultiple = new CalcMultiple();
 
 
     public IEnumerator GetServerData()
     {
-        PlayerPrefs.SetInt("playerMoney", 10000);
         GenerateGameBoard();
 
         CalcMoney();
@@ -52,9 +33,13 @@ public class SingleGame : MonoBehaviour, IGameMode
 
     void CalcMoney()
     {
-        WinMoney = GetMultiple() * InputValue - 8 * InputValue;
+        int _currentMoney = GetPlayerMoney();
 
-        PlayerMoney += WinMoney;
+        WinMoney = GetMultiple() * GetInputValue() - 8 * GetInputValue();
+
+        _currentMoney += WinMoney;
+
+        SetPlayerMoney(_currentMoney);
     }
 
     int GetMultiple()
@@ -63,5 +48,25 @@ public class SingleGame : MonoBehaviour, IGameMode
         Debug.Log($"{multiple}");
 
         return multiple;
+    }
+
+    int GetInputValue()
+    {
+        return int.Parse(_betInputValue.text);
+    }
+
+    int GetPlayerMoney()
+    {
+        if (!PlayerPrefs.HasKey("playerMoney"))
+        {
+            PlayerPrefs.SetInt("playerMoney", 10000);
+        }
+
+        return PlayerPrefs.GetInt("playerMoney");
+    }
+
+    void SetPlayerMoney(int money)
+    {
+        PlayerPrefs.SetInt("playerMoney", money);
     }
 }

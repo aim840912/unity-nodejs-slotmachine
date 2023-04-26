@@ -1,4 +1,3 @@
-
 public interface IGameMode
 {
     public int WinMoney { get; set; }
