@@ -1,12 +1,8 @@
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
-using System;
 
-public class BetControl : MonoBehaviour
+public class BetControl : ValueControl
 {
-    [SerializeField] TMP_Text _betValue;
-    public int CurrentBet { get; private set; } = 0;
     public TMP_Text[] EachBetGroup;
 
     private int GetPlayerMoney()
@@ -25,65 +21,60 @@ public class BetControl : MonoBehaviour
         }
     }
 
-    public void AddBet()
+    public override void Add()
     {
-        if (CurrentBet + 80 <= GetPlayerMoney())
-            CurrentBet += 80;
+        if (CurrentValue + 80 <= GetPlayerMoney())
+            CurrentValue += 80;
 
-        CheckBetNumber();
+        CheckValue();
     }
 
-    public void MinusBet()
+    public override void Minus()
     {
-        if (CurrentBet - 80 >= 0)
-            CurrentBet -= 80;
+        if (CurrentValue - 80 >= 0)
+            CurrentValue -= 80;
 
-        CheckBetNumber();
+        CheckValue();
     }
 
-    public void MaxBet()
+    public override void Max()
     {
         if (GetPlayerMoney() / 80 > 0)
         {
             int current = (GetPlayerMoney() / 80);
-            CurrentBet = 80 * current;
+            CurrentValue = 80 * current;
         }
         else
         {
-            CurrentBet = 0;
+            CurrentValue = 0;
         }
 
-        CheckBetNumber();
+        CheckValue();
     }
 
-    void CheckBetNumber()
+    protected override void CheckValue()
     {
-        if (CurrentBet > GetPlayerMoney())
-            CurrentBet = 0;
+        if (CurrentValue > GetPlayerMoney())
+            CurrentValue = 0;
 
-        _betValue.text = $"{CurrentBet}";
+        ValueText.text = $"{CurrentValue}";
 
         SetEachBet();
     }
 
-    public void SetEachBet()
+    private void SetEachBet()
     {
         for (int i = 0; i < EachBetGroup.Length; i++)
         {
-            EachBetGroup[i].text = $"{CurrentBet / 8}";
+            EachBetGroup[i].text = $"{CurrentValue / 8}";
         }
     }
 
-    public void SetZero()
+    public override void SetZero()
     {
-        CurrentBet = 0;
-        _betValue.text = $"{CurrentBet}";
+        CurrentValue = 0;
+        ValueText.text = $"{CurrentValue}";
 
         SetEachBet();
-    }
-
-    public int GetBetInputValue()
-    {
-        return int.Parse(_betValue.text);
     }
 }

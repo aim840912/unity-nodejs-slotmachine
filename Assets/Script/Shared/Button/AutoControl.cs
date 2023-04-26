@@ -1,55 +1,43 @@
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
-using System;
-
-
-public class AutoControl : MonoBehaviour
+public class AutoControl : ValueControl
 {
-    [SerializeField] TMP_Text _autoValue;
-    public int CurrentAuto { get; private set; } = 0;
-
     public int AutoTime;
 
-    public void AddAuto()
+    public override void Add()
     {
-        if (CurrentAuto <= AutoTime)
-            CurrentAuto++;
+        if (CurrentValue <= AutoTime)
+            CurrentValue++;
 
-        CheckAutoNumber();
+        CheckValue();
     }
 
-    public void MinusAuto()
+    public override void Minus()
     {
-        if (CurrentAuto >= 0)
-            CurrentAuto--;
+        if (CurrentValue >= 0)
+            CurrentValue--;
 
-        CheckAutoNumber();
+        CheckValue();
     }
 
-    public void MaxAuto()
+    public override void Max()
     {
-        CurrentAuto = 10;
+        CurrentValue = 10;
 
-        CheckAutoNumber();
+        CheckValue();
     }
 
-    void CheckAutoNumber()
+    protected override void CheckValue()
     {
-        if (CurrentAuto > AutoTime)
-            CurrentAuto = 0;
+        if (CurrentValue > AutoTime)
+            CurrentValue = 0;
 
-        _autoValue.text = $"{CurrentAuto}";
+        ValueText.text = $"{CurrentValue}";
     }
 
-    public void SetZero()
+    public override void SetZero()
     {
-        CurrentAuto = 0;
-        _autoValue.text = $"{CurrentAuto}";
-    }
-
-    public int GetAutoSpinValue()
-    {
-        return int.Parse(_autoValue.text);
+        CurrentValue = 0;
+        ValueText.text = $"{CurrentValue}";
     }
 }

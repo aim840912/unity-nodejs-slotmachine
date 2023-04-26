@@ -1542,7 +1542,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff220ddd5e9afa94a9e2096fa39f877a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _autoValue: {fileID: 579490145}
+  ValueText: {fileID: 579490145}
   AutoTime: 5
 --- !u!1 &283300932
 GameObject:
@@ -1822,7 +1822,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 225975873}
         m_TargetAssemblyTypeName: AutoControl, Assembly-CSharp
-        m_MethodName: MinusAuto
+        m_MethodName: Minus
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2537,6 +2537,7 @@ MonoBehaviour:
   _imageData: {fileID: 11400000, guid: d7bf73db1b9771e4d94eaeafc2cb787e, type: 2}
   _minDuration: 0.2
   _maxDuration: 0.5
+  IsOver: 0
 --- !u!1 &424147948
 GameObject:
   m_ObjectHideFlags: 0
@@ -2703,8 +2704,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1560383115}
-        m_TargetAssemblyTypeName: BetManager, Assembly-CSharp
-        m_MethodName: MinusBet
+        m_TargetAssemblyTypeName: BetControl, Assembly-CSharp
+        m_MethodName: Minus
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2968,6 +2969,7 @@ MonoBehaviour:
   _imageData: {fileID: 11400000, guid: d7bf73db1b9771e4d94eaeafc2cb787e, type: 2}
   _minDuration: 0.2
   _maxDuration: 0.5
+  IsOver: 0
 --- !u!114 &494166312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3313,6 +3315,7 @@ MonoBehaviour:
   _imageData: {fileID: 11400000, guid: d7bf73db1b9771e4d94eaeafc2cb787e, type: 2}
   _minDuration: 0.2
   _maxDuration: 0.5
+  IsOver: 0
 --- !u!1 &704220271
 GameObject:
   m_ObjectHideFlags: 0
@@ -3488,7 +3491,7 @@ MonoBehaviour:
   - {fileID: 685581134}
   - {fileID: 1537324408}
   - {fileID: 494166311}
-  IsOver: 0
+  CanNextStep: 0
 --- !u!224 &756783874
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3864,7 +3867,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 225975873}
         m_TargetAssemblyTypeName: AutoControl, Assembly-CSharp
-        m_MethodName: MaxAuto
+        m_MethodName: Max
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4140,6 +4143,7 @@ MonoBehaviour:
   _imageData: {fileID: 11400000, guid: d7bf73db1b9771e4d94eaeafc2cb787e, type: 2}
   _minDuration: 0.2
   _maxDuration: 0.5
+  IsOver: 0
 --- !u!1 &790088681
 GameObject:
   m_ObjectHideFlags: 0
@@ -4503,6 +4507,7 @@ MonoBehaviour:
   _imageData: {fileID: 11400000, guid: d7bf73db1b9771e4d94eaeafc2cb787e, type: 2}
   _minDuration: 0.2
   _maxDuration: 0.5
+  IsOver: 0
 --- !u!1 &820054626
 GameObject:
   m_ObjectHideFlags: 0
@@ -5595,6 +5600,7 @@ MonoBehaviour:
   _imageData: {fileID: 11400000, guid: d7bf73db1b9771e4d94eaeafc2cb787e, type: 2}
   _minDuration: 0.2
   _maxDuration: 0.5
+  IsOver: 0
 --- !u!1 &1101475682
 GameObject:
   m_ObjectHideFlags: 0
@@ -6124,8 +6130,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1560383115}
-        m_TargetAssemblyTypeName: BetManager, Assembly-CSharp
-        m_MethodName: MaxBet
+        m_TargetAssemblyTypeName: BetControl, Assembly-CSharp
+        m_MethodName: Max
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7194,7 +7200,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 225975873}
         m_TargetAssemblyTypeName: AutoControl, Assembly-CSharp
-        m_MethodName: AddAuto
+        m_MethodName: Add
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8366,6 +8372,7 @@ MonoBehaviour:
   _imageData: {fileID: 11400000, guid: d7bf73db1b9771e4d94eaeafc2cb787e, type: 2}
   _minDuration: 0.2
   _maxDuration: 0.5
+  IsOver: 0
 --- !u!1 &1560383109
 GameObject:
   m_ObjectHideFlags: 0
@@ -8530,7 +8537,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7385c1729e5ae6046ad828a5ea4d63ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _betValue: {fileID: 1641866740}
+  ValueText: {fileID: 1641866740}
   EachBetGroup:
   - {fileID: 65947698}
   - {fileID: 491307582}
@@ -9121,8 +9128,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1560383115}
-        m_TargetAssemblyTypeName: BetManager, Assembly-CSharp
-        m_MethodName: AddBet
+        m_TargetAssemblyTypeName: BetControl, Assembly-CSharp
+        m_MethodName: Add
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9580,6 +9587,7 @@ MonoBehaviour:
   _imageData: {fileID: 11400000, guid: d7bf73db1b9771e4d94eaeafc2cb787e, type: 2}
   _minDuration: 0.2
   _maxDuration: 0.5
+  IsOver: 0
 --- !u!1 &1842578083
 GameObject:
   m_ObjectHideFlags: 0
@@ -10497,6 +10505,7 @@ MonoBehaviour:
   _imageData: {fileID: 11400000, guid: d7bf73db1b9771e4d94eaeafc2cb787e, type: 2}
   _minDuration: 0.2
   _maxDuration: 0.5
+  IsOver: 0
 --- !u!114 &2067426084
 MonoBehaviour:
   m_ObjectHideFlags: 0

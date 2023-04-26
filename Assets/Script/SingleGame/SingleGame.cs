@@ -6,6 +6,7 @@ public class SingleGame : MonoBehaviour, IGameMode
 {
     public int WinMoney { get; set; }
     public int[] SlotNumber { get; set; } = new int[9];
+    public int PlayerMoney { get; set; }
 
     [SerializeField] private TMP_Text _betInputValue;
 

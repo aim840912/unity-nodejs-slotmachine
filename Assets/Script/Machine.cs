@@ -31,11 +31,12 @@ public class Machine : MonoBehaviour
 
     }
 
+
     public void SpinToggleOnClick()
     {
         _uiManager.CloseAllPanel();
 
-        _autoSpinTimes = _uiManager._autoControl.GetAutoSpinValue();
+        _autoSpinTimes = _uiManager._autoControl.CurrentValue;
 
         if (_autoSpinTimes > 0)
         {
