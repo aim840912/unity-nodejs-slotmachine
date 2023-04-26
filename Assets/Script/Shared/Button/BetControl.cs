@@ -9,9 +9,25 @@ public class BetControl : MonoBehaviour
     public int CurrentBet { get; private set; } = 0;
     public TMP_Text[] EachBetGroup;
 
+    private int GetPlayerMoney()
+    {
+        if (GameManager.instance._scenePattern == ScenePattern.ONLINE)
+        {
+            return PlayerManager.instance.PlayerData.Money;
+        }
+        else if (GameManager.instance._scenePattern == ScenePattern.SINGLE_GAME)
+        {
+            return PlayerPrefs.GetInt("playerMoney");
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
     public void AddBet()
     {
-        if (CurrentBet + 80 <= PlayerManager.instance.PlayerData.Money)
+        if (CurrentBet + 80 <= GetPlayerMoney())
             CurrentBet += 80;
 
         CheckBetNumber();
@@ -27,9 +43,9 @@ public class BetControl : MonoBehaviour
 
     public void MaxBet()
     {
-        if (PlayerManager.instance.PlayerData.Money / 80 > 0)
+        if (GetPlayerMoney() / 80 > 0)
         {
-            int current = (int)(PlayerManager.instance.PlayerData.Money / 80);
+            int current = (GetPlayerMoney() / 80);
             CurrentBet = 80 * current;
         }
         else
@@ -42,7 +58,7 @@ public class BetControl : MonoBehaviour
 
     void CheckBetNumber()
     {
-        if (CurrentBet > PlayerManager.instance.PlayerData.Money)
+        if (CurrentBet > GetPlayerMoney())
             CurrentBet = 0;
 
         _betValue.text = $"{CurrentBet}";
@@ -64,5 +80,10 @@ public class BetControl : MonoBehaviour
         _betValue.text = $"{CurrentBet}";
 
         SetEachBet();
+    }
+
+    public int GetBetInputValue()
+    {
+        return int.Parse(_betValue.text);
     }
 }

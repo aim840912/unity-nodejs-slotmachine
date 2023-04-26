@@ -4,11 +4,10 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 
-public class ServerLogin : ServerAccount
+public class ServerLogin : BaseServerAction
 {
-    [SerializeField] private int _sceneIndexToMainScene = 1;
     private PlayerData _playerData;
-
+    [SerializeField] private int _machineSceneIndex;
 
     protected override IEnumerator PostServerData()
     {
@@ -31,7 +30,7 @@ public class ServerLogin : ServerAccount
 
             yield return new WaitUntil(() => HasGetPlayerData());
 
-            SceneManager.LoadScene(_sceneIndexToMainScene);
+            SceneManager.LoadScene(_machineSceneIndex);
         }
         else if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
         {

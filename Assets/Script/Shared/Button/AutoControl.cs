@@ -21,7 +21,7 @@ public class AutoControl : MonoBehaviour
 
     public void MinusAuto()
     {
-        if (CurrentAuto >= AutoTime)
+        if (CurrentAuto >= 0)
             CurrentAuto--;
 
         CheckAutoNumber();
@@ -46,5 +46,10 @@ public class AutoControl : MonoBehaviour
     {
         CurrentAuto = 0;
         _autoValue.text = $"{CurrentAuto}";
+    }
+
+    public int GetAutoSpinValue()
+    {
+        return int.Parse(_autoValue.text);
     }
 }

@@ -8,7 +8,7 @@ using TMPro;
 [System.Serializable]
 public struct ServerReturnData
 {
-    public int[] Arr;
+    public int[] BoardNum;
     public int WinMoney;
     public int Money;
     public bool HasGetData;
@@ -30,7 +30,7 @@ public class Server : MonoBehaviour, IGameMode
 
         yield return new WaitUntil(() => _hasGetData == true);
 
-        SlotNumber = _serverReturnData.Arr;
+        SlotNumber = _serverReturnData.BoardNum;
         WinMoney = _serverReturnData.WinMoney;
     }
 

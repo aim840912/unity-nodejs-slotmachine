@@ -1,8 +1,9 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
-public abstract class ServerAccount : MonoBehaviour
+public abstract class BaseServerAction : MonoBehaviour
 {
     [SerializeField] protected TMP_InputField _name;
     [SerializeField] protected TMP_InputField _email;
@@ -16,4 +17,9 @@ public abstract class ServerAccount : MonoBehaviour
     }
 
     protected abstract IEnumerator PostServerData();
+
+    public virtual void ClickToScene(int sceneIndex)
+    {
+        SceneManager.LoadScene(sceneIndex);
+    }
 }

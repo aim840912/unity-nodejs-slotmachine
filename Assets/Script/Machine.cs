@@ -14,6 +14,7 @@ public class Machine : MonoBehaviour
     [SerializeField] private SingleGame _singleGame;
 
     private IGameMode _gameMode;
+    private int _autoSpinTimes;
 
     private void Start()
     {
@@ -33,6 +34,13 @@ public class Machine : MonoBehaviour
     public void SpinToggleOnClick()
     {
         _uiManager.CloseAllPanel();
+
+        _autoSpinTimes = _uiManager._autoControl.GetAutoSpinValue();
+
+        if (_autoSpinTimes > 0)
+        {
+            StartCoroutine(AutoSpin(_autoSpinTimes));
+        }
 
         if (_spinToggle.isOn)
         {
@@ -60,19 +68,14 @@ public class Machine : MonoBehaviour
         _uiManager.UpdatedPlayerUI(_gameMode);
     }
 
-    public void Auto(int time)
-    {
-        StartCoroutine(AutoSpin(time));
-    }
-
     private IEnumerator AutoSpin(int time)
     {
         for (int i = 0; i < time; i++)
         {
             StartSpin();
-            yield return new WaitForSecondsRealtime(5);
+            yield return new WaitForSecondsRealtime(3);
             StopSpin();
-            yield return new WaitForSecondsRealtime(5);
+            yield return new WaitForSecondsRealtime(3);
         }
     }
 }

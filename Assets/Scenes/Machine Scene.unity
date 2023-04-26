@@ -1391,8 +1391,10 @@ GameObject:
   - component: {fileID: 225975871}
   - component: {fileID: 225975870}
   - component: {fileID: 225975869}
+  - component: {fileID: 225975872}
+  - component: {fileID: 225975873}
   m_Layer: 5
-  m_Name: AUTO Btn
+  m_Name: Auto Control Btn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1464,7 +1466,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 225975870}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 225975872}
+        m_TargetAssemblyTypeName: ShowImage, Assembly-CSharp
+        m_MethodName: IsShowing
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &225975870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1503,6 +1517,33 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 225975867}
   m_CullTransparentMesh: 1
+--- !u!114 &225975872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 225975867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a54153968fa3eb499724f1008012ad2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameObject: {fileID: 424147948}
+--- !u!114 &225975873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 225975867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff220ddd5e9afa94a9e2096fa39f877a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _autoValue: {fileID: 579490145}
+  AutoTime: 5
 --- !u!1 &283300932
 GameObject:
   m_ObjectHideFlags: 0
@@ -1778,7 +1819,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 337472665}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 225975873}
+        m_TargetAssemblyTypeName: AutoControl, Assembly-CSharp
+        m_MethodName: MinusAuto
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &337472665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2501,7 +2554,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &424147949
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3140,6 +3193,7 @@ MonoBehaviour:
   _winMoneyText: {fileID: 1953902946}
   _playerMoneyText: {fileID: 133321526}
   _betControl: {fileID: 1560383115}
+  _autoControl: {fileID: 225975873}
   _panel:
   - {fileID: 856625885}
   - {fileID: 424147948}
@@ -3808,9 +3862,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1560383115}
-        m_TargetAssemblyTypeName: BetManager, Assembly-CSharp
-        m_MethodName: MaxBet
+      - m_Target: {fileID: 225975873}
+        m_TargetAssemblyTypeName: AutoControl, Assembly-CSharp
+        m_MethodName: MaxAuto
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5151,7 +5205,7 @@ GameObject:
   - component: {fileID: 1031542080}
   - component: {fileID: 1031542079}
   m_Layer: 5
-  m_Name: Zero Btn
+  m_Name: Zero Auto
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5222,8 +5276,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1560383115}
-        m_TargetAssemblyTypeName: BetControl, Assembly-CSharp
+      - m_Target: {fileID: 225975873}
+        m_TargetAssemblyTypeName: AutoControl, Assembly-CSharp
         m_MethodName: SetZero
         m_Mode: 1
         m_Arguments:
@@ -7137,7 +7191,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1336044876}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 225975873}
+        m_TargetAssemblyTypeName: AutoControl, Assembly-CSharp
+        m_MethodName: AddAuto
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1336044876
 MonoBehaviour:
   m_ObjectHideFlags: 0

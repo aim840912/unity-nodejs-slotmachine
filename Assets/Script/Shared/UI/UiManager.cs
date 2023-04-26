@@ -6,15 +6,10 @@ public class UiManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text _winMoneyText;
     [SerializeField] private TMP_Text _playerMoneyText;
-    [SerializeField] private BetControl _betControl;
+    public BetControl _betControl;
+    public AutoControl _autoControl;
     [SerializeField] private GameObject[] _panel;
 
-
-    // private void Start()
-    // {
-    //     int playerMoney = PlayerManager.instance.PlayerData.Money;
-    //     _playerMoneyText.text = $"{playerMoney}";
-    // }
 
     public void UpdatedPlayerUI(IGameMode server)
     {
