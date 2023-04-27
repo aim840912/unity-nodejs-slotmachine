@@ -15,11 +15,11 @@ public class SingleGame : MonoBehaviour, IGameMode
     private CalcMultiple _calcMultiple = new CalcMultiple();
 
 
-    public IEnumerator GetServerData()
+    public IEnumerator GetServerData(int betInputValue)
     {
         GenerateGameBoard();
 
-        CalcMoney();
+        CalcMoney(betInputValue);
 
         yield return null;
 
@@ -34,11 +34,11 @@ public class SingleGame : MonoBehaviour, IGameMode
         }
     }
 
-    void CalcMoney()
+    void CalcMoney(int betInputValue)
     {
         int _currentMoney = PlayerManager.instance.PlayerData.Money;
 
-        WinMoney = GetMultiple() * GetInputValue() / 8 - GetInputValue();
+        WinMoney = GetMultiple() * betInputValue / 8 - betInputValue;
 
         _currentMoney += WinMoney;
 

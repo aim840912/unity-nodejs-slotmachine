@@ -17,30 +17,29 @@ public class Server : MonoBehaviour, IGameMode
 {
     public int WinMoney { get; set; }
     public int[] SlotNumber { get; set; } = new int[9];
-    public int PlayerMoney { get; set; }
-    [SerializeField] private string _connectUrl = "";
-    [SerializeField] private TMP_Text _betInputValue;
+
+    [SerializeField] private string _connectUrl = "http://localhost:3000/machine/spinAction";
+
     private ServerReturnData _serverReturnData;
     private bool _hasGetData;
 
-    public IEnumerator GetServerData()
+    public IEnumerator GetServerData(int betInputValue)
     {
-        StartCoroutine(GetReturnData());
+        StartCoroutine(GetReturnData(betInputValue));
 
         yield return new WaitUntil(() => _hasGetData == true);
 
         SlotNumber = _serverReturnData.BoardNum;
         WinMoney = _serverReturnData.WinMoney;
-        PlayerMoney = _serverReturnData.Money;
     }
 
-    private IEnumerator GetReturnData()
+    private IEnumerator GetReturnData(int betInputValue)
     {
         _hasGetData = false;
 
         WWWForm form = new WWWForm();
 
-        form.AddField("InputValue", _betInputValue.text);
+        form.AddField("InputValue", betInputValue);
         form.AddField("userId", PlayerManager.instance.PlayerData.UserId);
 
         UnityWebRequest www = UnityWebRequest.Post(_connectUrl, form);

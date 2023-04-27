@@ -12,7 +12,7 @@ public class Machine : MonoBehaviour
     [SerializeField] private UiManager _uiManager;
     [SerializeField] private Server _server;
     [SerializeField] private SingleGame _singleGame;
-
+    [SerializeField] private TMP_Text _betInputValue;
     private IGameMode _gameMode;
     private int _autoSpinTimes;
 
@@ -55,7 +55,7 @@ public class Machine : MonoBehaviour
 
     void StartSpin()
     {
-        StartCoroutine(_gameMode.GetServerData());
+        StartCoroutine(_gameMode.GetServerData(int.Parse(_betInputValue.text)));
 
         SpinCoroutine.StartSpin();
 
