@@ -22,6 +22,8 @@ public class SingleGame : MonoBehaviour, IGameMode
         CalcMoney();
 
         yield return null;
+
+        SaveData();
     }
 
     void GenerateGameBoard()
@@ -34,13 +36,16 @@ public class SingleGame : MonoBehaviour, IGameMode
 
     void CalcMoney()
     {
-        int _currentMoney = GetPlayerMoney();
+        int _currentMoney = PlayerManager.instance.PlayerData.Money;
 
-        WinMoney = GetMultiple() * GetInputValue() - 8 * GetInputValue();
+        WinMoney = GetMultiple() * GetInputValue() / 8 - GetInputValue();
 
         _currentMoney += WinMoney;
 
-        SetPlayerMoney(_currentMoney);
+        SaveManager.instance.gameData.Money = _currentMoney;
+
+        PlayerManager.instance.PlayerData.Money = _currentMoney;
+
     }
 
     int GetMultiple()
@@ -56,18 +61,11 @@ public class SingleGame : MonoBehaviour, IGameMode
         return int.Parse(_betInputValue.text);
     }
 
-    int GetPlayerMoney()
+    void SaveData()
     {
-        if (!PlayerPrefs.HasKey("playerMoney"))
-        {
-            PlayerPrefs.SetInt("playerMoney", 10000);
-        }
-
-        return PlayerPrefs.GetInt("playerMoney");
+        SaveManager.instance.gameData.BoardNum = this.SlotNumber;
+        SaveManager.instance.SaveGame();
     }
 
-    void SetPlayerMoney(int money)
-    {
-        PlayerPrefs.SetInt("playerMoney", money);
-    }
+
 }

@@ -3,12 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
+[System.Serializable]
+public class GameData
+{
+    public int Money = 10000;
+    public int[] BoardNum;
+}
+
 public class SaveManager : MonoBehaviour
 {
     public static SaveManager instance;
     [SerializeField] private string fileName;
     [SerializeField] private bool encryptData;
-    private GameData gameData;
+    public GameData gameData;
     private FileDataHandler dataHandler;
 
     [ContextMenu("Delete save file")]
@@ -29,7 +36,10 @@ public class SaveManager : MonoBehaviour
     {
         dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, encryptData);
 
-        LoadGame();
+        if (GameManager.instance._scenePattern == ScenePattern.SINGLE_GAME)
+        {
+            LoadGame();
+        }
     }
 
     public void LoadGame()
@@ -42,15 +52,15 @@ public class SaveManager : MonoBehaviour
             NewGame();
         }
 
-
+        PlayerManager.instance.PlayerData.Money = gameData.Money;
     }
+
     public void NewGame()
     {
         gameData = new GameData();
     }
     public void SaveGame()
     {
-
         dataHandler.Save(gameData);
     }
 
