@@ -309,7 +309,7 @@ GameObject:
   - component: {fileID: 80284504}
   - component: {fileID: 80284503}
   m_Layer: 5
-  m_Name: EXIT
+  m_Name: HISTORY
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -355,7 +355,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: EXIT
+  m_text: HISTORY
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -382,8 +382,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 19.39
+  m_fontSizeBase: 19.39
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2200,7 +2200,7 @@ GameObject:
   - component: {fileID: 413176643}
   - component: {fileID: 413176642}
   m_Layer: 5
-  m_Name: EXIT Btn
+  m_Name: HISTORY Btn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5418,6 +5418,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1063499529}
   - component: {fileID: 1063499528}
+  - component: {fileID: 1063499531}
   - component: {fileID: 1063499530}
   m_Layer: 5
   m_Name: SpinToggle
@@ -5524,6 +5525,19 @@ MonoBehaviour:
   _toggleText: {fileID: 1444125848}
   _toggleOn: STOP
   _toggleOff: SPIN
+--- !u!114 &1063499531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1063499527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f6babd6420dcbd4c9edbce8a2dd22af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 1063499528}
 --- !u!1 &1077008690
 GameObject:
   m_ObjectHideFlags: 0

@@ -89,4 +89,9 @@ public class ImageControl : MonoBehaviour
         yield return new WaitForSeconds(time);
         LoopStop(boardNum);
     }
+
+    public void LoadLastBoard(int boardNum)
+    {
+        _image.sprite = _imageData.RollingImage[boardNum];
+    }
 }

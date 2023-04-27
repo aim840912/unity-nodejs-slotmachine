@@ -25,7 +25,7 @@ public class Server : MonoBehaviour, IGameMode
 
     public IEnumerator GetServerData()
     {
-        StartCoroutine(PostServerData());
+        StartCoroutine(GetReturnData());
 
         yield return new WaitUntil(() => _hasGetData == true);
 
@@ -34,7 +34,7 @@ public class Server : MonoBehaviour, IGameMode
         PlayerMoney = _serverReturnData.Money;
     }
 
-    private IEnumerator PostServerData()
+    private IEnumerator GetReturnData()
     {
         _hasGetData = false;
 
