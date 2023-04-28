@@ -9,6 +9,6 @@ public abstract class ValueControl : MonoBehaviour
     public abstract void Minus();
     public abstract void Max();
     public abstract void SetZero();
-    protected abstract void CheckValue();
+    public abstract void CheckCurrentValue();
 
 }

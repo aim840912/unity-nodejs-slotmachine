@@ -10,11 +10,13 @@ public class Machine : MonoBehaviour
 
     [SerializeField] private Toggle _spinToggle;
     [SerializeField] private UiManager _uiManager;
+    [Space(15)]
     [SerializeField] private Server _server;
     [SerializeField] private SingleGame _singleGame;
-    [SerializeField] private TMP_Text _betInputValue;
     private IGameMode _gameMode;
+
     private int _autoSpinTimes;
+
 
     private void Start()
     {
@@ -27,8 +29,15 @@ public class Machine : MonoBehaviour
             _gameMode = _singleGame;
         }
 
-        _uiManager.UpdatedPlayerUI(_gameMode);
+        StartCoroutine(WaitForGetData());
 
+    }
+
+    private IEnumerator WaitForGetData()
+    {
+        yield return new WaitUntil(() => _gameMode.GetData);
+
+        _uiManager.UpdatedPlayerUI(_gameMode);
     }
 
 
@@ -42,7 +51,14 @@ public class Machine : MonoBehaviour
         {
             StartCoroutine(AutoSpin(_autoSpinTimes));
         }
+        else
+        {
+            NormalSpin();
+        }
+    }
 
+    private void NormalSpin()
+    {
         if (_spinToggle.isOn)
         {
             StartSpin();
@@ -53,9 +69,22 @@ public class Machine : MonoBehaviour
         }
     }
 
+    private IEnumerator AutoSpin(int time)
+    {
+        for (int i = 0; i < time; i++)
+        {
+            --_uiManager._autoControl.CurrentValue;
+            StartSpin();
+            yield return new WaitForSecondsRealtime(3);
+            StopSpin();
+            yield return new WaitForSecondsRealtime(3);
+
+        }
+    }
+
     void StartSpin()
     {
-        StartCoroutine(_gameMode.GetServerData(int.Parse(_betInputValue.text)));
+        StartCoroutine(_gameMode.GetServerData(_uiManager._betControl.CurrentValue));
 
         SpinCoroutine.StartSpin();
 
@@ -69,14 +98,5 @@ public class Machine : MonoBehaviour
         _uiManager.UpdatedPlayerUI(_gameMode);
     }
 
-    private IEnumerator AutoSpin(int time)
-    {
-        for (int i = 0; i < time; i++)
-        {
-            StartSpin();
-            yield return new WaitForSecondsRealtime(3);
-            StopSpin();
-            yield return new WaitForSecondsRealtime(3);
-        }
-    }
+
 }

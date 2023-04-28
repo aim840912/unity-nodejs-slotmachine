@@ -7,8 +7,8 @@ public class SingleGame : MonoBehaviour, IGameMode
     public int WinMoney { get; set; }
     public int[] SlotNumber { get; set; } = new int[9];
     public int PlayerMoney { get; set; }
-
-    [SerializeField] private TMP_Text _betInputValue;
+    public ServerReturnData ServerReturnData { get; set; }
+    public bool GetData { get; set; }
 
     readonly int _minBoardNumber = 0;
     readonly int _maxBoardNumber = 10;
@@ -54,11 +54,6 @@ public class SingleGame : MonoBehaviour, IGameMode
         Debug.Log($"{multiple}");
 
         return multiple;
-    }
-
-    int GetInputValue()
-    {
-        return int.Parse(_betInputValue.text);
     }
 
     void SaveData()

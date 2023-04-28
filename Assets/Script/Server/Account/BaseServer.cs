@@ -3,7 +3,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-public abstract class BaseServerAction : MonoBehaviour
+public abstract class BaseServer : MonoBehaviour
 {
     [SerializeField] protected TMP_InputField _name;
     [SerializeField] protected TMP_InputField _email;

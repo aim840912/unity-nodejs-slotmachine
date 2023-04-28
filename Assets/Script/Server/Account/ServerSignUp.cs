@@ -6,7 +6,7 @@ using UnityEngine.Networking;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-public class ServerSignUp : BaseServerAction
+public class ServerSignUp : BaseServer
 {
     [SerializeField] private GameObject _panel;
 

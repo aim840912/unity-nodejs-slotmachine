@@ -26,7 +26,7 @@ public class BetControl : ValueControl
         if (CurrentValue + 80 <= GetPlayerMoney())
             CurrentValue += 80;
 
-        CheckValue();
+        CheckCurrentValue();
     }
 
     public override void Minus()
@@ -34,7 +34,7 @@ public class BetControl : ValueControl
         if (CurrentValue - 80 >= 0)
             CurrentValue -= 80;
 
-        CheckValue();
+        CheckCurrentValue();
     }
 
     public override void Max()
@@ -49,10 +49,10 @@ public class BetControl : ValueControl
             CurrentValue = 0;
         }
 
-        CheckValue();
+        CheckCurrentValue();
     }
 
-    protected override void CheckValue()
+    public override void CheckCurrentValue()
     {
         if (CurrentValue > GetPlayerMoney())
             CurrentValue = 0;

@@ -20,22 +20,23 @@ public class Server : MonoBehaviour, IGameMode
 
     [SerializeField] private string _connectUrl = "http://localhost:3000/machine/spinAction";
 
-    private ServerReturnData _serverReturnData;
-    private bool _hasGetData;
+    public ServerReturnData ServerReturnData { get; set; }
+
+    public bool GetData { get; set; }
 
     public IEnumerator GetServerData(int betInputValue)
     {
         StartCoroutine(GetReturnData(betInputValue));
 
-        yield return new WaitUntil(() => _hasGetData == true);
+        yield return new WaitUntil(() => GetData == true);
 
-        SlotNumber = _serverReturnData.BoardNum;
-        WinMoney = _serverReturnData.WinMoney;
+        SlotNumber = ServerReturnData.BoardNum;
+        WinMoney = ServerReturnData.WinMoney;
     }
 
     private IEnumerator GetReturnData(int betInputValue)
     {
-        _hasGetData = false;
+        GetData = false;
 
         WWWForm form = new WWWForm();
 
@@ -47,11 +48,11 @@ public class Server : MonoBehaviour, IGameMode
 
         if (www.result == UnityWebRequest.Result.Success)
         {
-            _hasGetData = true;
+            GetData = true;
 
-            _serverReturnData = JsonUtility.FromJson<ServerReturnData>(www.downloadHandler.text);
+            ServerReturnData = JsonUtility.FromJson<ServerReturnData>(www.downloadHandler.text);
 
-            PlayerManager.instance.PlayerData.Money = _serverReturnData.Money;
+            // PlayerManager.instance.PlayerData.Money = ServerReturnData.Money;
         }
         else if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
         {

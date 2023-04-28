@@ -9,28 +9,28 @@ public class AutoControl : ValueControl
         if (CurrentValue <= AutoTime)
             CurrentValue++;
 
-        CheckValue();
+        CheckCurrentValue();
     }
 
     public override void Minus()
     {
-        if (CurrentValue >= 0)
+        if (CurrentValue > 0)
             CurrentValue--;
 
-        CheckValue();
+        CheckCurrentValue();
     }
 
     public override void Max()
     {
-        CurrentValue = 10;
+        CurrentValue = AutoTime;
 
-        CheckValue();
+        CheckCurrentValue();
     }
 
-    protected override void CheckValue()
+    public override void CheckCurrentValue()
     {
         if (CurrentValue > AutoTime)
-            CurrentValue = 0;
+            CurrentValue = AutoTime;
 
         ValueText.text = $"{CurrentValue}";
     }

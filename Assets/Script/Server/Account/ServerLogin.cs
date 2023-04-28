@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 
-public class ServerLogin : BaseServerAction
+public class ServerLogin : BaseServer
 {
     private PlayerData _playerData;
     [SerializeField] private int _machineSceneIndex;

@@ -10,14 +10,22 @@ public class UiManager : MonoBehaviour
     public AutoControl _autoControl;
     [SerializeField] private GameObject[] _panel;
 
+    private void Start()
+    {
+        _playerMoneyText.text = $"{PlayerManager.instance.PlayerData.Money}";
+    }
+
 
     public void UpdatedPlayerUI(IGameMode server)
     {
         int winMoney = server.WinMoney;
-        int playerMoney = PlayerManager.instance.PlayerData.Money;
+        int playerMoney = server.ServerReturnData.Money;
 
         _winMoneyText.text = $"Win: {winMoney}";
         _playerMoneyText.text = $"{playerMoney}";
+
+        CheckValue(_betControl);
+        CheckValue(_autoControl);
     }
 
     public void TurnWinMoneyToZero()
@@ -31,6 +39,11 @@ public class UiManager : MonoBehaviour
         {
             _panel[i].SetActive(false);
         }
+    }
+
+    private void CheckValue(ValueControl valueControl)
+    {
+        valueControl.CheckCurrentValue();
     }
 
 }
