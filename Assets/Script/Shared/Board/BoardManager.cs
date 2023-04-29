@@ -1,57 +1,35 @@
 using UnityEngine;
-using DG.Tweening;
-using UnityEngine.UI;
+using System;
 using System.Collections;
 
 public class BoardManager : MonoBehaviour
 {
-    [SerializeField] private ImageControl[] _imageControls;
 
-    public bool CanNextStep;
+    [SerializeField] private ImageManager _imageManager;
+    [SerializeField] private LineManager _lineManager;
 
-    public void Spin()
+    public bool IsOver = false;
+
+    public void StartSpin()
     {
-        CanNextStep = false;
-
-        for (int i = 0; i < _imageControls.Length; i++)
-        {
-            _imageControls[i].StartLoop();
-        }
+        _imageManager.Spin();
+        _lineManager.Spin();
+        IsOver = false;
     }
 
-    public void Stop(int[] boardNum)
+    public void StopSpin(int[] boardNum)
     {
-        for (int i = 0; i < _imageControls.Length; i++)
-        {
-            StartCoroutine(_imageControls[i].SetTimeToStopSpin(boardNum[i]));
-        }
-
-        StartCoroutine(WaitCanNextStep());
+        StartCoroutine(Stop(boardNum));
     }
 
-    private IEnumerator WaitCanNextStep()
+    public IEnumerator Stop(int[] boardNum)
     {
-        yield return new WaitUntil(() => CheckCanNextStep());
+        _imageManager.Stop(boardNum);
 
-        CanNextStep = true;
+        yield return new WaitUntil(() => _imageManager.CanNextStep == true);
+
+        _lineManager.Stop(boardNum);
+
+        IsOver = true;
     }
-
-    public bool CheckCanNextStep()
-    {
-        int boolCount = 0;
-        for (int i = 0; i < _imageControls.Length; i++)
-        {
-            if (_imageControls[i].IsOver == true)
-            {
-                boolCount++;
-            }
-        }
-        if (boolCount == 9)
-        {
-            return true;
-        }
-        else
-            return false;
-    }
-
 }

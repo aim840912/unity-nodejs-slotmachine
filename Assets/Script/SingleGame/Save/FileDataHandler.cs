@@ -20,10 +20,10 @@ public class FileDataHandler
         encryptData = _encryptData;
     }
 
-    public void Save(GameData _data)
+    public void Save(ServerReturnData _data)
     {
         string fullPath = Path.Combine(dataDirPath, dataFileName);
-
+        Debug.Log(fullPath);
         try
         {
             Directory.CreateDirectory(Path.GetDirectoryName(fullPath));
@@ -48,10 +48,10 @@ public class FileDataHandler
         }
     }
 
-    public GameData Load()
+    public ServerReturnData Load()
     {
         string fullPath = Path.Combine(dataDirPath, dataFileName);
-        GameData loadData = null;
+        ServerReturnData loadData = null;
 
         if (File.Exists(fullPath))
         {
@@ -70,19 +70,14 @@ public class FileDataHandler
                 if (encryptData)
                     dataToLoad = EncryptDecrypt(dataToLoad);
 
-                loadData = JsonUtility.FromJson<GameData>(dataToLoad);
+                loadData = JsonUtility.FromJson<ServerReturnData>(dataToLoad);
             }
             catch (Exception e)
             {
                 Debug.LogError("Error on trying to load data from file:" + fullPath + "\n" + e);
             }
         }
-
-
-
-
         return loadData;
-
     }
 
     public void Delete()

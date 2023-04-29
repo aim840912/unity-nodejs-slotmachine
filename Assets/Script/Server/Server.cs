@@ -6,23 +6,20 @@ using UnityEngine.SceneManagement;
 using TMPro;
 
 [System.Serializable]
-public struct ServerReturnData
+public class ServerReturnData
 {
     public int[] BoardNum;
     public int WinMoney;
-    public int Money;
+    public int Money = 10000;
 }
 
 public class Server : MonoBehaviour, IGameMode
 {
-    public int WinMoney { get; set; }
-    public int[] SlotNumber { get; set; } = new int[9];
-
-    [SerializeField] private string _connectUrl = "http://localhost:3000/machine/spinAction";
 
     public ServerReturnData ServerReturnData { get; set; }
-
     public bool GetData { get; set; }
+
+    [SerializeField] private string _connectUrl = "http://localhost:3000/machine/spinAction";
 
     public IEnumerator GetServerData(int betInputValue)
     {
@@ -30,8 +27,7 @@ public class Server : MonoBehaviour, IGameMode
 
         yield return new WaitUntil(() => GetData == true);
 
-        SlotNumber = ServerReturnData.BoardNum;
-        WinMoney = ServerReturnData.WinMoney;
+        PlayerManager.instance.PlayerData.Money = ServerReturnData.Money;
     }
 
     private IEnumerator GetReturnData(int betInputValue)
@@ -49,13 +45,11 @@ public class Server : MonoBehaviour, IGameMode
         if (www.result == UnityWebRequest.Result.Success)
         {
             GetData = true;
-
             ServerReturnData = JsonUtility.FromJson<ServerReturnData>(www.downloadHandler.text);
-
-            // PlayerManager.instance.PlayerData.Money = ServerReturnData.Money;
         }
         else if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
         {
+            GetData = false;
             Debug.Log(www.result);
         }
     }

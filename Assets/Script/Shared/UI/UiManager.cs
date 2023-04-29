@@ -18,7 +18,7 @@ public class UiManager : MonoBehaviour
 
     public void UpdatedPlayerUI(IGameMode server)
     {
-        int winMoney = server.WinMoney;
+        int winMoney = server.ServerReturnData.WinMoney;
         int playerMoney = server.ServerReturnData.Money;
 
         _winMoneyText.text = $"Win: {winMoney}";
@@ -43,7 +43,13 @@ public class UiManager : MonoBehaviour
 
     private void CheckValue(ValueControl valueControl)
     {
-        valueControl.CheckCurrentValue();
+        valueControl.SetValueToText();
+    }
+
+    public void OnlyOpenOnePanel(GameObject gameObject)
+    {
+        CloseAllPanel();
+        gameObject.SetActive(true);
     }
 
 }

@@ -1,32 +1,29 @@
 using UnityEngine;
 using TMPro;
-
+using UnityEngine.UI;
 public class BetControl : ValueControl
 {
     public TMP_Text[] EachBetGroup;
+    [SerializeField] private Button[] _button;
+
+
+    private void Start()
+    {
+        for (int i = 0; i < _button.Length; i++)
+        {
+            _button[i].onClick.AddListener(() => SetValueToText());
+        }
+    }
 
     private int GetPlayerMoney()
     {
-        if (GameManager.instance._scenePattern == ScenePattern.ONLINE)
-        {
-            return PlayerManager.instance.PlayerData.Money;
-        }
-        else if (GameManager.instance._scenePattern == ScenePattern.SINGLE_GAME)
-        {
-            return PlayerPrefs.GetInt("playerMoney");
-        }
-        else
-        {
-            return 0;
-        }
+        return PlayerManager.instance.PlayerData.Money;
     }
 
     public override void Add()
     {
         if (CurrentValue + 80 <= GetPlayerMoney())
             CurrentValue += 80;
-
-        CheckCurrentValue();
     }
 
     public override void Minus()
@@ -34,7 +31,6 @@ public class BetControl : ValueControl
         if (CurrentValue - 80 >= 0)
             CurrentValue -= 80;
 
-        CheckCurrentValue();
     }
 
     public override void Max()
@@ -48,14 +44,12 @@ public class BetControl : ValueControl
         {
             CurrentValue = 0;
         }
-
-        CheckCurrentValue();
     }
 
-    public override void CheckCurrentValue()
+    public override void SetValueToText()
     {
         if (CurrentValue > GetPlayerMoney())
-            CurrentValue = 0;
+            Max();
 
         ValueText.text = $"{CurrentValue}";
 
@@ -77,4 +71,5 @@ public class BetControl : ValueControl
 
         SetEachBet();
     }
+
 }

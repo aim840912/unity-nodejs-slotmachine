@@ -1,72 +1,68 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System.Linq;
+// using System.Collections;
+// using System.Collections.Generic;
+// using UnityEngine;
+// using System.Linq;
 
-[System.Serializable]
-public class GameData
-{
-    public int Money = 10000;
-    public int[] BoardNum;
-}
 
-public class SaveManager : MonoBehaviour
-{
-    public static SaveManager instance;
-    [SerializeField] private string fileName;
-    [SerializeField] private bool encryptData;
-    public GameData gameData;
-    private FileDataHandler dataHandler;
+// public class SaveManager : MonoBehaviour
+// {
+//     public static SaveManager instance;
+//     public ServerReturnData ServerReturnData;
+//     [SerializeField] private string fileName;
+//     [SerializeField] private bool encryptData;
 
-    [ContextMenu("Delete save file")]
-    private void DeleteSavedData()
-    {
-        dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, encryptData);
-        dataHandler.Delete();
-    }
+//     private FileDataHandler dataHandler;
 
-    private void Awake()
-    {
-        if (instance != null)
-            Destroy(instance.gameObject);
-        else
-            instance = this;
-    }
-    private void Start()
-    {
-        dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, encryptData);
+//     [ContextMenu("Delete save file")]
+//     private void DeleteSavedData()
+//     {
+//         dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, encryptData);
+//         dataHandler.Delete();
+//     }
 
-        if (GameManager.instance._scenePattern == ScenePattern.SINGLE_GAME)
-        {
-            LoadGame();
-        }
-    }
+//     private void Awake()
+//     {
+//         if (instance != null)
+//             Destroy(instance.gameObject);
+//         else
+//             instance = this;
+//     }
+//     private void Start()
+//     {
+//         dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, encryptData);
 
-    public void LoadGame()
-    {
-        gameData = dataHandler.Load();
+//         if (GameManager.instance._scenePattern == ScenePattern.SINGLE_GAME)
+//         {
+//             Debug.Log("loadGame()");
+//             LoadGame();
+//         }
+//     }
 
-        if (this.gameData == null)
-        {
-            Debug.Log("No saved data found!");
-            NewGame();
-        }
+//     public void LoadGame()
+//     {
+//         ServerReturnData = dataHandler.Load();
 
-        PlayerManager.instance.PlayerData.Money = gameData.Money;
-    }
+//         if (this.ServerReturnData == null)
+//         {
+//             Debug.Log("No saved data found!");
+//             NewGame();
+//         }
 
-    public void NewGame()
-    {
-        gameData = new GameData();
-    }
-    public void SaveGame()
-    {
-        dataHandler.Save(gameData);
-    }
+//         PlayerManager.instance.PlayerData.Money = ServerReturnData.Money;
+//     }
 
-    private void OnApplicationQuit()
-    {
-        SaveGame();
-    }
+//     public void NewGame()
+//     {
+//         ServerReturnData = new ServerReturnData();
+//     }
+//     public void SaveGame()
+//     {
+//         dataHandler.Save(ServerReturnData);
+//     }
 
-}
+//     private void OnApplicationQuit()
+//     {
+//         SaveGame();
+//     }
+
+// }

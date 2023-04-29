@@ -6,7 +6,7 @@ using System.Collections;
 
 public class Machine : MonoBehaviour
 {
-    public SpinCoroutine SpinCoroutine;
+    public BoardManager SpinCoroutine;
 
     [SerializeField] private Toggle _spinToggle;
     [SerializeField] private UiManager _uiManager;
@@ -28,18 +28,7 @@ public class Machine : MonoBehaviour
         {
             _gameMode = _singleGame;
         }
-
-        StartCoroutine(WaitForGetData());
-
     }
-
-    private IEnumerator WaitForGetData()
-    {
-        yield return new WaitUntil(() => _gameMode.GetData);
-
-        _uiManager.UpdatedPlayerUI(_gameMode);
-    }
-
 
     public void SpinToggleOnClick()
     {
@@ -93,10 +82,9 @@ public class Machine : MonoBehaviour
 
     void StopSpin()
     {
-        SpinCoroutine.StopSpin(_gameMode.SlotNumber);
+        StartCoroutine(SpinCoroutine.Stop(_gameMode.ServerReturnData.BoardNum));
 
         _uiManager.UpdatedPlayerUI(_gameMode);
     }
-
 
 }

@@ -15,6 +15,26 @@ public class SingleGame : MonoBehaviour, IGameMode
     private CalcMultiple _calcMultiple = new CalcMultiple();
 
 
+    [SerializeField] private string fileName;
+    [SerializeField] private bool encryptData;
+
+    private FileDataHandler dataHandler;
+
+    [ContextMenu("Delete save file")]
+    private void DeleteSavedData()
+    {
+        dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, encryptData);
+        dataHandler.Delete();
+    }
+
+    private void Start()
+    {
+        if (GameManager.instance._scenePattern == ScenePattern.SINGLE_GAME)
+        {
+            GetPlayerData();
+        }
+    }
+
     public IEnumerator GetServerData(int betInputValue)
     {
         GenerateGameBoard();
@@ -22,8 +42,6 @@ public class SingleGame : MonoBehaviour, IGameMode
         CalcMoney(betInputValue);
 
         yield return null;
-
-        SaveData();
     }
 
     void GenerateGameBoard()
@@ -32,6 +50,8 @@ public class SingleGame : MonoBehaviour, IGameMode
         {
             SlotNumber[i] = Random.Range(_minBoardNumber, _maxBoardNumber);
         }
+
+        ServerReturnData.BoardNum = SlotNumber;
     }
 
     void CalcMoney(int betInputValue)
@@ -40,12 +60,53 @@ public class SingleGame : MonoBehaviour, IGameMode
 
         WinMoney = GetMultiple() * betInputValue / 8 - betInputValue;
 
+        ServerReturnData.WinMoney = WinMoney;
+
         _currentMoney += WinMoney;
 
-        SaveManager.instance.gameData.Money = _currentMoney;
+        ServerReturnData.Money = _currentMoney;
 
         PlayerManager.instance.PlayerData.Money = _currentMoney;
 
+        SaveGame();
+    }
+
+    void GetPlayerData()
+    {
+        dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, encryptData);
+
+        if (GameManager.instance._scenePattern == ScenePattern.SINGLE_GAME)
+        {
+            Debug.Log("loadGame()");
+            LoadGame();
+        }
+    }
+
+    public void LoadGame()
+    {
+        ServerReturnData = dataHandler.Load();
+
+        if (this.ServerReturnData == null)
+        {
+            Debug.Log("No saved data found!");
+            NewGame();
+        }
+
+        PlayerManager.instance.PlayerData.Money = ServerReturnData.Money;
+    }
+
+    public void NewGame()
+    {
+        ServerReturnData = new ServerReturnData();
+    }
+    public void SaveGame()
+    {
+        dataHandler.Save(ServerReturnData);
+    }
+
+    private void OnApplicationQuit()
+    {
+        SaveGame();
     }
 
     int GetMultiple()
@@ -55,12 +116,5 @@ public class SingleGame : MonoBehaviour, IGameMode
 
         return multiple;
     }
-
-    void SaveData()
-    {
-        SaveManager.instance.gameData.BoardNum = this.SlotNumber;
-        SaveManager.instance.SaveGame();
-    }
-
 
 }
