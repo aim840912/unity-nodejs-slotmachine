@@ -28,6 +28,8 @@ public class Machine : MonoBehaviour
         {
             _gameMode = _singleGame;
         }
+
+        _uiManager.UpdatedPlayerUI(_gameMode);
     }
 
     public void SpinToggleOnClick()
@@ -82,7 +84,7 @@ public class Machine : MonoBehaviour
 
     void StopSpin()
     {
-        StartCoroutine(SpinCoroutine.Stop(_gameMode.ServerReturnData.BoardNum));
+        StartCoroutine(SpinCoroutine.Stop(_gameMode.BackendData.BoardNum));
 
         _uiManager.UpdatedPlayerUI(_gameMode);
     }

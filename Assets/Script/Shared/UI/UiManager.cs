@@ -18,8 +18,8 @@ public class UiManager : MonoBehaviour
 
     public void UpdatedPlayerUI(IGameMode server)
     {
-        int winMoney = server.ServerReturnData.WinMoney;
-        int playerMoney = server.ServerReturnData.Money;
+        int winMoney = server.BackendData.WinMoney;
+        int playerMoney = server.BackendData.Money;
 
         _winMoneyText.text = $"Win: {winMoney}";
         _playerMoneyText.text = $"{playerMoney}";

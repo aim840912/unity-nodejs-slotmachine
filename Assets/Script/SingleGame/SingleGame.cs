@@ -4,20 +4,14 @@ using UnityEngine;
 using TMPro;
 public class SingleGame : MonoBehaviour, IGameMode
 {
-    public int WinMoney { get; set; }
     public int[] SlotNumber { get; set; } = new int[9];
-    public int PlayerMoney { get; set; }
-    public ServerReturnData ServerReturnData { get; set; }
-    public bool GetData { get; set; }
 
-    readonly int _minBoardNumber = 0;
-    readonly int _maxBoardNumber = 10;
-    private CalcMultiple _calcMultiple = new CalcMultiple();
-
+    public BackendData BackendData { get; set; }
 
     [SerializeField] private string fileName;
     [SerializeField] private bool encryptData;
 
+    private CalcMultiple _calcMultiple = new CalcMultiple();
     private FileDataHandler dataHandler;
 
     [ContextMenu("Delete save file")]
@@ -37,36 +31,38 @@ public class SingleGame : MonoBehaviour, IGameMode
 
     public IEnumerator GetServerData(int betInputValue)
     {
-        GenerateGameBoard();
+        GenerateGameBoard(0, 10);
 
         CalcMoney(betInputValue);
 
         yield return null;
     }
 
-    void GenerateGameBoard()
+    void GenerateGameBoard(int min, int max)
     {
-        for (var i = 0; i < SlotNumber.Length; i++)
+        int[] slotNumber = new int[9];
+
+        for (var i = 0; i < slotNumber.Length; i++)
         {
-            SlotNumber[i] = Random.Range(_minBoardNumber, _maxBoardNumber);
+            slotNumber[i] = Random.Range(min, max);
         }
 
-        ServerReturnData.BoardNum = SlotNumber;
+        BackendData.BoardNum = slotNumber;
     }
 
     void CalcMoney(int betInputValue)
     {
-        int _currentMoney = PlayerManager.instance.PlayerData.Money;
+        int winMoney = 0;
+        int currentMoney = PlayerManager.instance.PlayerData.Money;
 
-        WinMoney = GetMultiple() * betInputValue / 8 - betInputValue;
+        winMoney = GetMultiple(BackendData.BoardNum) * betInputValue / 8 - betInputValue;
 
-        ServerReturnData.WinMoney = WinMoney;
+        currentMoney += winMoney;
 
-        _currentMoney += WinMoney;
 
-        ServerReturnData.Money = _currentMoney;
+        BackendData.WinMoney = winMoney;
+        BackendData.Money = currentMoney;
 
-        PlayerManager.instance.PlayerData.Money = _currentMoney;
 
         SaveGame();
     }
@@ -84,24 +80,24 @@ public class SingleGame : MonoBehaviour, IGameMode
 
     public void LoadGame()
     {
-        ServerReturnData = dataHandler.Load();
+        BackendData = dataHandler.Load();
 
-        if (this.ServerReturnData == null)
+        if (this.BackendData == null)
         {
             Debug.Log("No saved data found!");
             NewGame();
         }
 
-        PlayerManager.instance.PlayerData.Money = ServerReturnData.Money;
+        PlayerManager.instance.PlayerData.Money = BackendData.Money;
     }
 
     public void NewGame()
     {
-        ServerReturnData = new ServerReturnData();
+        BackendData = new BackendData();
     }
     public void SaveGame()
     {
-        dataHandler.Save(ServerReturnData);
+        dataHandler.Save(BackendData);
     }
 
     private void OnApplicationQuit()
@@ -109,9 +105,9 @@ public class SingleGame : MonoBehaviour, IGameMode
         SaveGame();
     }
 
-    int GetMultiple()
+    int GetMultiple(int[] boardNum)
     {
-        int multiple = _calcMultiple.GetMultiples(SlotNumber);
+        int multiple = _calcMultiple.GetMultiples(boardNum);
         Debug.Log($"{multiple}");
 
         return multiple;
