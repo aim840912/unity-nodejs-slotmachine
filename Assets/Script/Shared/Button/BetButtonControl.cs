@@ -48,7 +48,6 @@ public class BetButtonControl : ValueControl
         if (CurrentValue > GetPlayerMoney())
         {
             CurrentValue = 0;
-            GameManager.instance.CurrentBet = 0;
         }
 
         ValueText.text = $"{CurrentValue}";
@@ -74,7 +73,6 @@ public class BetButtonControl : ValueControl
     private void ValueSet()
     {
         ValueText.text = $"{CurrentValue}";
-        GameManager.instance.CurrentBet = CurrentValue;
         SetEachBet();
         _autoControl.ValueCheck();
     }

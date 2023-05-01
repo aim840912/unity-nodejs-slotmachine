@@ -50,6 +50,11 @@ public class AutoButtonControl : ValueControl
         int betMoney = _betControl.CurrentValue;
         int playerMoney = PlayerManager.instance.PlayerData.Money;
 
+        if (playerMoney == 0 || betMoney == 0)
+        {
+            return 0;
+        }
+
         return (int)playerMoney / betMoney;
     }
 }
