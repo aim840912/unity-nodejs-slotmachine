@@ -1,17 +1,18 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-public class BetControl : ValueControl
+
+public class BetButtonControl : ValueControl
 {
     public TMP_Text[] EachBetGroup;
     [SerializeField] private Button[] _button;
-
+    [SerializeField] private AutoButtonControl _autoControl;
 
     private void Start()
     {
         for (int i = 0; i < _button.Length; i++)
         {
-            _button[i].onClick.AddListener(() => SetValueToText());
+            _button[i].onClick.AddListener(() => ValueSet());
         }
     }
 
@@ -30,29 +31,27 @@ public class BetControl : ValueControl
     {
         if (CurrentValue - 80 >= 0)
             CurrentValue -= 80;
-
     }
 
     public override void Max()
     {
-        if (GetPlayerMoney() / 80 > 0)
+        int maxMultiple = GetPlayerMoney() / 80;
+
+        if (maxMultiple > 0)
         {
-            int current = (GetPlayerMoney() / 80);
-            CurrentValue = 80 * current;
-        }
-        else
-        {
-            CurrentValue = 0;
+            CurrentValue = 80 * maxMultiple;
         }
     }
 
-    public override void SetValueToText()
+    public override void ValueCheck()
     {
         if (CurrentValue > GetPlayerMoney())
-            Max();
+        {
+            CurrentValue = 0;
+            GameManager.instance.CurrentBet = 0;
+        }
 
         ValueText.text = $"{CurrentValue}";
-
         SetEachBet();
     }
 
@@ -70,6 +69,14 @@ public class BetControl : ValueControl
         ValueText.text = $"{CurrentValue}";
 
         SetEachBet();
+    }
+
+    private void ValueSet()
+    {
+        ValueText.text = $"{CurrentValue}";
+        GameManager.instance.CurrentBet = CurrentValue;
+        SetEachBet();
+        _autoControl.ValueCheck();
     }
 
 }

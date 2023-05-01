@@ -1,23 +1,22 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-public class AutoControl : ValueControl
+public class AutoButtonControl : ValueControl
 {
-    public int AutoMaxTime;
     [SerializeField] private Button[] _button;
-    [SerializeField] private BetControl _betControl;
+    [SerializeField] private BetButtonControl _betControl;
 
     private void Start()
     {
         for (int i = 0; i < _button.Length; i++)
         {
-            _button[i].onClick.AddListener(() => SetValueToText());
+            _button[i].onClick.AddListener(() => ValueCheck());
         }
     }
 
     public override void Add()
     {
-        if (CurrentValue <= AutoMaxTime)
+        if (CurrentValue <= MaxMultiple())
             CurrentValue++;
     }
 
@@ -29,13 +28,12 @@ public class AutoControl : ValueControl
 
     public override void Max()
     {
-        AutoMaxTime = CountMax(_betControl.CurrentValue);
-        CurrentValue = AutoMaxTime;
+        CurrentValue = MaxMultiple();
     }
 
-    public override void SetValueToText()
+    public override void ValueCheck()
     {
-        if (CurrentValue > AutoMaxTime)
+        if (CurrentValue > MaxMultiple())
             Max();
 
         ValueText.text = $"{CurrentValue}";
@@ -47,8 +45,9 @@ public class AutoControl : ValueControl
         ValueText.text = $"{CurrentValue}";
     }
 
-    private int CountMax(int betMoney)
+    private int MaxMultiple()
     {
+        int betMoney = _betControl.CurrentValue;
         int playerMoney = PlayerManager.instance.PlayerData.Money;
 
         return (int)playerMoney / betMoney;

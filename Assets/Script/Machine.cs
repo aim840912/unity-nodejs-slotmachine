@@ -29,7 +29,6 @@ public class Machine : MonoBehaviour
             _gameMode = _singleGame;
         }
 
-        _uiManager.UpdatedPlayerUI(_gameMode);
     }
 
     public void SpinToggleOnClick()

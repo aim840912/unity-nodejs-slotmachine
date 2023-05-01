@@ -6,8 +6,8 @@ public class UiManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text _winMoneyText;
     [SerializeField] private TMP_Text _playerMoneyText;
-    public BetControl _betControl;
-    public AutoControl _autoControl;
+    public BetButtonControl _betControl;
+    public AutoButtonControl _autoControl;
     [SerializeField] private GameObject[] _panel;
 
     private void Start()
@@ -43,7 +43,7 @@ public class UiManager : MonoBehaviour
 
     private void CheckValue(ValueControl valueControl)
     {
-        valueControl.SetValueToText();
+        valueControl.ValueCheck();
     }
 
     public void OnlyOpenOnePanel(GameObject gameObject)

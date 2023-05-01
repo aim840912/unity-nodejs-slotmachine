@@ -7,8 +7,12 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public ScenePattern _scenePattern;
     public static GameManager instance = null;
+    public ScenePattern _scenePattern;
+
+    public int CurrentAutoTime = 0;
+    public int CurrentBet = 0;
+
 
     private void Awake()
     {
