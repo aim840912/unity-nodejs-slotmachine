@@ -20,7 +20,7 @@ public class FileDataHandler
         encryptData = _encryptData;
     }
 
-    public void Save(BackendData _data)
+    public void Save(PlayerData data)
     {
         string fullPath = Path.Combine(dataDirPath, dataFileName);
         Debug.Log(fullPath);
@@ -28,7 +28,7 @@ public class FileDataHandler
         {
             Directory.CreateDirectory(Path.GetDirectoryName(fullPath));
 
-            string dataToStore = JsonUtility.ToJson(_data, true);
+            string dataToStore = JsonUtility.ToJson(data, true);
 
             if (encryptData)
                 dataToStore = EncryptDecrypt(dataToStore);
@@ -48,10 +48,10 @@ public class FileDataHandler
         }
     }
 
-    public BackendData Load()
+    public PlayerData Load()
     {
         string fullPath = Path.Combine(dataDirPath, dataFileName);
-        BackendData loadData = null;
+        PlayerData loadData = null;
 
         if (File.Exists(fullPath))
         {
@@ -70,7 +70,7 @@ public class FileDataHandler
                 if (encryptData)
                     dataToLoad = EncryptDecrypt(dataToLoad);
 
-                loadData = JsonUtility.FromJson<BackendData>(dataToLoad);
+                loadData = JsonUtility.FromJson<PlayerData>(dataToLoad);
             }
             catch (Exception e)
             {

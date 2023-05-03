@@ -8,13 +8,12 @@ using System;
 public enum ScenePattern
 {
     ONLINE,
-    SINGLE_GAME // Personal computer 單機模式
+    SINGLE_GAME // 單機模式
 }
 
 [RequireComponent(typeof(Button))]
 public class SceneSwitch : MonoBehaviour
 {
-
     [SerializeField] ScenePattern _scenePattern;
     [SerializeField] Button _button;
 

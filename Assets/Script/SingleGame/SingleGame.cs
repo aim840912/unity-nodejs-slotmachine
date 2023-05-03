@@ -6,28 +6,10 @@ public class SingleGame : MonoBehaviour, IGameMode
 {
     public int[] SlotNumber { get; set; } = new int[9];
 
-    public BackendData BackendData { get; set; }
-
-    [SerializeField] private string fileName;
-    [SerializeField] private bool encryptData;
+    public BackendData BackendData { get; set; } = new BackendData();
+    [SerializeField] private SingleGameHandler _singleGameHandler;
 
     private CalcMultiple _calcMultiple = new CalcMultiple();
-    private FileDataHandler dataHandler;
-
-    [ContextMenu("Delete save file")]
-    private void DeleteSavedData()
-    {
-        dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, encryptData);
-        dataHandler.Delete();
-    }
-
-    private void Start()
-    {
-        if (GameManager.instance._scenePattern == ScenePattern.SINGLE_GAME)
-        {
-            GetPlayerData();
-        }
-    }
 
     public IEnumerator GetServerData(int betInputValue)
     {
@@ -63,46 +45,15 @@ public class SingleGame : MonoBehaviour, IGameMode
         BackendData.WinMoney = winMoney;
         BackendData.Money = currentMoney;
 
+        PlayerManager.instance.PlayerData.Money = currentMoney;
 
-        SaveGame();
+        _singleGameHandler.SaveGame(PlayerManager.instance.PlayerData);
     }
 
-    void GetPlayerData()
-    {
-        dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, encryptData);
-
-        if (GameManager.instance._scenePattern == ScenePattern.SINGLE_GAME)
-        {
-            Debug.Log("loadGame()");
-            LoadGame();
-        }
-    }
-
-    public void LoadGame()
-    {
-        BackendData = dataHandler.Load();
-
-        if (this.BackendData == null)
-        {
-            Debug.Log("No saved data found!");
-            NewGame();
-        }
-
-        PlayerManager.instance.PlayerData.Money = BackendData.Money;
-    }
-
-    public void NewGame()
-    {
-        BackendData = new BackendData();
-    }
-    public void SaveGame()
-    {
-        dataHandler.Save(BackendData);
-    }
 
     private void OnApplicationQuit()
     {
-        SaveGame();
+        _singleGameHandler.SaveGame(PlayerManager.instance.PlayerData);
     }
 
     int GetMultiple(int[] boardNum)

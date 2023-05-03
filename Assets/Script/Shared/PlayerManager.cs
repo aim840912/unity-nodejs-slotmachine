@@ -7,7 +7,7 @@ public class PlayerData
 {
     public string UserId;
     public string Name;
-    public int Money;
+    public int Money = 10000;
 }
 
 public class PlayerManager : MonoBehaviour
