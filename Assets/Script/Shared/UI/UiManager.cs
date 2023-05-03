@@ -41,7 +41,7 @@ public class UiManager : MonoBehaviour
         }
     }
 
-    private void CheckValue(ValueControl valueControl)
+    private void CheckValue(ButtonControlBase valueControl)
     {
         valueControl.ValueCheck();
     }

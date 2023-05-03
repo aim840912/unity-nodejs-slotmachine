@@ -6,9 +6,9 @@ using System.Collections;
 
 public class Machine : MonoBehaviour
 {
-    public BoardManager SpinCoroutine;
-
+    [SerializeField] private BoardManager _boardManager;
     [SerializeField] private Toggle _spinToggle;
+    [Space(15)]
     [SerializeField] private UiManager _uiManager;
     [Space(15)]
     [SerializeField] private Server _server;
@@ -67,8 +67,7 @@ public class Machine : MonoBehaviour
             StartSpin();
             yield return new WaitForSecondsRealtime(3);
             StopSpin();
-            yield return new WaitForSecondsRealtime(3);
-
+            yield return new WaitUntil(() => _boardManager.IsOver == true);
         }
     }
 
@@ -76,14 +75,14 @@ public class Machine : MonoBehaviour
     {
         StartCoroutine(_gameMode.GetServerData(_uiManager._betControl.CurrentValue));
 
-        SpinCoroutine.StartSpin();
+        _boardManager.Spin();
 
         _uiManager.TurnWinMoneyToZero();
     }
 
     void StopSpin()
     {
-        StartCoroutine(SpinCoroutine.Stop(_gameMode.BackendData.BoardNum));
+        StartCoroutine(_boardManager.Stop(_gameMode.BackendData.BoardNum));
 
         _uiManager.UpdatedPlayerUI(_gameMode);
     }

@@ -45,5 +45,8 @@ public class Server : MonoBehaviour, IGameMode
             GetData = false;
             Debug.Log(www.result);
         }
+
+        www.Dispose();
+
     }
 }

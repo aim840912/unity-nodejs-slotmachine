@@ -463,10 +463,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b33ed14e81b689245893bd154bde33e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerData:
-    UserId: 
-    Name: 
-    Money: 0
 --- !u!4 &278167723
 Transform:
   m_ObjectHideFlags: 0
@@ -2137,14 +2133,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1312091965}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70c4d6a451176e14f9bb799ce2edd84c, type: 3}
+  m_Script: {fileID: 11500000, guid: 2015a1d7ac4f1e8479d0c95af72ed24d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _name: {fileID: 1972653005}
   _email: {fileID: 961332776}
   _password: {fileID: 125117760}
   _message: {fileID: 1978372691}
-  connectUrl: http://localhost:3000/user/signup
+  _connectUrl: http://localhost:3000/user/signup
   _panel: {fileID: 741557549}
 --- !u!1 &1366594445
 GameObject:

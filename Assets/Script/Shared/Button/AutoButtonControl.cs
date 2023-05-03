@@ -1,18 +1,9 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-public class AutoButtonControl : ValueControl
+public class AutoButtonControl : ButtonControlBase
 {
-    [SerializeField] private Button[] _button;
     [SerializeField] private BetButtonControl _betControl;
-
-    private void Start()
-    {
-        for (int i = 0; i < _button.Length; i++)
-        {
-            _button[i].onClick.AddListener(() => ValueCheck());
-        }
-    }
 
     public override void Add()
     {
@@ -51,9 +42,7 @@ public class AutoButtonControl : ValueControl
         int playerMoney = PlayerManager.instance.PlayerData.Money;
 
         if (playerMoney == 0 || betMoney == 0)
-        {
             return 0;
-        }
 
         return (int)playerMoney / betMoney;
     }

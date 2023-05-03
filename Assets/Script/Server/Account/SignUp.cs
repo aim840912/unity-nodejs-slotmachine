@@ -6,7 +6,7 @@ using UnityEngine.Networking;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-public class ServerSignUp : BaseServer
+public class SignUp : AccountBase
 {
     [SerializeField] private GameObject _panel;
 
@@ -17,7 +17,7 @@ public class ServerSignUp : BaseServer
         form.AddField("email", _email.text);
         form.AddField("password", _password.text);
 
-        UnityWebRequest www = UnityWebRequest.Post(connectUrl, form);
+        UnityWebRequest www = UnityWebRequest.Post(_connectUrl, form);
         yield return www.SendWebRequest();
 
         if (www.result == UnityWebRequest.Result.Success)

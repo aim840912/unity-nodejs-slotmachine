@@ -59,5 +59,6 @@
     "mumei",
     "Prefs",
     "Scriptable"
-  ]
+  ],
+  "commentTranslate.hover.enabled": true
 }

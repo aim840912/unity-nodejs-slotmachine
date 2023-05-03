@@ -15,7 +15,6 @@ public class LineManager : MonoBehaviour
 
     public void Stop(int[] boardNum)
     {
-
         for (int i = 0; i < _lineControls.Length; i++)
         {
             _lineControls[i].LineEnabled(boardNum);

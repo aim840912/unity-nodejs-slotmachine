@@ -46,12 +46,7 @@ public class ImageManager : MonoBehaviour
                 boolCount++;
             }
         }
-        if (boolCount == 9)
-        {
-            return true;
-        }
-        else
-            return false;
-    }
 
+        return boolCount == _imageControls.Length ? true : false;
+    }
 }

@@ -14,7 +14,7 @@ public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager instance = null;
 
-    public PlayerData PlayerData;
+    public PlayerData PlayerData { get; set; }
 
     private void Awake()
     {
@@ -25,5 +25,17 @@ public class PlayerManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
+    }
+
+    public void UpdatePlayerManager(PlayerData playerData)
+    {
+        this.PlayerData = playerData;
+    }
+
+    public void ResetPlayerManager()
+    {
+        this.PlayerData.UserId = "";
+        this.PlayerData.Name = "";
+        this.PlayerData.Money = 0;
     }
 }

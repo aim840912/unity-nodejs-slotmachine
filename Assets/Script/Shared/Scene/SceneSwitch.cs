@@ -4,12 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
+
 public enum ScenePattern
 {
     ONLINE,
     SINGLE_GAME // Personal computer 單機模式
 }
 
+[RequireComponent(typeof(Button))]
 public class SceneSwitch : MonoBehaviour
 {
 

@@ -4,19 +4,26 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 
-public class ServerLogin : BaseServer
+public class Login : AccountBase
 {
     private PlayerData _playerData;
-    [SerializeField] private int _machineSceneIndex;
+    private string _loadSceneName = "Machine Scene";
+    [SerializeField] private Toggle _rememberToggle;
+
+    private void Start()
+    {
+        _email.text = PlayerPrefs.GetString("email");
+    }
 
     protected override IEnumerator PostServerData()
     {
+        RememberLoginInform();
         WWWForm form = new WWWForm();
 
         form.AddField("email", _email.text);
         form.AddField("password", _password.text);
 
-        UnityWebRequest www = UnityWebRequest.Post(connectUrl, form);
+        UnityWebRequest www = UnityWebRequest.Post(_connectUrl, form);
 
         yield return www.SendWebRequest();
 
@@ -24,22 +31,34 @@ public class ServerLogin : BaseServer
         {
             _playerData = JsonUtility.FromJson<PlayerData>(www.downloadHandler.text);
 
-            PlayerManager.instance.PlayerData.UserId = _playerData.UserId;
-            PlayerManager.instance.PlayerData.Name = _playerData.Name;
-            PlayerManager.instance.PlayerData.Money = _playerData.Money;
+            PlayerManager.instance.UpdatePlayerManager(_playerData);
 
             yield return new WaitUntil(() => HasGetPlayerData());
 
-            SceneManager.LoadScene(_machineSceneIndex);
+            SceneManager.LoadScene(_loadSceneName);
         }
         else if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
         {
             _message.text = www.downloadHandler.text;
         }
+
+        www.Dispose();
     }
 
     private bool HasGetPlayerData()
     {
         return PlayerManager.instance.PlayerData.UserId == "" ? false : true;
+    }
+
+    private void RememberLoginInform()
+    {
+        if (_rememberToggle.isOn)
+        {
+            PlayerPrefs.SetString("email", _email.text);
+        }
+        else
+        {
+            PlayerPrefs.SetString("email", "");
+        }
     }
 }

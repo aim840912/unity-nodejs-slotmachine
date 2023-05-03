@@ -3,13 +3,13 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-public abstract class BaseServer : MonoBehaviour
+public abstract class AccountBase : MonoBehaviour
 {
     [SerializeField] protected TMP_InputField _name;
     [SerializeField] protected TMP_InputField _email;
     [SerializeField] protected TMP_InputField _password;
     [SerializeField] protected TMP_Text _message;
-    [SerializeField] protected string connectUrl = "";
+    [SerializeField] protected string _connectUrl = "";
 
     public virtual void ClickToConnectServer()
     {
