@@ -7,9 +7,29 @@ public class SingleGame : MonoBehaviour, IGameMode
     public int[] SlotNumber { get; set; } = new int[9];
 
     public BackendData BackendData { get; set; } = new BackendData();
-    [SerializeField] private SingleGameHandler _singleGameHandler;
-
+    private SingleGameHandler _singleGameHandler = new SingleGameHandler();
+    private FileDataHandler _fileDataHandler;
     private CalcMultiple _calcMultiple = new CalcMultiple();
+
+    [SerializeField] private string _fileName;
+    [SerializeField] private bool _encryptData;
+
+    [ContextMenu("Delete save file")]
+    private void DeleteSavedData()
+    {
+        _fileDataHandler = new FileDataHandler(Application.persistentDataPath, _fileName, _encryptData);
+        _fileDataHandler.Delete();
+    }
+
+    private void Start()
+    {
+        if (GameManager.instance._scenePattern == ScenePattern.SINGLE_GAME)
+        {
+            _fileDataHandler = new FileDataHandler(Application.persistentDataPath, _fileName, _encryptData);
+            _singleGameHandler.LoadGame(_fileDataHandler);
+            Debug.Log("loadGame()");
+        }
+    }
 
     public IEnumerator GetServerData(int betInputValue)
     {
@@ -47,13 +67,13 @@ public class SingleGame : MonoBehaviour, IGameMode
 
         PlayerManager.instance.PlayerData.Money = currentMoney;
 
-        _singleGameHandler.SaveGame(PlayerManager.instance.PlayerData);
+        _singleGameHandler.SaveGame(PlayerManager.instance.PlayerData, _fileDataHandler);
     }
 
 
     private void OnApplicationQuit()
     {
-        _singleGameHandler.SaveGame(PlayerManager.instance.PlayerData);
+        _singleGameHandler.SaveGame(PlayerManager.instance.PlayerData, _fileDataHandler);
     }
 
     int GetMultiple(int[] boardNum)

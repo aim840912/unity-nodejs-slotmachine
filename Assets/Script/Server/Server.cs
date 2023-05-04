@@ -31,6 +31,7 @@ public class Server : MonoBehaviour, IGameMode
 
         form.AddField("InputValue", betInputValue);
         form.AddField("userId", PlayerManager.instance.PlayerData.UserId);
+        Debug.Log(PlayerManager.instance.PlayerData.UserId);
 
         UnityWebRequest www = UnityWebRequest.Post(_connectUrl, form);
         yield return www.SendWebRequest();
