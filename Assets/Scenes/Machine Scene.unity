@@ -1205,12 +1205,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 195001658}
-        m_TargetAssemblyTypeName: ShowImage, Assembly-CSharp
-        m_MethodName: IsShowing
-        m_Mode: 1
+        m_TargetAssemblyTypeName: UiControl, Assembly-CSharp
+        m_MethodName: ChangeActive
+        m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1263,10 +1263,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 195001652}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a54153968fa3eb499724f1008012ad2, type: 3}
+  m_Script: {fileID: 11500000, guid: d482c5cadc8563040894a6b90265b33a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameObject: {fileID: 153469208}
 --- !u!1 &199359334
 GameObject:
   m_ObjectHideFlags: 0
@@ -2787,7 +2786,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e9b1edd7722f5f45a60673d037903a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _connectUrl: http://localhost:3000/machine/spinAction
+  _urlData: {fileID: 11400000, guid: 9a35411d3b06d2743aa38a0c0cdbf4c4, type: 2}
 --- !u!4 &475138893
 Transform:
   m_ObjectHideFlags: 0
@@ -5416,6 +5415,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f6babd6420dcbd4c9edbce8a2dd22af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _interactableTime: 2
   _button: {fileID: 1063499528}
 --- !u!1 &1078079400
 GameObject:

@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 public class Login : AccountBase
 {
     private PlayerData _playerData;
-    private string _loadSceneName = "Machine Scene";
     [SerializeField] private Toggle _rememberToggle;
 
     private void Start()
@@ -23,7 +22,7 @@ public class Login : AccountBase
         form.AddField("email", _email.text);
         form.AddField("password", _password.text);
 
-        UnityWebRequest www = UnityWebRequest.Post(_connectUrl, form);
+        UnityWebRequest www = UnityWebRequest.Post(_urlData.LoginUrl, form);
 
         yield return www.SendWebRequest();
 
@@ -35,7 +34,7 @@ public class Login : AccountBase
 
             yield return new WaitUntil(() => HasGetPlayerData());
 
-            SceneManager.LoadScene(_loadSceneName);
+            SceneManager.LoadScene((int)SceneEnum.MACHINE);
         }
         else if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
         {

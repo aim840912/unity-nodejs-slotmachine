@@ -23,7 +23,7 @@ public class SingleGame : MonoBehaviour, IGameMode
 
     private void Start()
     {
-        if (GameManager.instance._scenePattern == ScenePattern.SINGLE_GAME)
+        if (GameManager.instance.GameMode == GameMode.SINGLE_GAME)
         {
             _fileDataHandler = new FileDataHandler(Application.persistentDataPath, _fileName, _encryptData);
             _singleGameHandler.LoadGame(_fileDataHandler);
@@ -73,7 +73,8 @@ public class SingleGame : MonoBehaviour, IGameMode
 
     private void OnApplicationQuit()
     {
-        _singleGameHandler.SaveGame(PlayerManager.instance.PlayerData, _fileDataHandler);
+        if (GameManager.instance.GameMode == GameMode.SINGLE_GAME)
+            _singleGameHandler.SaveGame(PlayerManager.instance.PlayerData, _fileDataHandler);
     }
 
     int GetMultiple(int[] boardNum)

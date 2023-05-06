@@ -3,9 +3,9 @@ using UnityEngine.SceneManagement;
 
 public class Logout : MonoBehaviour
 {
-    public void LogOut(string sceneName)
+    public void LogOut()
     {
         PlayerManager.instance.ResetPlayerManager();
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene((int)SceneEnum.CHOOSE_GAME_MODE);
     }
 }

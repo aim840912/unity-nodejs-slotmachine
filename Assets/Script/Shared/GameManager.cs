@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
-    public ScenePattern _scenePattern;
+    public GameMode GameMode { get; set; } = GameMode.ONLINE;
 
     private void Awake()
     {

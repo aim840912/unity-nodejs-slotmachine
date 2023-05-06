@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
 
-public enum ScenePattern
+public enum GameMode
 {
     ONLINE,
     SINGLE_GAME // 單機模式
@@ -14,8 +14,9 @@ public enum ScenePattern
 [RequireComponent(typeof(Button))]
 public class SceneSwitch : MonoBehaviour
 {
-    [SerializeField] ScenePattern _scenePattern;
+    [SerializeField] GameMode _gameMode;
     [SerializeField] Button _button;
+    [SerializeField] SceneChangeHandler _sceneChangeHandler;
 
     private void Reset()
     {
@@ -29,20 +30,21 @@ public class SceneSwitch : MonoBehaviour
 
     private void LoadToScene()
     {
-        switch (_scenePattern)
+        switch (_gameMode)
         {
-            case ScenePattern.SINGLE_GAME:
-                GameManager.instance._scenePattern = ScenePattern.SINGLE_GAME;
-                SceneManager.LoadScene("Machine Scene");
+            case GameMode.SINGLE_GAME:
+                GameManager.instance.GameMode = GameMode.SINGLE_GAME;
                 break;
 
-            case ScenePattern.ONLINE:
-                GameManager.instance._scenePattern = ScenePattern.ONLINE;
-                SceneManager.LoadScene("Login Scene");
+            case GameMode.ONLINE:
+                GameManager.instance.GameMode = GameMode.ONLINE;
                 break;
-
             default:
                 break;
         }
+
+        _sceneChangeHandler.ClickToScene();
     }
+
+
 }

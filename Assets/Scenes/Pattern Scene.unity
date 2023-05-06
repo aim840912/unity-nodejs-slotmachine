@@ -355,6 +355,7 @@ GameObject:
   - component: {fileID: 524853240}
   - component: {fileID: 524853239}
   - component: {fileID: 524853242}
+  - component: {fileID: 524853243}
   m_Layer: 5
   m_Name: Single Button
   m_TagString: Untagged
@@ -477,8 +478,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fa953b7ad117d347b3c714bb9a355f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scenePattern: 1
+  _gameMode: 1
   _button: {fileID: 524853239}
+  _sceneChangeHandler: {fileID: 524853243}
+--- !u!114 &524853243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 524853237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef05dab1fde09d5469e2676d64ec76b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SceneEnum: 3
 --- !u!1 &625301791
 GameObject:
   m_ObjectHideFlags: 0
@@ -492,6 +507,7 @@ GameObject:
   - component: {fileID: 625301794}
   - component: {fileID: 625301793}
   - component: {fileID: 625301796}
+  - component: {fileID: 625301797}
   m_Layer: 5
   m_Name: Online Button
   m_TagString: Untagged
@@ -614,8 +630,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fa953b7ad117d347b3c714bb9a355f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scenePattern: 0
+  _gameMode: 0
   _button: {fileID: 625301793}
+  _sceneChangeHandler: {fileID: 625301797}
+--- !u!114 &625301797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 625301791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef05dab1fde09d5469e2676d64ec76b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SceneEnum: 2
 --- !u!1 &952261972
 GameObject:
   m_ObjectHideFlags: 0
@@ -950,7 +980,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e95e7d8da1cb3a14b80f54723017b790, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scenePattern: 0
 --- !u!4 &1644685018
 Transform:
   m_ObjectHideFlags: 0

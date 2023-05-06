@@ -839,7 +839,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &741557550
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1545,6 +1545,7 @@ GameObject:
   - component: {fileID: 1175323546}
   - component: {fileID: 1175323545}
   - component: {fileID: 1175323544}
+  - component: {fileID: 1175323547}
   m_Layer: 5
   m_Name: Ok Btn
   m_TagString: Untagged
@@ -1617,10 +1618,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1312091968}
-        m_TargetAssemblyTypeName: BaseServerAction, Assembly-CSharp
+      - m_Target: {fileID: 1175323547}
+        m_TargetAssemblyTypeName: SceneChangeHandler, Assembly-CSharp
         m_MethodName: ClickToScene
-        m_Mode: 3
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1667,6 +1668,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1175323542}
   m_CullTransparentMesh: 1
+--- !u!114 &1175323547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1175323542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef05dab1fde09d5469e2676d64ec76b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SceneEnum: 2
 --- !u!1 &1192105577
 GameObject:
   m_ObjectHideFlags: 0
@@ -2140,7 +2154,7 @@ MonoBehaviour:
   _email: {fileID: 961332776}
   _password: {fileID: 125117760}
   _message: {fileID: 1978372691}
-  _connectUrl: http://localhost:3000/user/signup
+  _urlData: {fileID: 11400000, guid: 9a35411d3b06d2743aa38a0c0cdbf4c4, type: 2}
   _panel: {fileID: 741557549}
 --- !u!1 &1366594445
 GameObject:

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class UIInteractableTime : MonoBehaviour
 {
-    private float _interactableTime = 2;
+    [SerializeField] private float _interactableTime = 2;
     private Coroutine _coroutine;
     [SerializeField] private Selectable _button;
 

@@ -12,7 +12,7 @@ public class Server : MonoBehaviour, IGameMode
     public BackendData BackendData { get; set; }
     public bool GetData { get; set; }
 
-    [SerializeField] private string _connectUrl = "http://localhost:3000/machine/spinAction";
+    [SerializeField] private UrlData _urlData;
 
     public IEnumerator GetServerData(int betInputValue)
     {
@@ -33,7 +33,7 @@ public class Server : MonoBehaviour, IGameMode
         form.AddField("userId", PlayerManager.instance.PlayerData.UserId);
         Debug.Log(PlayerManager.instance.PlayerData.UserId);
 
-        UnityWebRequest www = UnityWebRequest.Post(_connectUrl, form);
+        UnityWebRequest www = UnityWebRequest.Post(_urlData.MachineUrl, form);
         yield return www.SendWebRequest();
 
         if (www.result == UnityWebRequest.Result.Success)

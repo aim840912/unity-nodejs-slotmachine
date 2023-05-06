@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0e5486b5e42498478448d496a7ea967, type: 3}
+  m_Name: Url Data
+  m_EditorClassIdentifier: 
+  LoginUrl: http://localhost:3000/user/login
+  SignupUrl: http://localhost:3000/user/signup
+  MachineUrl: http://localhost:3000/machine/spinAction
