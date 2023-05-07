@@ -6,6 +6,8 @@ public abstract class ButtonControlBase : MonoBehaviour
 {
     [SerializeField] protected TMP_Text _currentValueText;
     [SerializeField] protected Button[] _button;
+    [SerializeField] protected GameObject _alertPanel;
+    [SerializeField] protected TMP_Text _alertMessage;
     private int _currentValue = 0;
     public int CurrentValue
     {
@@ -48,9 +50,14 @@ public abstract class ButtonControlBase : MonoBehaviour
     public abstract void SetZero();
     public abstract void ValueCheck();
 
-    public virtual void SetCurrentValueText()
+    private void SetCurrentValueText()
     {
         _currentValueText.text = $"{CurrentValue}";
     }
 
+    protected void OpenAlertPanel(string alertMessage)
+    {
+        _alertPanel.SetActive(true);
+        _alertMessage.text = alertMessage;
+    }
 }

@@ -7,14 +7,10 @@ public class BetButtonControl : ButtonControlBase
 
     [SerializeField] private AutoButtonControl _autoControl;
 
-    private int GetPlayerMoney()
-    {
-        return PlayerManager.instance.PlayerData.Money;
-    }
 
     public override void Add()
     {
-        if (CurrentValue + 80 <= GetPlayerMoney())
+        if (CurrentValue + 80 <= PlayerMoney)
             CurrentValue += 80;
     }
 
@@ -26,7 +22,7 @@ public class BetButtonControl : ButtonControlBase
 
     public override void Max()
     {
-        int maxMultiple = GetPlayerMoney() / 80;
+        int maxMultiple = PlayerMoney / 80;
 
         if (maxMultiple > 0)
         {
@@ -36,9 +32,11 @@ public class BetButtonControl : ButtonControlBase
 
     public override void ValueCheck()
     {
-        if (CurrentValue > GetPlayerMoney())
+        if (CurrentValue > PlayerMoney)
+        {
+            OpenAlertPanel("YOUR BET MORE THAN YOUR MONEY");
             CurrentValue = 0;
-
+        }
         _currentValueText.text = $"{CurrentValue}";
         SetEachBet();
     }
@@ -59,7 +57,7 @@ public class BetButtonControl : ButtonControlBase
         SetEachBet();
     }
 
-    private void ValueSet()
+    private void ValueSet()// ! 修改
     {
         _currentValueText.text = $"{CurrentValue}";
         SetEachBet();
