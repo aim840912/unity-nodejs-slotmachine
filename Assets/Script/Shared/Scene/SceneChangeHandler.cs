@@ -10,12 +10,11 @@ public enum SceneEnum
     MACHINE,
 }
 
-[RequireComponent(typeof(Button))]
 public class SceneChangeHandler : MonoBehaviour
 {
     public SceneEnum SceneEnum;
 
-    public void ClickToScene()
+    public void MoveToScene()
     {
         SceneManager.LoadScene((int)SceneEnum);
     }

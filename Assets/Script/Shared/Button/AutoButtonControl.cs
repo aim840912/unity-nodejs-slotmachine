@@ -27,13 +27,13 @@ public class AutoButtonControl : ButtonControlBase
         if (CurrentValue > MaxMultiple())
             Max();
 
-        ValueText.text = $"{CurrentValue}";
+        _currentValueText.text = $"{CurrentValue}";
     }
 
     public override void SetZero()
     {
         CurrentValue = 0;
-        ValueText.text = $"{CurrentValue}";
+        _currentValueText.text = $"{CurrentValue}";
     }
 
     private int MaxMultiple()

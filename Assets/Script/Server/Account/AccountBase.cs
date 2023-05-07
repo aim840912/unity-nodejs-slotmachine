@@ -5,17 +5,30 @@ using UnityEngine.SceneManagement;
 
 public abstract class AccountBase : MonoBehaviour
 {
+    [HeaderAttribute("Input Setting")]
     [SerializeField] protected TMP_InputField _name;
     [SerializeField] protected TMP_InputField _email;
     [SerializeField] protected TMP_InputField _password;
+
+    [HeaderAttribute("Message")]
+    [SerializeField] protected GameObject _messagePanel;
     [SerializeField] protected TMP_Text _message;
+
+    [HeaderAttribute("URL Setting")]
     [SerializeField] protected UrlData _urlData;
 
     public virtual void ClickToConnectServer()
     {
-        StartCoroutine(PostServerData());
+        StartCoroutine(connectToServer());
     }
 
-    protected abstract IEnumerator PostServerData();
+    protected abstract IEnumerator connectToServer();
+
+
+    protected virtual void OpenPanel(string message)
+    {
+        _messagePanel.SetActive(true);
+        _message.text = message;
+    }
 
 }

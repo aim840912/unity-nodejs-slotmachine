@@ -1,16 +1,12 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Networking;
-using TMPro;
-using UnityEngine.SceneManagement;
 
 public class SignUp : AccountBase
 {
     [SerializeField] private GameObject _panel;
 
-    protected override IEnumerator PostServerData()
+    protected override IEnumerator connectToServer()
     {
         WWWForm form = new WWWForm();
         form.AddField("name", _name.text);
@@ -22,19 +18,11 @@ public class SignUp : AccountBase
 
         if (www.result == UnityWebRequest.Result.Success)
         {
-            _message.text = "sign up Success";
-
-            _panel.SetActive(true);
-
+            OpenPanel("Sign Up Success");
         }
         else if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
         {
-            _message.text = www.downloadHandler.text;
+            OpenPanel(www.downloadHandler.text);
         }
-    }
-
-    public void ClickToClosePanel()
-    {
-        _panel.SetActive(false);
     }
 }

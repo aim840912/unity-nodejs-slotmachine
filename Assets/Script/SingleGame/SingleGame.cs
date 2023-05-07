@@ -23,7 +23,7 @@ public class SingleGame : MonoBehaviour, IGameMode
 
     private void Start()
     {
-        if (GameManager.instance.GameMode == GameMode.SINGLE_GAME)
+        if (GameManager.Instance.GameMode == GameMode.SINGLE_GAME)
         {
             _fileDataHandler = new FileDataHandler(Application.persistentDataPath, _fileName, _encryptData);
             _singleGameHandler.LoadGame(_fileDataHandler);
@@ -73,7 +73,7 @@ public class SingleGame : MonoBehaviour, IGameMode
 
     private void OnApplicationQuit()
     {
-        if (GameManager.instance.GameMode == GameMode.SINGLE_GAME)
+        if (GameManager.Instance.GameMode == GameMode.SINGLE_GAME)
             _singleGameHandler.SaveGame(PlayerManager.instance.PlayerData, _fileDataHandler);
     }
 

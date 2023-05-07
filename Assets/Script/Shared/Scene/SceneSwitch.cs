@@ -33,17 +33,17 @@ public class SceneSwitch : MonoBehaviour
         switch (_gameMode)
         {
             case GameMode.SINGLE_GAME:
-                GameManager.instance.GameMode = GameMode.SINGLE_GAME;
+                GameManager.Instance.GameMode = GameMode.SINGLE_GAME;
                 break;
 
             case GameMode.ONLINE:
-                GameManager.instance.GameMode = GameMode.ONLINE;
+                GameManager.Instance.GameMode = GameMode.ONLINE;
                 break;
             default:
                 break;
         }
 
-        _sceneChangeHandler.ClickToScene();
+        _sceneChangeHandler.MoveToScene();
     }
 
 

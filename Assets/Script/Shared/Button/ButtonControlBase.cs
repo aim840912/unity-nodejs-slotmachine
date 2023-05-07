@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public abstract class ButtonControlBase : MonoBehaviour
 {
-    [SerializeField] protected TMP_Text ValueText;
+    [SerializeField] protected TMP_Text _currentValueText;
     [SerializeField] protected Button[] _button;
     private int _currentValue = 0;
     public int CurrentValue
@@ -19,11 +19,26 @@ public abstract class ButtonControlBase : MonoBehaviour
         }
     }
 
+    public int PlayerMoney
+    {
+        get
+        {
+            return PlayerManager.instance.PlayerData.Money;
+        }
+        set
+        {
+            if (PlayerManager.instance.PlayerData.Money < 0)
+                PlayerManager.instance.PlayerData.Money = 0;
+            else
+                PlayerManager.instance.PlayerData.Money = value;
+        }
+    }
+
     public virtual void Start()
     {
         for (int i = 0; i < _button.Length; i++)
         {
-            _button[i].onClick.AddListener(() => SetText());
+            _button[i].onClick.AddListener(() => SetCurrentValueText());
         }
     }
 
@@ -33,9 +48,9 @@ public abstract class ButtonControlBase : MonoBehaviour
     public abstract void SetZero();
     public abstract void ValueCheck();
 
-    public virtual void SetText()
+    public virtual void SetCurrentValueText()
     {
-        ValueText.text = $"{CurrentValue}";
+        _currentValueText.text = $"{CurrentValue}";
     }
 
 }

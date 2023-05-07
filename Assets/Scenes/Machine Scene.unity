@@ -1205,11 +1205,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 195001658}
-        m_TargetAssemblyTypeName: UiControl, Assembly-CSharp
+        m_TargetAssemblyTypeName: ControlActive, Assembly-CSharp
         m_MethodName: ChangeActive
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgument: {fileID: 153469208}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -1263,7 +1263,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 195001652}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d482c5cadc8563040894a6b90265b33a, type: 3}
+  m_Script: {fileID: 11500000, guid: d771a85667c9c73479a22f088c485d9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &199359334
@@ -1505,7 +1505,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a54153968fa3eb499724f1008012ad2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameObject: {fileID: 424147948}
 --- !u!114 &225975873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5833,6 +5832,7 @@ GameObject:
   - component: {fileID: 1193312138}
   - component: {fileID: 1193312137}
   - component: {fileID: 1193312136}
+  - component: {fileID: 1193312139}
   m_Layer: 5
   m_Name: Cancel Btn
   m_TagString: Untagged
@@ -5905,13 +5905,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 195001658}
-        m_TargetAssemblyTypeName: Logout, Assembly-CSharp
-        m_MethodName: ChangePanelActive
-        m_Mode: 1
+      - m_Target: {fileID: 1193312139}
+        m_TargetAssemblyTypeName: ControlActive, Assembly-CSharp
+        m_MethodName: ChangeActive
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 153469208}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -5955,6 +5955,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1193312133}
   m_CullTransparentMesh: 1
+--- !u!114 &1193312139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1193312133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d771a85667c9c73479a22f088c485d9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1208598391
 GameObject:
   m_ObjectHideFlags: 0
@@ -7307,6 +7319,7 @@ GameObject:
   - component: {fileID: 1369797334}
   - component: {fileID: 1369797333}
   - component: {fileID: 1369797332}
+  - component: {fileID: 1369797336}
   m_Layer: 5
   m_Name: Logout Btn
   m_TagString: Untagged
@@ -7394,13 +7407,25 @@ MonoBehaviour:
       - m_Target: {fileID: 1369797332}
         m_TargetAssemblyTypeName: Logout, Assembly-CSharp
         m_MethodName: LogOut
-        m_Mode: 5
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Pattern Scene
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1369797336}
+        m_TargetAssemblyTypeName: SceneChangeHandler, Assembly-CSharp
+        m_MethodName: ClickToScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1369797334
@@ -7441,6 +7466,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1369797330}
   m_CullTransparentMesh: 1
+--- !u!114 &1369797336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1369797330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef05dab1fde09d5469e2676d64ec76b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SceneEnum: 0
 --- !u!1 &1384690104
 GameObject:
   m_ObjectHideFlags: 0
@@ -8452,7 +8490,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a54153968fa3eb499724f1008012ad2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameObject: {fileID: 856625885}
 --- !u!114 &1560383115
 MonoBehaviour:
   m_ObjectHideFlags: 0

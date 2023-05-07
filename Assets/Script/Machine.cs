@@ -20,11 +20,11 @@ public class Machine : MonoBehaviour
 
     private void Start()
     {
-        if (GameManager.instance.GameMode == GameMode.ONLINE)
+        if (GameManager.Instance.GameMode == GameMode.ONLINE)
         {
             _gameMode = _server;
         }
-        else if (GameManager.instance.GameMode == GameMode.SINGLE_GAME)
+        else if (GameManager.Instance.GameMode == GameMode.SINGLE_GAME)
         {
             _gameMode = _singleGame;
         }

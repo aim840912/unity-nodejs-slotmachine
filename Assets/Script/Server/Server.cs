@@ -5,10 +5,8 @@ using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-
 public class Server : MonoBehaviour, IGameMode
 {
-
     public BackendData BackendData { get; set; }
     public bool GetData { get; set; }
 
@@ -31,7 +29,6 @@ public class Server : MonoBehaviour, IGameMode
 
         form.AddField("InputValue", betInputValue);
         form.AddField("userId", PlayerManager.instance.PlayerData.UserId);
-        Debug.Log(PlayerManager.instance.PlayerData.UserId);
 
         UnityWebRequest www = UnityWebRequest.Post(_urlData.MachineUrl, form);
         yield return www.SendWebRequest();
@@ -44,10 +41,8 @@ public class Server : MonoBehaviour, IGameMode
         else if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
         {
             GetData = false;
-            Debug.Log(www.result);
         }
 
         www.Dispose();
-
     }
 }

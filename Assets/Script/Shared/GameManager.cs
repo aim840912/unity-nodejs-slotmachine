@@ -7,16 +7,36 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance = null;
+    private static GameManager _instance = null;
     public GameMode GameMode { get; set; } = GameMode.ONLINE;
+
+    public int SpinCount { get; set; } = 0;
+
+    public static GameManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                GameObject singleton = new GameObject();
+
+                _instance = singleton.AddComponent<GameManager>();
+                singleton.name = "[Singleton]" + typeof(GameManager).ToString();
+
+                DontDestroyOnLoad(singleton);
+            }
+
+            return _instance;
+        }
+    }
 
     private void Awake()
     {
-        if (instance != null)
+        if (_instance != null)
             Destroy(gameObject);
         else
         {
-            instance = this;
+            _instance = this;
             DontDestroyOnLoad(gameObject);
         }
     }

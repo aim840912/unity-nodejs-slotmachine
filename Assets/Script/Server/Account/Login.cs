@@ -8,13 +8,14 @@ public class Login : AccountBase
 {
     private PlayerData _playerData;
     [SerializeField] private Toggle _rememberToggle;
+    [SerializeField] private SceneEnum _nextScene;
 
     private void Start()
     {
         _email.text = PlayerPrefs.GetString("email");
     }
 
-    protected override IEnumerator PostServerData()
+    protected override IEnumerator connectToServer()
     {
         RememberLoginInform();
         WWWForm form = new WWWForm();
@@ -34,11 +35,11 @@ public class Login : AccountBase
 
             yield return new WaitUntil(() => HasGetPlayerData());
 
-            SceneManager.LoadScene((int)SceneEnum.MACHINE);
+            LoadToNextScene(_nextScene);
         }
         else if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
         {
-            _message.text = www.downloadHandler.text;
+            OpenPanel(www.downloadHandler.text);
         }
 
         www.Dispose();
@@ -52,12 +53,13 @@ public class Login : AccountBase
     private void RememberLoginInform()
     {
         if (_rememberToggle.isOn)
-        {
             PlayerPrefs.SetString("email", _email.text);
-        }
         else
-        {
             PlayerPrefs.SetString("email", "");
-        }
+    }
+
+    private void LoadToNextScene(SceneEnum sceneEnum)
+    {
+        SceneManager.LoadScene((int)sceneEnum);
     }
 }

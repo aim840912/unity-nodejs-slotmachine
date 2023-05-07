@@ -1,14 +1,11 @@
 using UnityEngine;
 using TMPro;
-using UnityEngine.UI;
 
 public class BetButtonControl : ButtonControlBase
 {
-    public TMP_Text[] EachBetGroup;
+    public TMP_Text[] EachBetTextGroup;
 
     [SerializeField] private AutoButtonControl _autoControl;
-
-
 
     private int GetPlayerMoney()
     {
@@ -42,29 +39,29 @@ public class BetButtonControl : ButtonControlBase
         if (CurrentValue > GetPlayerMoney())
             CurrentValue = 0;
 
-        ValueText.text = $"{CurrentValue}";
+        _currentValueText.text = $"{CurrentValue}";
         SetEachBet();
     }
 
     private void SetEachBet()
     {
-        for (int i = 0; i < EachBetGroup.Length; i++)
+        for (int i = 0; i < EachBetTextGroup.Length; i++)
         {
-            EachBetGroup[i].text = $"{CurrentValue / 8}";
+            EachBetTextGroup[i].text = $"{CurrentValue / 8}";
         }
     }
 
     public override void SetZero()
     {
         CurrentValue = 0;
-        ValueText.text = $"{CurrentValue}";
+        _currentValueText.text = $"{CurrentValue}";
 
         SetEachBet();
     }
 
     private void ValueSet()
     {
-        ValueText.text = $"{CurrentValue}";
+        _currentValueText.text = $"{CurrentValue}";
         SetEachBet();
         _autoControl.ValueCheck();
     }
