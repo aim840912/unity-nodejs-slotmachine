@@ -35,7 +35,7 @@ public class Machine : MonoBehaviour
     {
         _uiManager.CloseAllPanel();
 
-        _autoSpinTimes = _uiManager._autoControl.CurrentValue;
+        _autoSpinTimes = GetAutoSpinTime();
 
         if (_autoSpinTimes > 0)
         {
@@ -49,6 +49,9 @@ public class Machine : MonoBehaviour
 
     private void NormalSpin()
     {
+        if (_uiManager.IsBetAvailable())
+            return;
+
         if (_spinToggle.isOn)
         {
             StartSpin();
@@ -71,7 +74,7 @@ public class Machine : MonoBehaviour
         }
     }
 
-    void StartSpin()
+    private void StartSpin()
     {
         StartCoroutine(_gameMode.GetServerData(_uiManager._betControl.CurrentValue));
 
@@ -80,11 +83,15 @@ public class Machine : MonoBehaviour
         _uiManager.TurnWinMoneyToZero();
     }
 
-    void StopSpin()
+    private void StopSpin()
     {
         StartCoroutine(_boardManager.Stop(_gameMode.BackendData.BoardNum));
 
         _uiManager.UpdatedPlayerUI(_gameMode);
     }
+
+    private int GetAutoSpinTime() => _uiManager._autoControl.CurrentValue;
+
+    private void CancelAutoSpin() => _autoSpinTimes = 0;
 
 }

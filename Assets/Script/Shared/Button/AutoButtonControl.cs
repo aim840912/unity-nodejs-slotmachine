@@ -7,43 +7,39 @@ public class AutoButtonControl : ButtonControlBase
 
     public override void Add()
     {
-        if (CurrentValue <= MaxMultiple())
-            CurrentValue++;
+        if (_currentValue < MaxMultiple())
+            _currentValue++;
     }
 
     public override void Minus()
     {
-        if (CurrentValue > 0)
-            CurrentValue--;
+        if (_currentValue > 0)
+            _currentValue--;
     }
 
     public override void Max()
     {
-        CurrentValue = MaxMultiple();
+        _currentValue = MaxMultiple();
     }
 
     public override void ValueCheck()
     {
-        if (CurrentValue > MaxMultiple())
-            Max();
-
-        _currentValueText.text = $"{CurrentValue}";
-    }
-
-    public override void SetZero()
-    {
-        CurrentValue = 0;
-        _currentValueText.text = $"{CurrentValue}";
+        Debug.Log($"AutoButtonControl ValueCheck()");
+        if (_currentValue > MaxMultiple())
+        {
+            OpenAlertPanel("YOUR AUTO MORE THAN YOUR MONEY");
+            _currentValue = 0;
+        }
+        SetCurrentValueText();
     }
 
     private int MaxMultiple()
     {
         int betMoney = _betControl.CurrentValue;
-        int playerMoney = PlayerManager.instance.PlayerData.Money;
 
-        if (playerMoney == 0 || betMoney == 0)
+        if (PlayerMoney != 0 && betMoney != 0)
+            return (int)PlayerMoney / betMoney;
+        else
             return 0;
-
-        return (int)playerMoney / betMoney;
     }
 }

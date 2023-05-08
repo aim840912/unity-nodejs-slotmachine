@@ -3,21 +3,28 @@ using TMPro;
 
 public class BetButtonControl : ButtonControlBase
 {
-    public TMP_Text[] EachBetTextGroup;
-
+    [SerializeField] private TMP_Text[] _eachBetTextGroup;
     [SerializeField] private AutoButtonControl _autoControl;
 
+    public override void Start()
+    {
+        base.Start();
+        for (int i = 0; i < _button.Length; i++)
+        {
+            _button[i].onClick.AddListener(() => SetEachBetText());
+        }
+    }
 
     public override void Add()
     {
-        if (CurrentValue + 80 <= PlayerMoney)
-            CurrentValue += 80;
+        if (_currentValue + 80 <= PlayerMoney)
+            _currentValue += 80;
     }
 
     public override void Minus()
     {
-        if (CurrentValue - 80 >= 0)
-            CurrentValue -= 80;
+        if (_currentValue - 80 >= 0)
+            _currentValue -= 80;
     }
 
     public override void Max()
@@ -26,42 +33,27 @@ public class BetButtonControl : ButtonControlBase
 
         if (maxMultiple > 0)
         {
-            CurrentValue = 80 * maxMultiple;
+            _currentValue = 80 * maxMultiple;
         }
     }
 
     public override void ValueCheck()
     {
-        if (CurrentValue > PlayerMoney)
+        Debug.Log($"BetButtonControl ValueCheck()");
+        if (_currentValue > PlayerMoney)
         {
             OpenAlertPanel("YOUR BET MORE THAN YOUR MONEY");
-            CurrentValue = 0;
+            _currentValue = 0;
         }
-        _currentValueText.text = $"{CurrentValue}";
-        SetEachBet();
+        SetCurrentValueText();
+        SetEachBetText();
     }
 
-    private void SetEachBet()
+    private void SetEachBetText()
     {
-        for (int i = 0; i < EachBetTextGroup.Length; i++)
+        for (int i = 0; i < _eachBetTextGroup.Length; i++)
         {
-            EachBetTextGroup[i].text = $"{CurrentValue / 8}";
+            _eachBetTextGroup[i].text = $"{_currentValue / 8}";
         }
     }
-
-    public override void SetZero()
-    {
-        CurrentValue = 0;
-        _currentValueText.text = $"{CurrentValue}";
-
-        SetEachBet();
-    }
-
-    private void ValueSet()// ! 修改
-    {
-        _currentValueText.text = $"{CurrentValue}";
-        SetEachBet();
-        _autoControl.ValueCheck();
-    }
-
 }

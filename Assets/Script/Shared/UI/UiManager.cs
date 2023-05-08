@@ -12,7 +12,7 @@ public class UiManager : MonoBehaviour
 
     private void Start()
     {
-        _playerMoneyText.text = $"{PlayerManager.instance.PlayerData.Money}";
+        _playerMoneyText.text = $"{PlayerManager.instance.PlayerMoney}";
     }
 
 
@@ -23,9 +23,6 @@ public class UiManager : MonoBehaviour
 
         _winMoneyText.text = $"Win: {winMoney}";
         _playerMoneyText.text = $"{playerMoney}";
-
-        CheckValue(_betControl);
-        CheckValue(_autoControl);
     }
 
     public void TurnWinMoneyToZero()
@@ -41,9 +38,16 @@ public class UiManager : MonoBehaviour
         }
     }
 
-    private void CheckValue(ButtonControlBase valueControl)
+    public bool IsBetAvailable()
     {
-        valueControl.ValueCheck();
+        if (_betControl.CurrentValue * _autoControl.CurrentValue > PlayerManager.instance.PlayerMoney)
+        {
+            _betControl.CurrentValue = 0;
+            _autoControl.CurrentValue = 0;
+
+            return false;
+        }
+        return true;
     }
 
     public void OnlyOpenOnePanel(GameObject gameObject)

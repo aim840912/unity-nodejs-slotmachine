@@ -4,13 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance = null;
     public GameMode GameMode { get; set; } = GameMode.ONLINE;
 
-    public int SpinCount { get; set; } = 0;
+    public event Action SpinEvent;
 
     public static GameManager Instance
     {

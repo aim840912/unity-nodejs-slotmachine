@@ -16,6 +16,14 @@ public class PlayerManager : MonoBehaviour
 
     public PlayerData PlayerData { get; set; }
 
+    public int PlayerMoney
+    {
+        get
+        {
+            return PlayerData.Money;
+        }
+    }
+
     private void Awake()
     {
         if (instance != null)

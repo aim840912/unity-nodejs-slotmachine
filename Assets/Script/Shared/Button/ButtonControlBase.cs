@@ -8,7 +8,7 @@ public abstract class ButtonControlBase : MonoBehaviour
     [SerializeField] protected Button[] _button;
     [SerializeField] protected GameObject _alertPanel;
     [SerializeField] protected TMP_Text _alertMessage;
-    private int _currentValue = 0;
+    protected int _currentValue = 0;
     public int CurrentValue
     {
         get
@@ -27,17 +27,12 @@ public abstract class ButtonControlBase : MonoBehaviour
         {
             return PlayerManager.instance.PlayerData.Money;
         }
-        set
-        {
-            if (PlayerManager.instance.PlayerData.Money < 0)
-                PlayerManager.instance.PlayerData.Money = 0;
-            else
-                PlayerManager.instance.PlayerData.Money = value;
-        }
     }
 
     public virtual void Start()
     {
+        GameManager.Instance.SpinEvent += ValueCheck;
+
         for (int i = 0; i < _button.Length; i++)
         {
             _button[i].onClick.AddListener(() => SetCurrentValueText());
@@ -47,13 +42,11 @@ public abstract class ButtonControlBase : MonoBehaviour
     public abstract void Add();
     public abstract void Minus();
     public abstract void Max();
-    public abstract void SetZero();
+    public void SetZero() => _currentValue = 0;
+
     public abstract void ValueCheck();
 
-    private void SetCurrentValueText()
-    {
-        _currentValueText.text = $"{CurrentValue}";
-    }
+    protected void SetCurrentValueText() => _currentValueText.text = $"{_currentValue}";
 
     protected void OpenAlertPanel(string alertMessage)
     {
