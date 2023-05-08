@@ -76,7 +76,7 @@ public class Machine : MonoBehaviour
 
     private void StartSpin()
     {
-        StartCoroutine(_gameMode.GetServerData(_uiManager._betControl.CurrentValue));
+        StartCoroutine(_gameMode.GetServerData(GetBetValue()));
 
         _boardManager.Spin();
 
@@ -93,5 +93,8 @@ public class Machine : MonoBehaviour
     private int GetAutoSpinTime() => _uiManager._autoControl.CurrentValue;
 
     private void CancelAutoSpin() => _autoSpinTimes = 0;
+
+    private int GetBetValue() => _uiManager._betControl.CurrentValue;
+
 
 }
