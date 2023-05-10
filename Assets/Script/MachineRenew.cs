@@ -35,7 +35,7 @@ public class MachineRenew : MonoBehaviour
         // if (_uiManager.IsBetAvailable())
         //     return;
 
-        spinBase.SpinHandler((GetBetValue()));
+        spinBase.SpinHandler();
     }
 
 

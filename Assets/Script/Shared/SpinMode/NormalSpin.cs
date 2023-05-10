@@ -8,35 +8,31 @@ public class NormalSpin : SpinBase
     : base(toggle, uiManager, boardManager, gameMode, mono)
     { }
 
-    public override void SpinHandler(int inputValue)
+    public override void SpinHandler()
     {
-        _uiManager.CloseAllPanel();
+        base.SpinHandler();
 
         SetToggleText(_spinToggle.isOn);
 
         if (_spinToggle.isOn)
-            StartSpin(inputValue);
+            StartSpin();
         else
             StopSpin();
     }
-    public override void StartSpin(int inputValue)
+    protected override void StartSpin()
     {
-        _mono.StartCoroutine(_gameMode.GetServerData(inputValue));
+        _mono.StartCoroutine(_gameMode.GetServerData(GetInputValue()));
 
         _boardManager.Spin();
 
         _uiManager.TurnWinMoneyToZero();
     }
 
-    public override void StopSpin()
+    protected override void StopSpin()
     {
         _mono.StartCoroutine(_boardManager.Stop(_gameMode.BackendData.BoardNum));
 
         _uiManager.UpdatedPlayerUI(_gameMode);
     }
 
-    private void SetToggleText(bool isSpin)
-    {
-        _toggleText.text = isSpin ? "Stop" : "Spin";
-    }
 }

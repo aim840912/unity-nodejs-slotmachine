@@ -22,7 +22,19 @@ public abstract class SpinBase
         _toggleText = _spinToggle.GetComponentInChildren<Text>();
     }
 
-    public abstract void SpinHandler(int inputValue);
-    public abstract void StartSpin(int inputValue);
-    public abstract void StopSpin();
+    public virtual void SpinHandler()
+    {
+        _uiManager.CloseAllPanel();
+    }
+    protected abstract void StartSpin();
+    protected abstract void StopSpin();
+
+    protected virtual void SetToggleText(bool isSpin)
+    {
+        _toggleText.text = isSpin ? "Stop" : "Spin";
+    }
+    protected virtual int GetInputValue()
+    {
+        return _uiManager._betControl.CurrentValue;
+    }
 }
