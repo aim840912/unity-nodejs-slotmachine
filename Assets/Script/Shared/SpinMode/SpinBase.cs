@@ -33,8 +33,6 @@ public abstract class SpinBase
     {
         _toggleText.text = isSpin ? "Stop" : "Spin";
     }
-    protected virtual int GetInputValue()
-    {
-        return _uiManager._betControl.CurrentValue;
-    }
+    protected virtual int GetInputValue() => _uiManager._betControl.CurrentValue;
+
 }

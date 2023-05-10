@@ -27,14 +27,20 @@ public class MachineRenew : MonoBehaviour
             _gameMode = _singleGame;
         }
 
-        spinBase = new NormalSpin(_spinToggle, _uiManager, _boardManager, _gameMode, this);
     }
 
     public void Spin()
     {
         // if (_uiManager.IsBetAvailable())
         //     return;
-
+        if (_uiManager._autoControl.CurrentValue == 0)
+        {
+            spinBase = new NormalSpin(_spinToggle, _uiManager, _boardManager, _gameMode, this);
+        }
+        else
+        {
+            spinBase = new AutoSpin(_spinToggle, _uiManager, _boardManager, _gameMode, this);
+        }
         spinBase.SpinHandler();
     }
 

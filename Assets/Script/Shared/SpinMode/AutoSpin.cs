@@ -34,13 +34,19 @@ public class AutoSpin : SpinBase
 
     private IEnumerator AutoSpinSequence()
     {
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < GetAutoTime(); i++)
         {
             StartSpin();
             yield return new WaitForSeconds(31);
             StopSpin();
+            yield return new WaitUntil(() => _boardManager.IsOver == true);
+            DecreaseAutoTime();
         }
     }
+
+    private int GetAutoTime() => _uiManager._autoControl.CurrentValue;
+
+    private int DecreaseAutoTime() => _uiManager._autoControl.CurrentValue--;
 
 
 }
