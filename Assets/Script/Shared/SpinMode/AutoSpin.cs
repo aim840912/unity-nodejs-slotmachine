@@ -13,40 +13,45 @@ public class AutoSpin : SpinBase
         }
     }
 
-    public AutoSpin(Toggle toggle, UiManager uiManager, BoardManager boardManager, IGameMode gameMode, MonoBehaviour mono)
-    : base(toggle, uiManager, boardManager, gameMode, mono)
+    public AutoSpin(Button spinBtn, Toggle toggle, UiManager uiManager, BoardManager boardManager, IGameMode gameMode, MonoBehaviour mono)
+    : base(spinBtn, toggle, uiManager, boardManager, gameMode, mono)
     { }
 
     public override void SpinHandler()
     {
+        base.SpinHandler();
         _mono.StartCoroutine(AutoSpinSequence());
-    }
-
-    protected override void StartSpin()
-    {
-        throw new NotImplementedException();
-    }
-
-    protected override void StopSpin()
-    {
-        throw new NotImplementedException();
     }
 
     private IEnumerator AutoSpinSequence()
     {
-        for (int i = 0; i < GetAutoTime(); i++)
+        for (int i = GetAutoTime(); i > 0; i--)
         {
+            CheckAutoCurrentValue();
             StartSpin();
-            yield return new WaitForSeconds(31);
+            yield return new WaitForSeconds(3);
             StopSpin();
             yield return new WaitUntil(() => _boardManager.IsOver == true);
-            DecreaseAutoTime();
         }
+
+        AutoOver();
+
     }
 
     private int GetAutoTime() => _uiManager._autoControl.CurrentValue;
 
-    private int DecreaseAutoTime() => _uiManager._autoControl.CurrentValue--;
+    private void CheckAutoCurrentValue()
+    {
+        _uiManager._autoControl.Minus();
+        _uiManager._autoControl.ValueCheck();
+
+    }
+
+    private void AutoOver()
+    {
+        Debug.Log("auto over");
+        _spinToggle.GetComponent<Toggle>().isOn = false;
+    }
 
 
 }

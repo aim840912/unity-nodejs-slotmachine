@@ -23,7 +23,7 @@ public class FileDataHandler
     public void Save(PlayerData data)
     {
         string fullPath = Path.Combine(dataDirPath, dataFileName);
-        Debug.Log(fullPath);
+        // Debug.Log(fullPath);
         try
         {
             Directory.CreateDirectory(Path.GetDirectoryName(fullPath));

@@ -66,6 +66,7 @@ public class SingleGame : MonoBehaviour, IGameMode
         BackendData.Money = currentMoney;
 
         PlayerManager.instance.PlayerData.Money = currentMoney;
+        // PlayerManager.instance.PlayerData.Money = 10000;
 
         _singleGameHandler.SaveGame(PlayerManager.instance.PlayerData, _fileDataHandler);
     }

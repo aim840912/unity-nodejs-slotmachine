@@ -24,7 +24,6 @@ public class AutoButtonControl : ButtonControlBase
 
     public override void ValueCheck()
     {
-        Debug.Log($"AutoButtonControl ValueCheck()");
         if (_currentValue > MaxMultiple())
         {
             OpenAlertPanel("YOUR AUTO MORE THAN YOUR MONEY");

@@ -8,6 +8,7 @@ public class MachineRenew : MonoBehaviour
 {
     [SerializeField] private BoardManager _boardManager;
     [SerializeField] private Toggle _spinToggle;
+    [SerializeField] private Button _spinBtn;
     [SerializeField] private UiManager _uiManager;
     private SpinBase spinBase;
 
@@ -15,6 +16,9 @@ public class MachineRenew : MonoBehaviour
     private IGameMode _gameMode;
     [SerializeField] private Server _server;
     [SerializeField] private SingleGame _singleGame;
+
+    private NormalSpin _normalSpin;
+    private AutoSpin _autoSpin;
 
     private void Start()
     {
@@ -27,6 +31,13 @@ public class MachineRenew : MonoBehaviour
             _gameMode = _singleGame;
         }
 
+        Init();
+    }
+
+    private void Init()
+    {
+        _normalSpin = new NormalSpin(_spinBtn, _spinToggle, _uiManager, _boardManager, _gameMode, this);
+        _autoSpin = new AutoSpin(_spinBtn, _spinToggle, _uiManager, _boardManager, _gameMode, this);
     }
 
     public void Spin()
@@ -35,11 +46,11 @@ public class MachineRenew : MonoBehaviour
         //     return;
         if (_uiManager._autoControl.CurrentValue == 0)
         {
-            spinBase = new NormalSpin(_spinToggle, _uiManager, _boardManager, _gameMode, this);
+            spinBase = _normalSpin;
         }
         else
         {
-            spinBase = new AutoSpin(_spinToggle, _uiManager, _boardManager, _gameMode, this);
+            spinBase = _autoSpin;
         }
         spinBase.SpinHandler();
     }
