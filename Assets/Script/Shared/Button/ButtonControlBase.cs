@@ -8,16 +8,19 @@ public abstract class ButtonControlBase : MonoBehaviour
     [SerializeField] protected Button[] _button;
     [SerializeField] protected GameObject _alertPanel;
     [SerializeField] protected TMP_Text _alertMessage;
-    protected int _currentValue = 0;
+    private int _currentValue = 0;
     public int CurrentValue
     {
         get
         {
-            return _currentValue >= 0 ? _currentValue : 0;
+            return _currentValue;
         }
         set
         {
-            _currentValue = value;
+            if (_currentValue >= 0)
+                _currentValue = value;
+            else
+                _currentValue = 0;
         }
     }
 
@@ -42,11 +45,11 @@ public abstract class ButtonControlBase : MonoBehaviour
     public abstract void Add();
     public abstract void Minus();
     public abstract void Max();
-    public void SetZero() => _currentValue = 0;
+    public void SetZero() => CurrentValue = 0;
 
     public abstract void ValueCheck();
 
-    protected void SetCurrentValueText() => _currentValueText.text = $"{_currentValue}";
+    protected void SetCurrentValueText() => _currentValueText.text = $"{CurrentValue}";
 
     protected void OpenAlertPanel(string alertMessage)
     {

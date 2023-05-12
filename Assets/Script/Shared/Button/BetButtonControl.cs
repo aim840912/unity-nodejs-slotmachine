@@ -17,14 +17,14 @@ public class BetButtonControl : ButtonControlBase
 
     public override void Add()
     {
-        if (_currentValue + 80 <= PlayerMoney)
-            _currentValue += 80;
+        if (CurrentValue + 80 <= PlayerMoney)
+            CurrentValue += 80;
     }
 
     public override void Minus()
     {
-        if (_currentValue - 80 >= 0)
-            _currentValue -= 80;
+        if (CurrentValue - 80 >= 0)
+            CurrentValue -= 80;
     }
 
     public override void Max()
@@ -33,18 +33,18 @@ public class BetButtonControl : ButtonControlBase
 
         if (maxMultiple > 0)
         {
-            _currentValue = 80 * maxMultiple;
+            CurrentValue = 80 * maxMultiple;
         }
     }
 
     public override void ValueCheck()
     {
-        Debug.Log($"BetButtonControl ValueCheck()");
-        if (_currentValue > PlayerMoney)
+        if (CurrentValue > PlayerMoney)
         {
             OpenAlertPanel("YOUR BET MORE THAN YOUR MONEY");
-            _currentValue = 0;
+            CurrentValue = 0;
         }
+
         SetCurrentValueText();
         SetEachBetText();
     }
@@ -53,7 +53,7 @@ public class BetButtonControl : ButtonControlBase
     {
         for (int i = 0; i < _eachBetTextGroup.Length; i++)
         {
-            _eachBetTextGroup[i].text = $"{_currentValue / 8}";
+            _eachBetTextGroup[i].text = $"{CurrentValue / 8}";
         }
     }
 }

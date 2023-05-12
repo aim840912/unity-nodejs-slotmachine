@@ -7,27 +7,27 @@ public class AutoButtonControl : ButtonControlBase
 
     public override void Add()
     {
-        if (_currentValue < MaxMultiple())
-            _currentValue++;
+        if (CurrentValue < MaxMultiple())
+            CurrentValue++;
     }
 
     public override void Minus()
     {
-        if (_currentValue > 0)
-            _currentValue--;
+        if (CurrentValue > 0)
+            CurrentValue--;
     }
 
     public override void Max()
     {
-        _currentValue = MaxMultiple();
+        CurrentValue = MaxMultiple();
     }
 
     public override void ValueCheck()
     {
-        if (_currentValue > MaxMultiple())
+        if (CurrentValue > MaxMultiple())
         {
             OpenAlertPanel("YOUR AUTO MORE THAN YOUR MONEY");
-            _currentValue = 0;
+            CurrentValue = 0;
         }
         SetCurrentValueText();
     }

@@ -7,7 +7,6 @@ using System.Collections;
 public class MachineRenew : MonoBehaviour
 {
     [SerializeField] private BoardManager _boardManager;
-    [SerializeField] private Toggle _spinToggle;
     [SerializeField] private Button _spinBtn;
     [SerializeField] private UiManager _uiManager;
     private SpinBase spinBase;
@@ -36,8 +35,8 @@ public class MachineRenew : MonoBehaviour
 
     private void Init()
     {
-        _normalSpin = new NormalSpin(_spinBtn, _spinToggle, _uiManager, _boardManager, _gameMode, this);
-        _autoSpin = new AutoSpin(_spinBtn, _spinToggle, _uiManager, _boardManager, _gameMode, this);
+        _normalSpin = new NormalSpin(_spinBtn, _uiManager, _boardManager, _gameMode, this);
+        _autoSpin = new AutoSpin(_spinBtn, _uiManager, _boardManager, _gameMode, this);
     }
 
     public void Spin()

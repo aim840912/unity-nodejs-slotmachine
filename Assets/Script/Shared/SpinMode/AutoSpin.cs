@@ -5,53 +5,57 @@ using UnityEngine.UI;
 
 public class AutoSpin : SpinBase
 {
-    private int AutoSpinTime
-    {
-        get
-        {
-            return _uiManager._autoControl.CurrentValue;
-        }
-    }
-
-    public AutoSpin(Button spinBtn, Toggle toggle, UiManager uiManager, BoardManager boardManager, IGameMode gameMode, MonoBehaviour mono)
-    : base(spinBtn, toggle, uiManager, boardManager, gameMode, mono)
+    public AutoSpin(Button spinBtn, UiManager uiManager, BoardManager boardManager, IGameMode gameMode, MonoBehaviour mono)
+    : base(spinBtn, uiManager, boardManager, gameMode, mono)
     { }
 
     public override void SpinHandler()
     {
         base.SpinHandler();
-        _mono.StartCoroutine(AutoSpinSequence());
-    }
-
-    private IEnumerator AutoSpinSequence()
-    {
-        for (int i = GetAutoTime(); i > 0; i--)
+        if (_SpinBool == true)
         {
-            CheckAutoCurrentValue();
-            StartSpin();
-            yield return new WaitForSeconds(3);
-            StopSpin();
-            yield return new WaitUntil(() => _boardManager.IsOver == true);
+            _mono.StartCoroutine(Auto());
+            _SpinBool = !_SpinBool;
+        }
+        else
+        {
+            SetAutoToZero();
+            _SpinBool = true;
         }
 
-        AutoOver();
+    }
 
+    private IEnumerator Auto()
+    {
+        while (_SpinBool)
+        {
+            Rotate();
+            yield return new WaitForSeconds(3);
+            Stop();
+            yield return new WaitUntil(() => _boardManager.IsOver == true);
+            if (_uiManager._autoControl.CurrentValue > 0)
+            {
+                _uiManager._autoControl.CurrentValue--;
+            }
+            _uiManager._autoControl.ValueCheck();
+            _SpinBool = IsOver();
+        }
+        _SpinBool = true;
     }
 
     private int GetAutoTime() => _uiManager._autoControl.CurrentValue;
 
-    private void CheckAutoCurrentValue()
+    private void SetAutoToZero()
     {
-        _uiManager._autoControl.Minus();
+        _uiManager._autoControl.CurrentValue = 0;
         _uiManager._autoControl.ValueCheck();
-
     }
 
-    private void AutoOver()
+    private bool IsOver()
     {
-        Debug.Log("auto over");
-        _spinToggle.GetComponent<Toggle>().isOn = false;
+        if (GetAutoTime() > 0)
+            return true;
+        else
+            return false;
     }
-
-
 }

@@ -4,19 +4,19 @@ using UnityEngine.UI;
 
 public class NormalSpin : SpinBase
 {
-    public NormalSpin(Button spinBtn, Toggle toggle, UiManager uiManager, BoardManager boardManager, IGameMode gameMode, MonoBehaviour mono)
-    : base(spinBtn, toggle, uiManager, boardManager, gameMode, mono)
+    public NormalSpin(Button spinBtn, UiManager uiManager, BoardManager boardManager, IGameMode gameMode, MonoBehaviour mono)
+    : base(spinBtn, uiManager, boardManager, gameMode, mono)
     { }
 
     public override void SpinHandler()
     {
         base.SpinHandler();
 
-        SetToggleText(_spinToggle.isOn);
-
-        if (_spinToggle.isOn)
-            StartSpin();
+        if (_SpinBool)
+            Rotate();
         else
-            StopSpin();
+            Stop();
+
+        _SpinBool = !_SpinBool;
     }
 }
