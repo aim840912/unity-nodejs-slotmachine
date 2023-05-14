@@ -19,6 +19,7 @@ public class MachineRenew : MonoBehaviour
     private NormalSpin _normalSpin;
     private AutoSpin _autoSpin;
 
+
     private void Start()
     {
         if (GameManager.Instance.GameMode == GameMode.ONLINE)
@@ -53,6 +54,7 @@ public class MachineRenew : MonoBehaviour
         }
         spinBase.SpinHandler();
     }
+
 
 
     private int GetBetValue() => _uiManager._betControl.CurrentValue;

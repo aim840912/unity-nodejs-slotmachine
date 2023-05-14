@@ -11,23 +11,20 @@ public class AutoSpin : SpinBase
 
     public override void SpinHandler()
     {
-        base.SpinHandler();
+
         if (_SpinBool == true)
         {
             _mono.StartCoroutine(Auto());
-            _SpinBool = !_SpinBool;
         }
         else
         {
-            SetAutoToZero();
             _SpinBool = true;
         }
-
     }
 
     private IEnumerator Auto()
     {
-        while (_SpinBool)
+        while (GetAutoTime() > 0)
         {
             Rotate();
             yield return new WaitForSeconds(3);
@@ -38,18 +35,11 @@ public class AutoSpin : SpinBase
                 _uiManager._autoControl.CurrentValue--;
             }
             _uiManager._autoControl.ValueCheck();
-            _SpinBool = IsOver();
         }
-        _SpinBool = true;
     }
 
     private int GetAutoTime() => _uiManager._autoControl.CurrentValue;
 
-    private void SetAutoToZero()
-    {
-        _uiManager._autoControl.CurrentValue = 0;
-        _uiManager._autoControl.ValueCheck();
-    }
 
     private bool IsOver()
     {

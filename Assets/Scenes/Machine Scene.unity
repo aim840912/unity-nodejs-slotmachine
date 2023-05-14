@@ -2248,6 +2248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _imageManager: {fileID: 756783873}
   _lineManager: {fileID: 1946096806}
+  _spinBtn: {fileID: 301384232}
 --- !u!4 &172926958
 Transform:
   m_ObjectHideFlags: 0
@@ -3481,18 +3482,6 @@ MonoBehaviour:
       - m_Target: {fileID: 1796007682}
         m_TargetAssemblyTypeName: MachineRenew, Assembly-CSharp
         m_MethodName: Spin
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 301384231}
-        m_TargetAssemblyTypeName: UIInteractableTime, Assembly-CSharp
-        m_MethodName: StartDelayInteractable
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8386,6 +8375,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _imageManager: {fileID: 756783873}
   _lineManager: {fileID: 1946096806}
+  _spinBtn: {fileID: 0}
 --- !u!4 &836439520
 Transform:
   m_ObjectHideFlags: 0
@@ -16566,7 +16556,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _boardManager: {fileID: 172926957}
-  _spinToggle: {fileID: 352682921}
   _spinBtn: {fileID: 301384232}
   _uiManager: {fileID: 2084644162}
   _server: {fileID: 475138892}

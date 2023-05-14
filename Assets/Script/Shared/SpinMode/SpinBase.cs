@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
+
 public abstract class SpinBase
 {
     protected Button _spinBtn;
@@ -11,6 +13,8 @@ public abstract class SpinBase
     protected TMP_Text _buttonText;
     protected MonoBehaviour _mono;
     protected bool _SpinBool = true;
+
+    public float AuToStop { get; set; } = 3f;
 
     public SpinBase(Button spinBtn, UiManager uiManager, BoardManager boardManager, IGameMode gameMode, MonoBehaviour mono)
     {
@@ -23,10 +27,7 @@ public abstract class SpinBase
         _buttonText = _spinBtn.GetComponentInChildren<TMP_Text>();
     }
 
-    public virtual void SpinHandler()
-    {
-        _uiManager.CloseAllPanel();
-    }
+    public abstract void SpinHandler();
 
     protected virtual void Rotate()
     {
@@ -35,6 +36,8 @@ public abstract class SpinBase
         _boardManager.Spin();
 
         _uiManager.TurnWinMoneyToZero();
+
+        _SpinBool = false;
     }
 
     protected virtual void Stop()
@@ -42,7 +45,17 @@ public abstract class SpinBase
         _mono.StartCoroutine(_boardManager.Stop(_gameMode.BackendData.BoardNum));
 
         _uiManager.UpdatedPlayerUI(_gameMode);
+
+        _SpinBool = true;
     }
 
     protected virtual int GetInputValue() => _uiManager._betControl.CurrentValue;
+
+    private IEnumerator SetBtnInteractableTime(float interactableTime)
+    {
+        _spinBtn.interactable = false;
+        yield return new WaitForSeconds(interactableTime);
+        _spinBtn.interactable = true;
+    }
+
 }
