@@ -46,10 +46,12 @@ public class MachineRenew : MonoBehaviour
         //     return;
         if (_uiManager._autoControl.CurrentValue == 0)
         {
+            Debug.Log($"_normalSpin");
             spinBase = _normalSpin;
         }
         else
         {
+            Debug.Log($"_autoSpin");
             spinBase = _autoSpin;
         }
         spinBase.SpinHandler();
