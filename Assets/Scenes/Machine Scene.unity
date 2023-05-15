@@ -135,7 +135,6 @@ GameObject:
   - component: {fileID: 497304}
   - component: {fileID: 497303}
   - component: {fileID: 497302}
-  - component: {fileID: 497301}
   m_Layer: 5
   m_Name: Logout Btn
   m_TagString: Untagged
@@ -165,18 +164,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 56.737427}
   m_Pivot: {x: 1, y: 1}
---- !u!114 &497301
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 497299}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d771a85667c9c73479a22f088c485d9b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &497302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,17 +208,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 497301}
-        m_TargetAssemblyTypeName: ControlActive, Assembly-CSharp
-        m_MethodName: ChangeActive
-        m_Mode: 2
+      - m_Target: {fileID: 690083560}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
-          m_ObjectArgument: {fileID: 690083560}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &497303
 MonoBehaviour:
@@ -13751,7 +13738,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1399614596}
         m_TargetAssemblyTypeName: SceneChangeHandler, Assembly-CSharp
-        m_MethodName: ClickToScene
+        m_MethodName: MoveToScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -18242,7 +18229,6 @@ GameObject:
   - component: {fileID: 2053984082}
   - component: {fileID: 2053984081}
   - component: {fileID: 2053984080}
-  - component: {fileID: 2053984079}
   m_Layer: 5
   m_Name: Cancel Btn
   m_TagString: Untagged
@@ -18271,18 +18257,6 @@ RectTransform:
   m_AnchoredPosition: {x: 400, y: 0}
   m_SizeDelta: {x: 100, y: 56.7374}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2053984079
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2053984077}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d771a85667c9c73479a22f088c485d9b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2053984080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18327,13 +18301,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2053984079}
-        m_TargetAssemblyTypeName: ControlActive, Assembly-CSharp
-        m_MethodName: ChangeActive
-        m_Mode: 2
+      - m_Target: {fileID: 690083560}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
-          m_ObjectArgument: {fileID: 690083560}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

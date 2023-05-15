@@ -2156,7 +2156,6 @@ MonoBehaviour:
   _messagePanel: {fileID: 741557549}
   _message: {fileID: 1978372691}
   _urlData: {fileID: 11400000, guid: 9a35411d3b06d2743aa38a0c0cdbf4c4, type: 2}
-  _panel: {fileID: 741557549}
 --- !u!1 &1366594445
 GameObject:
   m_ObjectHideFlags: 0
@@ -2378,8 +2377,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1392438989}
-        m_TargetAssemblyTypeName: SceneChangeHandler, Assembly-CSharp
-        m_MethodName: ClickToScene
+        m_TargetAssemblyTypeName: SceneSwitch, Assembly-CSharp
+        m_MethodName: LoadToScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2436,10 +2435,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1392438984}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef05dab1fde09d5469e2676d64ec76b7, type: 3}
+  m_Script: {fileID: 11500000, guid: 3fa953b7ad117d347b3c714bb9a355f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneEnum: 2
+  _gameMode: 0
+  _button: {fileID: 1392438986}
+  _sceneEnum: 2
 --- !u!1 &1393680565
 GameObject:
   m_ObjectHideFlags: 0

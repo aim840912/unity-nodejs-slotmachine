@@ -23,7 +23,6 @@ public class AutoSpin : SpinBase
 
     private IEnumerator NormalAuto()
     {
-
         if (GetAutoTime() < 1)
             yield break;
         _isCrRunning = true;
@@ -35,37 +34,37 @@ public class AutoSpin : SpinBase
         }
 
         Stop();
-
         yield return new WaitUntil(() => _boardManager.IsOver == true);
 
-        if (_uiManager._autoControl.CurrentValue > 0)
-        {
-            _uiManager._autoControl.CurrentValue--;
-        }
-        _uiManager._autoControl.ValueCheck();
+        AutoValueControl();
 
         _isCrRunning = false;
 
         _mono.StartCoroutine(NormalAuto());
     }
+
 
     private IEnumerator StopAutoAndRestart()
     {
-
         Stop();
         yield return new WaitUntil(() => _boardManager.IsOver == true);
 
-        if (_uiManager._autoControl.CurrentValue > 0)
-        {
-            _uiManager._autoControl.CurrentValue--;
-        }
-        _uiManager._autoControl.ValueCheck();
+        AutoValueControl();
 
         _isCrRunning = false;
 
         _mono.StartCoroutine(NormalAuto());
 
     }
+    private void AutoValueControl()
+    {
+        if (_uiManager._autoControl.CurrentValue > 0)
+        {
+            _uiManager._autoControl.CurrentValue--;
+        }
+        _uiManager._autoControl.ValueCheck();
+    }
+
 
 
     private int GetAutoTime() => _uiManager._autoControl.CurrentValue;

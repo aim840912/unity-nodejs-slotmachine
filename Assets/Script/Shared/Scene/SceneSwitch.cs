@@ -16,7 +16,7 @@ public class SceneSwitch : MonoBehaviour
 {
     [SerializeField] GameMode _gameMode;
     [SerializeField] Button _button;
-    [SerializeField] SceneChangeHandler _sceneChangeHandler;
+    [SerializeField] SceneEnum _sceneEnum;
 
     private void Reset()
     {
@@ -28,23 +28,14 @@ public class SceneSwitch : MonoBehaviour
         _button.onClick.AddListener(() => LoadToScene());
     }
 
-    private void LoadToScene()
+    public void LoadToScene()
     {
-        switch (_gameMode)
-        {
-            case GameMode.SINGLE_GAME:
-                GameManager.Instance.GameMode = GameMode.SINGLE_GAME;
-                break;
-
-            case GameMode.ONLINE:
-                GameManager.Instance.GameMode = GameMode.ONLINE;
-                break;
-            default:
-                break;
-        }
-
-        _sceneChangeHandler.MoveToScene();
+        GameManager.Instance.GameMode = _gameMode;
+        MoveToScene();
     }
 
-
+    private void MoveToScene()
+    {
+        SceneManager.LoadScene((int)_sceneEnum);
+    }
 }

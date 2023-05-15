@@ -4,8 +4,6 @@ using UnityEngine.Networking;
 
 public class SignUp : AccountBase
 {
-    [SerializeField] private GameObject _panel;
-
     protected override IEnumerator connectToServer()
     {
         WWWForm form = new WWWForm();
