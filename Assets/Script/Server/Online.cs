@@ -5,9 +5,9 @@ using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-public class Server : MonoBehaviour, IGameMode
+public class Online : MonoBehaviour, IGameMode
 {
-    public BackendData BackendData { get; set; }
+    public BackendData BackendData { get; set; } = new BackendData();
     public bool GetData { get; set; }
 
     [SerializeField] private UrlData _urlData;

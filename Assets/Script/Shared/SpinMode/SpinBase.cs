@@ -9,7 +9,6 @@ public abstract class SpinBase
     protected UiManager _uiManager;
     protected BoardManager _boardManager;
     protected IGameMode _gameMode;
-    protected Text _toggleText;
     protected TMP_Text _buttonText;
     protected MonoBehaviour _mono;
     protected bool _SpinBool = true;
@@ -35,16 +34,12 @@ public abstract class SpinBase
 
         _boardManager.Spin();
 
-        _uiManager.TurnWinMoneyToZero();
-
         _SpinBool = false;
     }
 
     protected virtual void Stop()
     {
-        _mono.StartCoroutine(_boardManager.Stop(_gameMode.BackendData.BoardNum));
-
-        _uiManager.UpdatedPlayerUI(_gameMode);
+        _mono.StartCoroutine(_boardManager.Stop(_gameMode.BackendData));
 
         _SpinBool = true;
     }

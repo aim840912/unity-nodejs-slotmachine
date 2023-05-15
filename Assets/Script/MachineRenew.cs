@@ -13,7 +13,7 @@ public class MachineRenew : MonoBehaviour
 
     [HeaderAttribute("Game mode")]
     private IGameMode _gameMode;
-    [SerializeField] private Server _server;
+    [SerializeField] private Online _online;
     [SerializeField] private SingleGame _singleGame;
 
     private NormalSpin _normalSpin;
@@ -24,7 +24,7 @@ public class MachineRenew : MonoBehaviour
     {
         if (GameManager.Instance.GameMode == GameMode.ONLINE)
         {
-            _gameMode = _server;
+            _gameMode = _online;
         }
         else if (GameManager.Instance.GameMode == GameMode.SINGLE_GAME)
         {

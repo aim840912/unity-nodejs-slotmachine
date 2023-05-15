@@ -8,8 +8,7 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager _instance = null;
     public GameMode GameMode { get; set; } = GameMode.ONLINE;
-
-    public event Action SpinEvent;
+    public int AutoTime { get; set; } = 0;
 
     public static GameManager Instance
     {

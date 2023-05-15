@@ -11,7 +11,7 @@ public class Machine : MonoBehaviour
     [Space(15)]
     [SerializeField] private UiManager _uiManager;
     [Space(15)]
-    [SerializeField] private Server _server;
+    [SerializeField] private Online _online;
     [SerializeField] private SingleGame _singleGame;
     private IGameMode _gameMode;
 
@@ -22,7 +22,7 @@ public class Machine : MonoBehaviour
     {
         if (GameManager.Instance.GameMode == GameMode.ONLINE)
         {
-            _gameMode = _server;
+            _gameMode = _online;
         }
         else if (GameManager.Instance.GameMode == GameMode.SINGLE_GAME)
         {
@@ -80,14 +80,14 @@ public class Machine : MonoBehaviour
 
         _boardManager.Spin();
 
-        _uiManager.TurnWinMoneyToZero();
+        _uiManager.SetWinToZero();
     }
 
     private void StopSpin()
     {
-        StartCoroutine(_boardManager.Stop(_gameMode.BackendData.BoardNum));
+        StartCoroutine(_boardManager.Stop(_gameMode.BackendData));
 
-        _uiManager.UpdatedPlayerUI(_gameMode);
+        _uiManager.UpdatedPlayerUI(_gameMode.BackendData);
     }
 
     private int GetAutoSpinTime() => _uiManager._autoControl.CurrentValue;

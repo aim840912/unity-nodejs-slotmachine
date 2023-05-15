@@ -2236,6 +2236,7 @@ MonoBehaviour:
   _imageManager: {fileID: 756783873}
   _lineManager: {fileID: 1946096806}
   _spinBtn: {fileID: 301384232}
+  _uiManager: {fileID: 2084644162}
 --- !u!4 &172926958
 Transform:
   m_ObjectHideFlags: 0
@@ -5098,7 +5099,7 @@ GameObject:
   - component: {fileID: 475138893}
   - component: {fileID: 475138892}
   m_Layer: 0
-  m_Name: Server
+  m_Name: Online
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5113,7 +5114,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 475138891}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e9b1edd7722f5f45a60673d037903a4, type: 3}
+  m_Script: {fileID: 11500000, guid: b7445d0205c44ed43b70307b28561461, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _urlData: {fileID: 11400000, guid: 9a35411d3b06d2743aa38a0c0cdbf4c4, type: 2}
@@ -8363,6 +8364,7 @@ MonoBehaviour:
   _imageManager: {fileID: 756783873}
   _lineManager: {fileID: 1946096806}
   _spinBtn: {fileID: 0}
+  _uiManager: {fileID: 0}
 --- !u!4 &836439520
 Transform:
   m_ObjectHideFlags: 0
@@ -13664,10 +13666,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1399614594}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef05dab1fde09d5469e2676d64ec76b7, type: 3}
+  m_Script: {fileID: 11500000, guid: 3fa953b7ad117d347b3c714bb9a355f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneEnum: 0
+  _gameMode: 1
+  _button: {fileID: 0}
+  _sceneEnum: 0
 --- !u!114 &1399614597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16545,7 +16549,7 @@ MonoBehaviour:
   _boardManager: {fileID: 172926957}
   _spinBtn: {fileID: 301384232}
   _uiManager: {fileID: 2084644162}
-  _server: {fileID: 475138892}
+  _online: {fileID: 475138892}
   _singleGame: {fileID: 1333078633}
 --- !u!4 &1796007683
 Transform:
@@ -17615,7 +17619,7 @@ MonoBehaviour:
   _boardManager: {fileID: 836439519}
   _spinToggle: {fileID: 1063499528}
   _uiManager: {fileID: 651812588}
-  _server: {fileID: 475138892}
+  _online: {fileID: 0}
   _singleGame: {fileID: 1333078633}
 --- !u!4 &1900489946
 Transform:

@@ -9,6 +9,7 @@ public class BoardManager : MonoBehaviour
     [SerializeField] private ImageManager _imageManager;
     [SerializeField] private LineManager _lineManager;
     [SerializeField] private Button _spinBtn;
+    [SerializeField] private UiManager _uiManager;
 
     public bool IsOver { get; private set; } = false;
 
@@ -17,19 +18,24 @@ public class BoardManager : MonoBehaviour
         _imageManager.Spin();
         _lineManager.Spin();
 
+        _uiManager.SetWinToZero();
+
         IsOver = false;
     }
 
-    public IEnumerator Stop(int[] boardNum)
+    public IEnumerator Stop(BackendData backendData)
     {
         StartCoroutine(SetBtnInteractableTime());
-        _imageManager.Stop(boardNum);
+
+        _imageManager.Stop(backendData.BoardNum);
 
         yield return new WaitUntil(() => _imageManager.CanNextStep == true);
 
-        _lineManager.Stop(boardNum);
+        _lineManager.Stop(backendData.BoardNum);
 
         yield return new WaitForSeconds(2f);
+
+        _uiManager.UpdatedPlayerUI(backendData);
 
         IsOver = true;
     }

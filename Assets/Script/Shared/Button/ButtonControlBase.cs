@@ -34,8 +34,6 @@ public abstract class ButtonControlBase : MonoBehaviour
 
     public virtual void Start()
     {
-        GameManager.Instance.SpinEvent += ValueCheck;
-
         for (int i = 0; i < _button.Length; i++)
         {
             _button[i].onClick.AddListener(() => SetCurrentValueText());

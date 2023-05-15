@@ -15,17 +15,13 @@ public class UiManager : MonoBehaviour
         _playerMoneyText.text = $"{PlayerManager.instance.PlayerMoney}";
     }
 
-
-    public void UpdatedPlayerUI(IGameMode server)
+    public void UpdatedPlayerUI(BackendData backendData)
     {
-        int winMoney = server.BackendData.WinMoney;
-        int playerMoney = server.BackendData.Money;
-
-        _winMoneyText.text = $"Win: {winMoney}";
-        _playerMoneyText.text = $"{playerMoney}";
+        _winMoneyText.text = $"Win: {backendData.WinMoney}";
+        _playerMoneyText.text = $"{backendData.Money}";
     }
 
-    public void TurnWinMoneyToZero()
+    public void SetWinToZero()
     {
         _winMoneyText.text = $"Win: {0}";
     }
