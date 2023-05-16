@@ -11,7 +11,7 @@ public class BoardManager : MonoBehaviour
     [SerializeField] private Button _spinBtn;
     [SerializeField] private UiManager _uiManager;
 
-    public bool IsOver { get; private set; } = false;
+    public bool IsOver { get; private set; } = true;
 
     public void Spin()
     {
@@ -36,6 +36,12 @@ public class BoardManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         _uiManager.UpdatedPlayerUI(backendData);
+
+        if (_uiManager._autoControl.CurrentValue > 0)
+        {
+            _uiManager._autoControl.CurrentValue--;
+            _uiManager._autoControl.ValueCheck();
+        }
 
         IsOver = true;
     }

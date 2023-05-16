@@ -3,24 +3,25 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AutoSpin : SpinBase
+public class AutoSpinRenew : SpinBase
 {
-    private bool _isCrRunning = false;
-
     Coroutine _coroutine = null;
 
-    public AutoSpin(Button spinBtn, UiManager uiManager, BoardManager boardManager, IGameMode gameMode, MonoBehaviour mono)
+    public AutoSpinRenew(Button spinBtn, UiManager uiManager, BoardManager boardManager, IGameMode gameMode, MonoBehaviour mono)
     : base(spinBtn, uiManager, boardManager, gameMode, mono)
     { }
 
     public override void SpinHandler()
     {
-        if (_isCrRunning == false)
+        Debug.Log(_boardManager.IsOver);
+        if (_boardManager.IsOver)
+        {
             _coroutine = _mono.StartCoroutine(NormalAuto());
-        else
+        }
+        else if (!_boardManager.IsOver)
         {
             _mono.StopCoroutine(_coroutine);
-            _mono.StartCoroutine(StopAutoAndRestart());
+            _coroutine = _mono.StartCoroutine(NormalAuto());
         }
     }
 
@@ -28,41 +29,27 @@ public class AutoSpin : SpinBase
     {
         if (GetAutoTime() < 1)
             yield break;
-        _isCrRunning = true;
 
-        if (_SpinBool == true)
+
+        if (_boardManager.IsOver == true)
         {
+            Debug.Log("rotate()");
             Rotate();
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(3f);
         }
 
-        Stop();
+
+        if (_boardManager.IsOver == false)
+        {
+            Debug.Log("stop()");
+            Stop();
+        }
 
         yield return new WaitUntil(() => _boardManager.IsOver == true);
 
-
-        _isCrRunning = false;
-
         _coroutine = _mono.StartCoroutine(NormalAuto());
     }
-
-
-    private IEnumerator StopAutoAndRestart()
-    {
-        Stop();
-
-        yield return new WaitUntil(() => _boardManager.IsOver == true);
-
-        _isCrRunning = false;
-
-        _coroutine = _mono.StartCoroutine(NormalAuto());
-
-    }
-
-
 
 
     private int GetAutoTime() => _uiManager._autoControl.CurrentValue;
-
-
 }

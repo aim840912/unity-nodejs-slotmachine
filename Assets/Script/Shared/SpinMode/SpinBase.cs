@@ -34,14 +34,14 @@ public abstract class SpinBase
 
         _boardManager.Spin();
 
-        _SpinBool = false;
+        // _SpinBool = false;
     }
 
     protected virtual void Stop()
     {
         _mono.StartCoroutine(_boardManager.Stop(_gameMode.BackendData));
 
-        _SpinBool = true;
+        // _SpinBool = true;
     }
 
     protected virtual int GetInputValue() => _uiManager._betControl.CurrentValue;
@@ -51,6 +51,11 @@ public abstract class SpinBase
         _spinBtn.interactable = false;
         yield return new WaitForSeconds(interactableTime);
         _spinBtn.interactable = true;
+    }
+
+    private bool GetIsOverOnBoardManager()
+    {
+        return _boardManager.IsOver;
     }
 
 }

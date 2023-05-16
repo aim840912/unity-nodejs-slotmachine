@@ -12,7 +12,7 @@ public class NormalSpin : SpinBase
 
     public override void SpinHandler()
     {
-        if (_SpinBool)
+        if (_boardManager.IsOver)
         {
             Rotate();
         }
@@ -21,4 +21,15 @@ public class NormalSpin : SpinBase
             Stop();
         }
     }
+    // public override void SpinHandler()
+    // {
+    //     if (_SpinBool)
+    //     {
+    //         Rotate();
+    //     }
+    //     else
+    //     {
+    //         Stop();
+    //     }
+    // }
 }

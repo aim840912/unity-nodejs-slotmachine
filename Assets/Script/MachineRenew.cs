@@ -17,7 +17,7 @@ public class MachineRenew : MonoBehaviour
     [SerializeField] private SingleGame _singleGame;
 
     private NormalSpin _normalSpin;
-    private AutoSpin _autoSpin;
+    private AutoSpinRenew _autoSpin;
 
 
     private void Start()
@@ -37,7 +37,7 @@ public class MachineRenew : MonoBehaviour
     private void Init()
     {
         _normalSpin = new NormalSpin(_spinBtn, _uiManager, _boardManager, _gameMode, this);
-        _autoSpin = new AutoSpin(_spinBtn, _uiManager, _boardManager, _gameMode, this);
+        _autoSpin = new AutoSpinRenew(_spinBtn, _uiManager, _boardManager, _gameMode, this);
     }
 
     public void Spin()

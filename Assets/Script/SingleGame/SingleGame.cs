@@ -81,7 +81,7 @@ public class SingleGame : MonoBehaviour, IGameMode
     int GetMultiple(int[] boardNum)
     {
         int multiple = _calcMultiple.GetMultiples(boardNum);
-        Debug.Log($"{multiple}");
+        // Debug.Log($"{multiple}");
 
         return multiple;
     }
