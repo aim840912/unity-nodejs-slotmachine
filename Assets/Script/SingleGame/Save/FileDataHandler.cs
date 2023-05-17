@@ -6,31 +6,31 @@ using System.IO;
 
 public class FileDataHandler
 {
-    private string dataDirPath = "";
-    private string dataFileName = "";
+    private string _dataDirPath = "";
+    private string _dataFileName = "";
 
-    private bool encryptData = false;
-    private string codeWord = "Secret";
+    private bool _encryptData = false;
+    private string _codeWord = "Secret";
 
 
-    public FileDataHandler(string _dataDirPath, string _dataFileName, bool _encryptData)
+    public FileDataHandler(string dataDirPath, string dataFileName, bool encryptData)
     {
-        dataDirPath = _dataDirPath;
-        dataFileName = _dataFileName;
-        encryptData = _encryptData;
+        this._dataDirPath = dataDirPath;
+        this._dataFileName = dataFileName;
+        this._encryptData = encryptData;
     }
 
     public void Save(PlayerData data)
     {
-        string fullPath = Path.Combine(dataDirPath, dataFileName);
-        // Debug.Log(fullPath);
+        string fullPath = Path.Combine(_dataDirPath, _dataFileName);
+
         try
         {
             Directory.CreateDirectory(Path.GetDirectoryName(fullPath));
 
             string dataToStore = JsonUtility.ToJson(data, true);
 
-            if (encryptData)
+            if (_encryptData)
                 dataToStore = EncryptDecrypt(dataToStore);
 
             using (FileStream stream = new FileStream(fullPath, FileMode.Create))
@@ -41,7 +41,6 @@ public class FileDataHandler
                 }
             }
         }
-
         catch (Exception e)
         {
             Debug.LogError("Error on trying to save data to file: " + fullPath + "\n" + e);
@@ -50,7 +49,7 @@ public class FileDataHandler
 
     public PlayerData Load()
     {
-        string fullPath = Path.Combine(dataDirPath, dataFileName);
+        string fullPath = Path.Combine(_dataDirPath, _dataFileName);
         PlayerData loadData = null;
 
         if (File.Exists(fullPath))
@@ -67,7 +66,7 @@ public class FileDataHandler
                     }
                 }
 
-                if (encryptData)
+                if (_encryptData)
                     dataToLoad = EncryptDecrypt(dataToLoad);
 
                 loadData = JsonUtility.FromJson<PlayerData>(dataToLoad);
@@ -82,7 +81,7 @@ public class FileDataHandler
 
     public void Delete()
     {
-        string fullPath = Path.Combine(dataDirPath, dataFileName);
+        string fullPath = Path.Combine(_dataDirPath, _dataFileName);
 
         if (File.Exists(fullPath))
             File.Delete(fullPath);
@@ -94,7 +93,7 @@ public class FileDataHandler
 
         for (int i = 0; i < _data.Length; i++)
         {
-            modifiedData += (char)(_data[i] ^ codeWord[i % codeWord.Length]);
+            modifiedData += (char)(_data[i] ^ _codeWord[i % _codeWord.Length]);
         }
 
         return modifiedData;

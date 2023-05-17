@@ -43,6 +43,8 @@ public class BoardManager : MonoBehaviour
             _uiManager._autoControl.ValueCheck();
         }
 
+        yield return new WaitForSeconds(2f);
+
         IsOver = true;
     }
 

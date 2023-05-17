@@ -8,7 +8,9 @@ using System;
 public enum GameMode
 {
     ONLINE,
-    SINGLE_GAME // 單機模式
+    SINGLE_GAME,
+    dev, // 單機模式
+
 }
 
 [RequireComponent(typeof(Button))]

@@ -7,94 +7,62 @@ using System.Collections;
 public class Machine : MonoBehaviour
 {
     [SerializeField] private BoardManager _boardManager;
-    [SerializeField] private Toggle _spinToggle;
-    [Space(15)]
+    [SerializeField] private Button _spinBtn;
     [SerializeField] private UiManager _uiManager;
-    [Space(15)]
+    private SpinBase spinBase;
+
+    [HeaderAttribute("Game mode")]
     [SerializeField] private Online _online;
     [SerializeField] private SingleGame _singleGame;
-    private IGameMode _gameMode;
 
-    private int _autoSpinTimes;
-
+    [Header("Spin")]
+    private NormalSpin _normalSpin;
+    private AutoSpin _autoSpin;
 
     private void Start()
     {
-        if (GameManager.Instance.GameMode == GameMode.ONLINE)
-        {
-            _gameMode = _online;
-        }
-        else if (GameManager.Instance.GameMode == GameMode.SINGLE_GAME)
-        {
-            _gameMode = _singleGame;
-        }
-
+        Init();
     }
 
-    public void SpinToggleOnClick()
+    private void Init()
     {
-        _uiManager.CloseAllPanel();
+        _normalSpin = new NormalSpin(_spinBtn, _uiManager, _boardManager, GetGameMode(), this);
+        _autoSpin = new AutoSpin(_spinBtn, _uiManager, _boardManager, GetGameMode(), this);
+    }
 
-        _autoSpinTimes = GetAutoSpinTime();
-
-        if (_autoSpinTimes > 0)
+    private IGameMode GetGameMode()
+    {
+        switch (GameManager.Instance.GameMode)
         {
-            StartCoroutine(AutoSpin(_autoSpinTimes));
+            case GameMode.ONLINE:
+                return _online;
+            case GameMode.SINGLE_GAME:
+                return _singleGame;
+            default:
+                return _singleGame;
+        }
+    }
+
+    private SpinBase GetSpinType()
+    {
+        if (_uiManager._autoControl.CurrentValue == 0)
+        {
+            Debug.Log($"_normalSpin");
+            return _normalSpin;
         }
         else
         {
-            NormalSpin();
+            Debug.Log($"_autoSpin");
+            return _autoSpin;
         }
     }
 
-    private void NormalSpin()
+
+    public void Spin()
     {
-        if (_uiManager.IsBetAvailable())
+        if (!_uiManager.IsBetAvailable())
             return;
 
-        if (_spinToggle.isOn)
-        {
-            StartSpin();
-        }
-        else
-        {
-            StopSpin();
-        }
+        GetSpinType().SpinHandler();
     }
-
-    private IEnumerator AutoSpin(int time)
-    {
-        for (int i = 0; i < time; i++)
-        {
-            --_uiManager._autoControl.CurrentValue;
-            StartSpin();
-            yield return new WaitForSecondsRealtime(3);
-            StopSpin();
-            yield return new WaitUntil(() => _boardManager.IsOver == true);
-        }
-    }
-
-    private void StartSpin()
-    {
-        StartCoroutine(_gameMode.GetServerData(GetBetValue()));
-
-        _boardManager.Spin();
-
-        _uiManager.SetWinToZero();
-    }
-
-    private void StopSpin()
-    {
-        StartCoroutine(_boardManager.Stop(_gameMode.BackendData));
-
-        _uiManager.UpdatedPlayerUI(_gameMode.BackendData);
-    }
-
-    private int GetAutoSpinTime() => _uiManager._autoControl.CurrentValue;
-
-    private void CancelAutoSpin() => _autoSpinTimes = 0;
-
-    private int GetBetValue() => _uiManager._betControl.CurrentValue;
-
-
 }

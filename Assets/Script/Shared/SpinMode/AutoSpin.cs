@@ -5,9 +5,7 @@ using UnityEngine.UI;
 
 public class AutoSpin : SpinBase
 {
-    private bool _isCrRunning = false;
-
-    Coroutine _coroutine = null;
+    private Coroutine _coroutine = null;
 
     public AutoSpin(Button spinBtn, UiManager uiManager, BoardManager boardManager, IGameMode gameMode, MonoBehaviour mono)
     : base(spinBtn, uiManager, boardManager, gameMode, mono)
@@ -15,54 +13,34 @@ public class AutoSpin : SpinBase
 
     public override void SpinHandler()
     {
-        if (_isCrRunning == false)
-            _coroutine = _mono.StartCoroutine(NormalAuto());
-        else
+        if (_coroutine != null)
         {
             _mono.StopCoroutine(_coroutine);
-            _mono.StartCoroutine(StopAutoAndRestart());
         }
+        _coroutine = _mono.StartCoroutine(NormalAuto());
     }
 
     private IEnumerator NormalAuto()
     {
         if (GetAutoTime() < 1)
             yield break;
-        _isCrRunning = true;
 
-        if (_SpinBool == true)
+        if (_boardManager.IsOver == true)
         {
             Rotate();
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(3f);
         }
 
-        Stop();
+        if (_boardManager.IsOver == false)
+        {
+            Stop();
+        }
 
         yield return new WaitUntil(() => _boardManager.IsOver == true);
 
-
-        _isCrRunning = false;
-
         _coroutine = _mono.StartCoroutine(NormalAuto());
     }
-
-
-    private IEnumerator StopAutoAndRestart()
-    {
-        Stop();
-
-        yield return new WaitUntil(() => _boardManager.IsOver == true);
-
-        _isCrRunning = false;
-
-        _coroutine = _mono.StartCoroutine(NormalAuto());
-
-    }
-
-
 
 
     private int GetAutoTime() => _uiManager._autoControl.CurrentValue;
-
-
 }

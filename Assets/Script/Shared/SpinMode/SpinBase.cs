@@ -13,8 +13,6 @@ public abstract class SpinBase
     protected MonoBehaviour _mono;
     protected bool _SpinBool = true;
 
-    public float AuToStop { get; set; } = 3f;
-
     public SpinBase(Button spinBtn, UiManager uiManager, BoardManager boardManager, IGameMode gameMode, MonoBehaviour mono)
     {
         this._spinBtn = spinBtn;
@@ -34,14 +32,14 @@ public abstract class SpinBase
 
         _boardManager.Spin();
 
-        // _SpinBool = false;
+        ChangeBtnName("Stop");
     }
 
     protected virtual void Stop()
     {
         _mono.StartCoroutine(_boardManager.Stop(_gameMode.BackendData));
 
-        // _SpinBool = true;
+        ChangeBtnName("Spin");
     }
 
     protected virtual int GetInputValue() => _uiManager._betControl.CurrentValue;
@@ -53,9 +51,8 @@ public abstract class SpinBase
         _spinBtn.interactable = true;
     }
 
-    private bool GetIsOverOnBoardManager()
+    private void ChangeBtnName(string btnName)
     {
-        return _boardManager.IsOver;
+        _buttonText.text = btnName;
     }
-
 }

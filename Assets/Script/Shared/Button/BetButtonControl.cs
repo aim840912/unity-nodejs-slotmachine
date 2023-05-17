@@ -4,7 +4,6 @@ using TMPro;
 public class BetButtonControl : ButtonControlBase
 {
     [SerializeField] private TMP_Text[] _eachBetTextGroup;
-    [SerializeField] private AutoButtonControl _autoControl;
 
     public override void Start()
     {

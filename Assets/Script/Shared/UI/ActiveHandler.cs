@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ControlActive : MonoBehaviour
+public class ActiveHandler : MonoBehaviour
 {
     public void ChangeActive(GameObject gameObject)
     {
