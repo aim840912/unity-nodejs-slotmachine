@@ -7,8 +7,8 @@ public class AutoSpin : SpinBase
 {
     private Coroutine _coroutine = null;
 
-    public AutoSpin(Button spinBtn, UiManager uiManager, BoardManager boardManager, IGameMode gameMode, MonoBehaviour mono)
-    : base(spinBtn, uiManager, boardManager, gameMode, mono)
+    public AutoSpin(UiManager uiManager, BoardManager boardManager, IGameMode gameMode, MonoBehaviour mono)
+    : base(uiManager, boardManager, gameMode, mono)
     { }
 
     public override void SpinHandler()

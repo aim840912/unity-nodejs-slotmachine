@@ -7,16 +7,19 @@ using System.Collections;
 public class Machine : MonoBehaviour
 {
     [SerializeField] private BoardManager _boardManager;
-    [SerializeField] private Button _spinBtn;
     [SerializeField] private UiManager _uiManager;
 
     [HeaderAttribute("Game mode")]
     [SerializeField] private Online _online;
     [SerializeField] private SingleGame _singleGame;
 
-    [Header("Spin")]
     private NormalSpin _normalSpin;
     private AutoSpin _autoSpin;
+
+
+    [HeaderAttribute("Bet and Auto Control")]
+    [SerializeField] private BetButtonControl _betControl;
+    [SerializeField] private AutoButtonControl _autoControl;
 
     private void Start()
     {
@@ -25,8 +28,8 @@ public class Machine : MonoBehaviour
 
     private void Init()
     {
-        _normalSpin = new NormalSpin(_spinBtn, _uiManager, _boardManager, GetGameMode(), this);
-        _autoSpin = new AutoSpin(_spinBtn, _uiManager, _boardManager, GetGameMode(), this);
+        _normalSpin = new NormalSpin(_uiManager, _boardManager, GetGameMode(), this);
+        _autoSpin = new AutoSpin(_uiManager, _boardManager, GetGameMode(), this);
     }
 
     private IGameMode GetGameMode()
@@ -42,7 +45,7 @@ public class Machine : MonoBehaviour
         }
     }
 
-    private SpinBase GetSpinType()
+    private SpinBase SetSpinType()
     {
         if (_uiManager._autoControl.CurrentValue == 0)
         {
@@ -56,12 +59,24 @@ public class Machine : MonoBehaviour
         }
     }
 
-
     public void Spin()
     {
-        if (!_uiManager.IsBetAvailable())
+        if (!IsBetAvailable())
             return;
 
-        GetSpinType().SpinHandler();
+        SetSpinType().SpinHandler();
+    }
+
+    private bool IsBetAvailable()
+    {
+        if (PlayerManager.instance.PlayerMoney > _betControl.CurrentValue * _autoControl.CurrentValue)
+        {
+            return true;
+        }
+
+        _betControl.CurrentValue = 0;
+        _autoControl.CurrentValue = 0;
+
+        return false;
     }
 }

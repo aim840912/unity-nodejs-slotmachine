@@ -1384,6 +1384,7 @@ MonoBehaviour:
   _lineManager: {fileID: 1946096806}
   _spinBtn: {fileID: 301384232}
   _uiManager: {fileID: 2084644162}
+  _buttonText: {fileID: 1289853277}
 --- !u!4 &172926958
 Transform:
   m_ObjectHideFlags: 0
@@ -7541,7 +7542,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameMode: 1
-  _button: {fileID: 0}
+  _button: {fileID: 1399614598}
   _sceneEnum: 0
 --- !u!114 &1399614597
 MonoBehaviour:
@@ -9179,10 +9180,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _boardManager: {fileID: 172926957}
-  _spinBtn: {fileID: 301384232}
   _uiManager: {fileID: 2084644162}
   _online: {fileID: 475138892}
   _singleGame: {fileID: 1333078633}
+  _betButtonControl: {fileID: 0}
+  _autoButtonControl: {fileID: 0}
 --- !u!4 &1796007683
 Transform:
   m_ObjectHideFlags: 0

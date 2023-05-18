@@ -34,20 +34,6 @@ public class UiManager : MonoBehaviour
         }
     }
 
-    public bool IsBetAvailable()
-    {
-        if (PlayerManager.instance.PlayerMoney > _betControl.CurrentValue * _autoControl.CurrentValue)
-        {
-            return true;
-        }
-
-        _betControl.CurrentValue = 0;
-        _autoControl.CurrentValue = 0;
-
-        return false;
-
-    }
-
     public void OnlyOpenOnePanel(GameObject gameObject)
     {
         CloseAllPanel();
