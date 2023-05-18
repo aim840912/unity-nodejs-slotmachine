@@ -9,7 +9,6 @@ public class Machine : MonoBehaviour
     [SerializeField] private BoardManager _boardManager;
     [SerializeField] private Button _spinBtn;
     [SerializeField] private UiManager _uiManager;
-    private SpinBase spinBase;
 
     [HeaderAttribute("Game mode")]
     [SerializeField] private Online _online;

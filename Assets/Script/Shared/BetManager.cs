@@ -1,44 +1,43 @@
-using UnityEngine;
-using UnityEngine.UI;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
-//! 嘗試中 尚未實作
 public class BetManager : MonoBehaviour
 {
-    [SerializeField] private BetButtonControl _betControl;
-    [SerializeField] private AutoButtonControl _autoControl;
+    private static BetManager _instance = null;
 
-    public bool IsBetAvailable()
+    public int BetValue { get; set; }
+    public int AutoValue { get; set; }
+
+    public static BetManager Instance
     {
-        if (PlayerManager.instance.PlayerMoney > _betControl.CurrentValue * _autoControl.CurrentValue)
+        get
         {
-            return true;
-        }
+            if (_instance == null)
+            {
+                GameObject singleton = new GameObject();
 
-        _betControl.CurrentValue = 0;
-        _autoControl.CurrentValue = 0;
+                _instance = singleton.AddComponent<BetManager>();
+                singleton.name = "[Singleton]" + typeof(BetManager).ToString();
 
-        return false;
-    }
+                DontDestroyOnLoad(singleton);
+            }
 
-    public void LoopOneTime()
-    {
-        if (_autoControl.CurrentValue > 0)
-        {
-            _autoControl.CurrentValue--;
-            _autoControl.ValueCheck();
+            return _instance;
         }
     }
 
-    public int GetBetValue()
+    private void Awake()
     {
-
-        return _betControl.CurrentValue;
-    }
-
-    public int GetAutoValue()
-    {
-        return _autoControl.CurrentValue;
+        if (_instance != null)
+            Destroy(gameObject);
+        else
+        {
+            _instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
     }
 
 }

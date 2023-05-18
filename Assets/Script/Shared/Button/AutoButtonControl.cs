@@ -1,13 +1,10 @@
-using UnityEngine;
-using TMPro;
-using UnityEngine.UI;
 public class AutoButtonControl : ButtonControlBase
 {
-    [SerializeField] private BetButtonControl _betControl;
+    private int SetMax = 100;
 
     public override void Add()
     {
-        if (CurrentValue < MaxMultiple())
+        if (CurrentValue >= 0 && CurrentValue < 100)
             CurrentValue++;
     }
 
@@ -19,26 +16,25 @@ public class AutoButtonControl : ButtonControlBase
 
     public override void Max()
     {
-        CurrentValue = MaxMultiple();
+        CurrentValue = SetMax;
     }
 
     public override void ValueCheck()
     {
-        if (CurrentValue > MaxMultiple())
+        if (CurrentValue < 0)
         {
-            OpenAlertPanel("YOUR AUTO MORE THAN YOUR MONEY");
+            OpenAlertPanel("YOUR AUTO LESS THAN 0");
             CurrentValue = 0;
         }
         SetCurrentValueText();
     }
 
-    private int MaxMultiple()
+    public void LoopOneTime()
     {
-        int betMoney = _betControl.CurrentValue;
-
-        if (PlayerMoney != 0 && betMoney != 0)
-            return (int)PlayerMoney / betMoney;
-        else
-            return 0;
+        if (CurrentValue > 0)
+        {
+            CurrentValue--;
+            ValueCheck();
+        }
     }
 }

@@ -9,9 +9,8 @@ public abstract class SpinBase
     protected UiManager _uiManager;
     protected BoardManager _boardManager;
     protected IGameMode _gameMode;
-    protected TMP_Text _buttonText;
     protected MonoBehaviour _mono;
-    protected bool _SpinBool = true;
+    private TMP_Text _buttonText;
 
     public SpinBase(Button spinBtn, UiManager uiManager, BoardManager boardManager, IGameMode gameMode, MonoBehaviour mono)
     {

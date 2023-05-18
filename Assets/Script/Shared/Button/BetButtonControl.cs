@@ -16,7 +16,7 @@ public class BetButtonControl : ButtonControlBase
 
     public override void Add()
     {
-        if (CurrentValue + 80 <= PlayerMoney)
+        if (CurrentValue + 80 <= GetPlayerMoney())
             CurrentValue += 80;
     }
 
@@ -28,7 +28,7 @@ public class BetButtonControl : ButtonControlBase
 
     public override void Max()
     {
-        int maxMultiple = PlayerMoney / 80;
+        int maxMultiple = GetPlayerMoney() / 80;
 
         if (maxMultiple > 0)
         {
@@ -38,7 +38,7 @@ public class BetButtonControl : ButtonControlBase
 
     public override void ValueCheck()
     {
-        if (CurrentValue > PlayerMoney)
+        if (CurrentValue > GetPlayerMoney())
         {
             OpenAlertPanel("YOUR BET MORE THAN YOUR MONEY");
             CurrentValue = 0;

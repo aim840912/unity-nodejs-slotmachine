@@ -37,11 +37,7 @@ public class BoardManager : MonoBehaviour
 
         _uiManager.UpdatedPlayerUI(backendData);
 
-        if (_uiManager._autoControl.CurrentValue > 0)
-        {
-            _uiManager._autoControl.CurrentValue--;
-            _uiManager._autoControl.ValueCheck();
-        }
+        _uiManager._autoControl.LoopOneTime();
 
         yield return new WaitForSeconds(2f);
 
