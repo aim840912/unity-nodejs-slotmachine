@@ -3,13 +3,14 @@ using UnityEngine.UI;
 using System;
 using System.Collections;
 using TMPro;
+
 public class BoardManager : MonoBehaviour
 {
-
     [SerializeField] private ImageManager _imageManager;
     [SerializeField] private LineManager _lineManager;
     [SerializeField] private Button _spinBtn;
     [SerializeField] private UiManager _uiManager;
+    [SerializeField] private AutoButtonControl _autoControl;
     [SerializeField] private TMP_Text _buttonText;
 
     public bool IsOver { get; private set; } = true;
@@ -40,7 +41,7 @@ public class BoardManager : MonoBehaviour
 
         _uiManager.UpdatedPlayerUI(backendData);
 
-        _uiManager._autoControl.LoopOneTime();
+        LoopOneTime();
 
         yield return new WaitForSeconds(2f);
 
@@ -49,7 +50,7 @@ public class BoardManager : MonoBehaviour
         IsOver = true;
     }
 
-    public IEnumerator SetBtnInteractableTime()
+    private IEnumerator SetBtnInteractableTime()
     {
         _spinBtn.interactable = false;
         yield return new WaitUntil(() => IsOver == true);
@@ -57,4 +58,13 @@ public class BoardManager : MonoBehaviour
     }
 
     private void ChangeBtnName(string btnName) => _buttonText.text = btnName;
+
+    private void LoopOneTime()
+    {
+        if (_autoControl.CurrentValue > 0)
+        {
+            _autoControl.CurrentValue--;
+            _autoControl.ValueCheck();
+        }
+    }
 }

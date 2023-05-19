@@ -3,8 +3,8 @@ using UnityEngine;
 using UnityEngine.UI;
 public class NormalSpin : SpinBase
 {
-    public NormalSpin(UiManager uiManager, BoardManager boardManager, IGameMode gameMode, MonoBehaviour mono)
-    : base(uiManager, boardManager, gameMode, mono)
+    public NormalSpin(BetButtonControl betControl, AutoButtonControl autoControl, BoardManager boardManager, IGameMode gameMode, MonoBehaviour mono)
+    : base(betControl, autoControl, boardManager, gameMode, mono)
     { }
 
     public override void SpinHandler()

@@ -28,13 +28,4 @@ public class AutoButtonControl : ButtonControlBase
         }
         SetCurrentValueText();
     }
-
-    public void LoopOneTime()
-    {
-        if (CurrentValue > 0)
-        {
-            CurrentValue--;
-            ValueCheck();
-        }
-    }
 }

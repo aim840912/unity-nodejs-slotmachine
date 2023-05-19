@@ -7,7 +7,6 @@ using System.Collections;
 public class Machine : MonoBehaviour
 {
     [SerializeField] private BoardManager _boardManager;
-    [SerializeField] private UiManager _uiManager;
 
     [HeaderAttribute("Game mode")]
     [SerializeField] private Online _online;
@@ -28,36 +27,14 @@ public class Machine : MonoBehaviour
 
     private void Init()
     {
-        _normalSpin = new NormalSpin(_uiManager, _boardManager, GetGameMode(), this);
-        _autoSpin = new AutoSpin(_uiManager, _boardManager, GetGameMode(), this);
+        _normalSpin = new NormalSpin(_betControl, _autoControl, _boardManager, GetGameMode(), this);
+        _autoSpin = new AutoSpin(_betControl, _autoControl, _boardManager, GetGameMode(), this);
     }
 
-    private IGameMode GetGameMode()
-    {
-        switch (GameManager.Instance.GameMode)
-        {
-            case GameMode.ONLINE:
-                return _online;
-            case GameMode.SINGLE_GAME:
-                return _singleGame;
-            default:
-                return _singleGame;
-        }
-    }
+    private IGameMode GetGameMode() => GameManager.Instance.GameMode == GameMode.ONLINE ? _online : _singleGame;
 
-    private SpinBase SetSpinType()
-    {
-        if (_uiManager._autoControl.CurrentValue == 0)
-        {
-            Debug.Log($"_normalSpin");
-            return _normalSpin;
-        }
-        else
-        {
-            Debug.Log($"_autoSpin");
-            return _autoSpin;
-        }
-    }
+    private SpinBase SetSpinType() => _autoControl.CurrentValue == 0 ? _normalSpin : _autoSpin;
+
 
     public void Spin()
     {

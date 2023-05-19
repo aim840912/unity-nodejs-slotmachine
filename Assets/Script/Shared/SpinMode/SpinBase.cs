@@ -5,14 +5,17 @@ using System.Collections;
 
 public abstract class SpinBase
 {
-    protected UiManager _uiManager;
+    protected BetButtonControl _betControl;
+    protected AutoButtonControl _autoControl;
+
     protected BoardManager _boardManager;
     protected IGameMode _gameMode;
     protected MonoBehaviour _mono;
 
-    public SpinBase(UiManager uiManager, BoardManager boardManager, IGameMode gameMode, MonoBehaviour mono)
+    public SpinBase(BetButtonControl betControl, AutoButtonControl autoControl, BoardManager boardManager, IGameMode gameMode, MonoBehaviour mono)
     {
-        this._uiManager = uiManager;
+        this._betControl = betControl;
+        this._autoControl = autoControl;
         this._boardManager = boardManager;
         this._gameMode = gameMode;
         this._mono = mono;
@@ -33,5 +36,5 @@ public abstract class SpinBase
 
     }
 
-    protected virtual int GetInputValue() => _uiManager._betControl.CurrentValue;
+    protected virtual int GetInputValue() => _betControl.CurrentValue;
 }

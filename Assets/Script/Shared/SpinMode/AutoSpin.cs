@@ -7,9 +7,10 @@ public class AutoSpin : SpinBase
 {
     private Coroutine _coroutine = null;
 
-    public AutoSpin(UiManager uiManager, BoardManager boardManager, IGameMode gameMode, MonoBehaviour mono)
-    : base(uiManager, boardManager, gameMode, mono)
-    { }
+    public AutoSpin(BetButtonControl betControl, AutoButtonControl autoControl, BoardManager boardManager, IGameMode gameMode, MonoBehaviour mono)
+    : base(betControl, autoControl, boardManager, gameMode, mono)
+    {
+    }
 
     public override void SpinHandler()
     {
@@ -42,5 +43,5 @@ public class AutoSpin : SpinBase
     }
 
 
-    private int GetAutoTime() => _uiManager._autoControl.CurrentValue;
+    private int GetAutoTime() => _autoControl.CurrentValue;
 }
