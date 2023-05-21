@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     private static GameManager _instance = null;
     public GameMode GameMode { get; set; } = GameMode.ONLINE;
     public int AutoTime { get; set; } = 0;
+    public UrlData UrlData;
 
     public static GameManager Instance
     {

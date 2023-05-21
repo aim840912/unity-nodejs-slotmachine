@@ -6,8 +6,6 @@ public class UiManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text _winMoneyText;
     [SerializeField] private TMP_Text _playerMoneyText;
-    public BetButtonControl _betControl;
-    public AutoButtonControl _autoControl;
     [SerializeField] private GameObject[] _panel;
 
     private void Start()

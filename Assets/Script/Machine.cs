@@ -9,8 +9,8 @@ public class Machine : MonoBehaviour
     [SerializeField] private BoardManager _boardManager;
 
     [HeaderAttribute("Game mode")]
-    [SerializeField] private Online _online;
     [SerializeField] private SingleGame _singleGame;
+    private Online _online = new Online();
 
     private NormalSpin _normalSpin;
     private AutoSpin _autoSpin;

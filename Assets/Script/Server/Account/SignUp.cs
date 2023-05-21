@@ -11,7 +11,7 @@ public class SignUp : AccountBase
         form.AddField("email", _email.text);
         form.AddField("password", _password.text);
 
-        UnityWebRequest www = UnityWebRequest.Post(_urlData.SignupUrl, form);
+        UnityWebRequest www = UnityWebRequest.Post(GameManager.Instance.UrlData.SignupUrl, form);
         yield return www.SendWebRequest();
 
         if (www.result == UnityWebRequest.Result.Success)

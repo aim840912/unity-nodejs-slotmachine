@@ -14,9 +14,6 @@ public abstract class AccountBase : MonoBehaviour
     [SerializeField] protected GameObject _messagePanel;
     [SerializeField] protected TMP_Text _message;
 
-    [HeaderAttribute("URL Setting")]
-    [SerializeField] protected UrlData _urlData;
-
     public virtual void ClickToConnectServer()
     {
         StartCoroutine(connectToServer());

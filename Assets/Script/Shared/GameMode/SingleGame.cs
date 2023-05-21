@@ -1,11 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+
 public class SingleGame : MonoBehaviour, IGameMode
 {
-    public int[] SlotNumber { get; set; } = new int[9];
-
     public BackendData BackendData { get; set; } = new BackendData();
     private SingleGameHandler _singleGameHandler = new SingleGameHandler();
     private FileDataHandler _fileDataHandler;
@@ -14,12 +11,24 @@ public class SingleGame : MonoBehaviour, IGameMode
     [SerializeField] private string _fileName;
     [SerializeField] private bool _encryptData;
 
+    #region Data Modify
+
     [ContextMenu("Delete save file")]
     private void DeleteSavedData()
     {
         _fileDataHandler = new FileDataHandler(Application.persistentDataPath, _fileName, _encryptData);
         _fileDataHandler.Delete();
     }
+
+    [ContextMenu("Reset file")]
+    private void ResetSavedData()
+    {
+        PlayerManager.instance.PlayerData.Money = 10000;
+        _singleGameHandler.SaveGame(PlayerManager.instance.PlayerData, _fileDataHandler);
+    }
+
+    #endregion
+
 
     private void Start()
     {
@@ -66,7 +75,6 @@ public class SingleGame : MonoBehaviour, IGameMode
         BackendData.Money = currentMoney;
 
         PlayerManager.instance.PlayerData.Money = currentMoney;
-        // PlayerManager.instance.PlayerData.Money = 10000;
 
         _singleGameHandler.SaveGame(PlayerManager.instance.PlayerData, _fileDataHandler);
     }
@@ -81,9 +89,7 @@ public class SingleGame : MonoBehaviour, IGameMode
     int GetMultiple(int[] boardNum)
     {
         int multiple = _calcMultiple.GetMultiples(boardNum);
-        // Debug.Log($"{multiple}");
 
         return multiple;
     }
-
 }

@@ -23,7 +23,7 @@ public class Login : AccountBase
         form.AddField("email", _email.text);
         form.AddField("password", _password.text);
 
-        UnityWebRequest www = UnityWebRequest.Post(_urlData.LoginUrl, form);
+        UnityWebRequest www = UnityWebRequest.Post(GameManager.Instance.UrlData.LoginUrl, form);
 
         yield return www.SendWebRequest();
 
