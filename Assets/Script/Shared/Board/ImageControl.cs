@@ -9,6 +9,7 @@ public class ImageControl : MonoBehaviour
     [SerializeField] private Data _imageData;
     [SerializeField] private float _minDuration = .2f;
     [SerializeField] private float _maxDuration = .5f;
+    [SerializeField] private float _stopTime;
 
     private float _DotweenLocalMoveDuration;
     private float _topPoint;
@@ -19,6 +20,9 @@ public class ImageControl : MonoBehaviour
     private void Start()
     {
         SetDotween();
+
+        _stopTime = Random.Range(0, 2);
+
         _image = GetComponent<Image>();
     }
 
@@ -85,8 +89,7 @@ public class ImageControl : MonoBehaviour
 
     public IEnumerator SetTimeToStopSpin(int boardNum)
     {
-        int time = Random.Range(0, 2);
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSeconds(_stopTime);
         LoopStop(boardNum);
     }
 
