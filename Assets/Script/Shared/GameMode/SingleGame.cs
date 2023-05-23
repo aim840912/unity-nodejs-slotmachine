@@ -36,7 +36,6 @@ public class SingleGame : MonoBehaviour, IGameMode
         {
             _fileDataHandler = new FileDataHandler(Application.persistentDataPath, _fileName, _encryptData);
             _singleGameHandler.LoadGame(_fileDataHandler);
-            Debug.Log("loadGame()");
         }
     }
 

@@ -36,12 +36,11 @@ public abstract class ButtonControlBase : MonoBehaviour
     public abstract void Add();
     public abstract void Minus();
     public abstract void Max();
-    public abstract void ValueCheck();
 
     public void SetZero() => CurrentValue = 0;
 
     protected int GetPlayerMoney() => PlayerManager.instance.PlayerMoney;
-    protected void SetCurrentValueText() => _currentValueText.text = $"{CurrentValue}";
+    protected virtual void SetCurrentValueText() => _currentValueText.text = $"{CurrentValue}";
 
     protected void OpenAlertPanel(string alertMessage)
     {

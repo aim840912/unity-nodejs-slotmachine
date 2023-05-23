@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class AutoSpin : SpinBase
 {
     private Coroutine _coroutine = null;
+    private float _loopStopTime = 3f;
 
     public AutoSpin(BetButtonControl betControl, AutoButtonControl autoControl, BoardManager boardManager, IGameMode gameMode, MonoBehaviour mono)
     : base(betControl, autoControl, boardManager, gameMode, mono)
@@ -18,18 +19,18 @@ public class AutoSpin : SpinBase
         {
             _mono.StopCoroutine(_coroutine);
         }
-        _coroutine = _mono.StartCoroutine(NormalAuto());
+        _coroutine = _mono.StartCoroutine(Auto());
     }
 
-    private IEnumerator NormalAuto()
+    private IEnumerator Auto()
     {
-        if (GetAutoTime() < 1)
+        if (GetAutoValue() < 1)
             yield break;
 
         if (_boardManager.IsOver == true)
         {
             Rotate();
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(_loopStopTime);
         }
 
         if (_boardManager.IsOver == false)
@@ -39,9 +40,11 @@ public class AutoSpin : SpinBase
 
         yield return new WaitUntil(() => _boardManager.IsOver == true);
 
-        _coroutine = _mono.StartCoroutine(NormalAuto());
+        _autoControl.LoopOverOneTime();
+
+        _coroutine = _mono.StartCoroutine(Auto());
     }
 
 
-    private int GetAutoTime() => _autoControl.CurrentValue;
+    private int GetAutoValue() => _autoControl.CurrentValue;
 }

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0e5486b5e42498478448d496a7ea967, type: 3}
   m_Name: Url Data
   m_EditorClassIdentifier: 
-  LoginUrl: http://localhost:3000/user/login
-  SignupUrl: http://localhost:3000/user/signup
-  MachineUrl: http://localhost:3000/machine/spinAction
+  LoginUrl: https://slot-machine-387507.ue.r.appspot.com/user/login
+  SignupUrl: https://slot-machine-387507.ue.r.appspot.com/user/signup
+  MachineUrl: https://slot-machine-387507.ue.r.appspot.com/machine/spinAction

@@ -1430,7 +1430,6 @@ MonoBehaviour:
   _lineManager: {fileID: 1946096806}
   _spinBtn: {fileID: 301384232}
   _uiManager: {fileID: 2084644162}
-  _autoControl: {fileID: 23461486}
   _buttonText: {fileID: 1289853277}
 --- !u!4 &172926958
 Transform:
@@ -1955,7 +1954,6 @@ GameObject:
   - component: {fileID: 301384234}
   - component: {fileID: 301384233}
   - component: {fileID: 301384232}
-  - component: {fileID: 301384231}
   m_Layer: 0
   m_Name: SpinBtn
   m_TagString: Untagged
@@ -1984,18 +1982,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 56.737396}
   m_Pivot: {x: 1, y: 0}
---- !u!114 &301384231
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 301384229}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e99a451393506d47a764e923bb90a97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &301384232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2052,13 +2038,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 301384231}
-        m_TargetAssemblyTypeName: MachineRenew, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 2084644162}
+        m_TargetAssemblyTypeName: UiManager, Assembly-CSharp
+        m_MethodName: CloseAllPanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -10387,8 +10373,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _winMoneyText: {fileID: 1261575105}
   _playerMoneyText: {fileID: 809493103}
-  _betControl: {fileID: 868144284}
-  _autoControl: {fileID: 23461486}
   _panel:
   - {fileID: 970470801}
   - {fileID: 1657752514}

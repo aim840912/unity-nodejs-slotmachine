@@ -25,7 +25,7 @@ public abstract class SpinBase
 
     protected virtual void Rotate()
     {
-        _mono.StartCoroutine(_gameMode.GetServerData(GetInputValue()));
+        _mono.StartCoroutine(_gameMode.GetServerData(GetBetValue()));
 
         _boardManager.Spin();
     }
@@ -36,5 +36,5 @@ public abstract class SpinBase
 
     }
 
-    protected virtual int GetInputValue() => _betControl.CurrentValue;
+    protected virtual int GetBetValue() => _betControl.CurrentValue;
 }

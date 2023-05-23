@@ -1,8 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
-using System.Collections;
 
 public class Machine : MonoBehaviour
 {
@@ -33,27 +29,15 @@ public class Machine : MonoBehaviour
 
     private IGameMode GetGameMode() => GameManager.Instance.GameMode == GameMode.ONLINE ? _online : _singleGame;
 
-    private SpinBase SetSpinType() => _autoControl.CurrentValue == 0 ? _normalSpin : _autoSpin;
+    private SpinBase SpinType() => _autoControl.CurrentValue == 0 ? _normalSpin : _autoSpin;
 
 
     public void Spin()
     {
-        if (!IsBetAvailable())
+        if (!_betControl.ValueCheck())
             return;
 
-        SetSpinType().SpinHandler();
+        SpinType().SpinHandler();
     }
 
-    private bool IsBetAvailable()
-    {
-        if (PlayerManager.instance.PlayerMoney > _betControl.CurrentValue * _autoControl.CurrentValue)
-        {
-            return true;
-        }
-
-        _betControl.CurrentValue = 0;
-        _autoControl.CurrentValue = 0;
-
-        return false;
-    }
 }

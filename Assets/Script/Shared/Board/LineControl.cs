@@ -11,22 +11,22 @@ public class LineControl : MonoBehaviour
         _lineImage = GetComponent<Image>();
     }
 
-    private Odds[] IntTurnToOdds(int[] boardNum)
+    private Odds[] TurnToOddsArray(int[] boardNum)
     {
-        Odds[] newOddsArray = new Odds[_lineIndex.Length];
+        Odds[] oddsArray = new Odds[_lineIndex.Length];
 
         for (int i = 0; i < _lineIndex.Length; i++)
         {
-            newOddsArray[i] = (Odds)boardNum[_lineIndex[i]];
+            oddsArray[i] = (Odds)boardNum[_lineIndex[i]];
         }
 
-        return newOddsArray;
+        return oddsArray;
     }
 
 
     public void LineEnabled(int[] boardNum)
     {
-        _lineImage.enabled = IsLineEnabled(IntTurnToOdds(boardNum));
+        _lineImage.enabled = IsLineEnabled(TurnToOddsArray(boardNum));
     }
 
     public void LineDisabled()
@@ -36,14 +36,6 @@ public class LineControl : MonoBehaviour
 
     private bool IsLineEnabled(params Odds[] lineIndex)
     {
-        int sevenQuantity = 0;
-        int barQuantity = 0;
-
-        for (int i = 0; i < lineIndex.Length; i++)
-        {
-            EachQuantity(lineIndex[i], ref sevenQuantity, ref barQuantity);
-        }
-
         if (lineIndex[0] == Odds.hololive)
         {
             return true;
@@ -52,29 +44,34 @@ public class LineControl : MonoBehaviour
         {
             return true;
         }
-        else if (barQuantity == 3 || sevenQuantity == 3)
+        else if (IsAnyOddsEqualsQuantity(lineIndex))
         {
             return true;
         }
-        else
-        {
-            return false;
-        }
+
+        return false;
     }
 
-    private void EachQuantity(Odds a, ref int sevenQuantity, ref int barQuantity)
+    private bool IsAnyOddsEqualsQuantity(Odds[] odds)
     {
-        switch (a)
+        int anySevenQuantity = 0;
+        int anyBarQuantity = 0;
+
+        for (int i = 0; i < odds.Length; i++)
         {
-            case Odds.gura:
-            case Odds.ame:
-                sevenQuantity++;
-                break;
-            case Odds.ina:
-            case Odds.kronii:
-            case Odds.mumei:
-                barQuantity++;
-                break;
+            if (odds[i] == Odds.gura || odds[i] == Odds.ame)
+            {
+                anySevenQuantity++;
+            }
+            else if (odds[i] == Odds.ina || odds[i] == Odds.kronii || odds[i] == Odds.mumei)
+            {
+                anyBarQuantity++;
+            }
         }
+
+        if (anySevenQuantity == 3 || anyBarQuantity == 3)
+            return true;
+
+        return false;
     }
 }

@@ -19,13 +19,12 @@ public class AutoButtonControl : ButtonControlBase
         CurrentValue = SetMax;
     }
 
-    public override void ValueCheck()
+
+    public void LoopOverOneTime()
     {
-        if (CurrentValue < 0)
-        {
-            OpenAlertPanel("YOUR AUTO LESS THAN 0");
-            CurrentValue = 0;
-        }
+        if (CurrentValue > 0)
+            CurrentValue--;
+
         SetCurrentValueText();
     }
 }

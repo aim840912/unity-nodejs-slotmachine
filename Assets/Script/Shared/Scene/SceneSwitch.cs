@@ -32,7 +32,18 @@ public class SceneSwitch : MonoBehaviour
     public void LoadToScene()
     {
         GameManager.Instance.GameMode = _gameMode;
-        MoveToScene();
+        if (_gameMode == GameMode.ONLINE)
+        {
+            if (GameManager.Instance.CheckHasInternet())
+            {
+                MoveToScene();
+            }
+        }
+        else
+        {
+            MoveToScene();
+        }
+
     }
 
     private void MoveToScene()

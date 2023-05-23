@@ -5,15 +5,6 @@ public class BetButtonControl : ButtonControlBase
 {
     [SerializeField] private TMP_Text[] _eachBetTextGroup;
 
-    public override void Start()
-    {
-        base.Start();
-        for (int i = 0; i < _button.Length; i++)
-        {
-            _button[i].onClick.AddListener(() => SetEachBetText());
-        }
-    }
-
     public override void Add()
     {
         if (CurrentValue + 80 <= GetPlayerMoney())
@@ -36,15 +27,23 @@ public class BetButtonControl : ButtonControlBase
         }
     }
 
-    public override void ValueCheck()
+    public bool ValueCheck()
     {
         if (CurrentValue > GetPlayerMoney())
         {
             OpenAlertPanel("YOUR BET MORE THAN YOUR MONEY");
             CurrentValue = 0;
+
+            SetCurrentValueText();
+            return false;
         }
 
-        SetCurrentValueText();
+        return true;
+    }
+
+    protected override void SetCurrentValueText()
+    {
+        base.SetCurrentValueText();
         SetEachBetText();
     }
 

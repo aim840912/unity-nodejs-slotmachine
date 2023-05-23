@@ -1,15 +1,14 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance = null;
     public GameMode GameMode { get; set; } = GameMode.ONLINE;
-    public int AutoTime { get; set; } = 0;
     public UrlData UrlData;
+
+    [SerializeField] private GameObject _errorMessagePanel;
+    [SerializeField] private TMP_Text _message;
 
     public static GameManager Instance
     {
@@ -40,4 +39,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void OpenErrorMessagePanel(string message)
+    {
+        _errorMessagePanel.SetActive(true);
+        _message.text = message;
+    }
+
+    public bool CheckHasInternet()
+    {
+        if (Application.internetReachability == NetworkReachability.NotReachable)
+        {
+            OpenErrorMessagePanel("No internet");
+            return false;
+        }
+        return true;
+    }
 }

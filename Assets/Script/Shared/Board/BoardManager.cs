@@ -9,7 +9,6 @@ public class BoardManager : MonoBehaviour
     [SerializeField] private LineManager _lineManager;
     [SerializeField] private Button _spinBtn;
     [SerializeField] private UiManager _uiManager;
-    [SerializeField] private AutoButtonControl _autoControl;
     [SerializeField] private TMP_Text _buttonText;
 
     public bool IsOver { get; private set; } = true;
@@ -21,14 +20,12 @@ public class BoardManager : MonoBehaviour
 
         _uiManager.SetWinToZero();
 
-        ChangeBtnName("Stop");
-
         IsOver = false;
     }
 
     public IEnumerator Stop(BackendData backendData)
     {
-        StartCoroutine(SetBtnInteractableTime());
+        StartCoroutine(SetBtn());
 
         _imageManager.Stop(backendData.BoardNum);
 
@@ -40,30 +37,21 @@ public class BoardManager : MonoBehaviour
 
         _uiManager.UpdatedPlayerUI(backendData);
 
-        LoopOneTime();
-
-        yield return new WaitForSeconds(2f);
-
-        ChangeBtnName("Spin");
+        yield return new WaitForSeconds(1f);
 
         IsOver = true;
     }
 
-    private IEnumerator SetBtnInteractableTime()
+    private IEnumerator SetBtn()
     {
         _spinBtn.interactable = false;
+        ChangeBtnName("STOP");
+
         yield return new WaitUntil(() => IsOver == true);
+
         _spinBtn.interactable = true;
+        ChangeBtnName("SPIN");
     }
 
     private void ChangeBtnName(string btnName) => _buttonText.text = btnName;
-
-    private void LoopOneTime()
-    {
-        if (_autoControl.CurrentValue > 0)
-        {
-            _autoControl.CurrentValue--;
-            _autoControl.ValueCheck();
-        }
-    }
 }
