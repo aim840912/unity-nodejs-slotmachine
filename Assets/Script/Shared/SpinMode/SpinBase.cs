@@ -25,8 +25,11 @@ public abstract class SpinBase
 
     protected virtual void Rotate()
     {
+        if (!GameManager.Instance.CheckHasInternet())
+        {
+            return;
+        }
         _mono.StartCoroutine(_gameMode.GetServerData(GetBetValue()));
-
         _boardManager.Spin();
     }
 

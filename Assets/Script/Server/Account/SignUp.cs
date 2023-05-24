@@ -16,11 +16,11 @@ public class SignUp : AccountBase
 
         if (www.result == UnityWebRequest.Result.Success)
         {
-            OpenPanel("Sign Up Success");
+            OpenMessagePanel("Sign Up Success");
         }
         else if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
         {
-            OpenPanel(www.downloadHandler.text);
+            OpenMessagePanel(www.downloadHandler.text);
         }
     }
 }

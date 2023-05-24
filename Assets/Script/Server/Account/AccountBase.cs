@@ -22,7 +22,7 @@ public abstract class AccountBase : MonoBehaviour
     protected abstract IEnumerator connectToServer();
 
 
-    protected virtual void OpenPanel(string message)
+    protected virtual void OpenMessagePanel(string message)
     {
         _messagePanel.SetActive(true);
         _message.text = message;

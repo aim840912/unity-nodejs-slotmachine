@@ -44,7 +44,7 @@ public class ImageControl : MonoBehaviour
         .SetEase(Ease.InCubic)
         .OnComplete(() => Loop());
     }
-    void Loop()
+    private void Loop()
     {
         _image.transform.localPosition = new Vector3(0, _topPoint, 0);
         _image.transform
@@ -53,7 +53,7 @@ public class ImageControl : MonoBehaviour
             .SetLoops(-1)
             .OnStepComplete(() => ChangeSprite(_image));
     }
-    void ChangeSprite(Image image)
+    private void ChangeSprite(Image image)
     {
         int imageIndex = Random.Range(0, _imageData.RollingImage.Length);
         image.sprite = _imageData.RollingImage[imageIndex];
@@ -62,7 +62,13 @@ public class ImageControl : MonoBehaviour
     #endregion
 
     #region Stop
-    public Tween LoopStop(int boardNum)
+    public IEnumerator StopRoutine(int boardNum)
+    {
+        yield return new WaitForSeconds(_stopTime);
+        LoopStop(boardNum);
+    }
+
+    private Tween LoopStop(int boardNum)
     {
         _image.transform.DOKill();
 
@@ -71,7 +77,7 @@ public class ImageControl : MonoBehaviour
         .OnComplete(() => TopPointToOriginPoint(boardNum));
     }
 
-    void TopPointToOriginPoint(int boardNum)
+    private void TopPointToOriginPoint(int boardNum)
     {
         ChangeFinalSprite(_image, boardNum);
         _image.transform
@@ -79,7 +85,7 @@ public class ImageControl : MonoBehaviour
             .SetEase(Ease.OutBack).OnComplete(() => IsOver = true);
     }
 
-    void ChangeFinalSprite(Image eachImage, int boardNum)
+    private void ChangeFinalSprite(Image eachImage, int boardNum)
     {
         eachImage.transform.localPosition = new Vector3(0, _topPoint, 0);
         eachImage.sprite = _imageData.RollingImage[boardNum];
@@ -87,14 +93,4 @@ public class ImageControl : MonoBehaviour
 
     #endregion
 
-    public IEnumerator SetTimeToStopSpin(int boardNum)
-    {
-        yield return new WaitForSeconds(_stopTime);
-        LoopStop(boardNum);
-    }
-
-    public void LoadLastBoard(int boardNum)
-    {
-        _image.sprite = _imageData.RollingImage[boardNum];
-    }
 }

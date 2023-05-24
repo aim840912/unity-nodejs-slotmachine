@@ -47,11 +47,15 @@ public class GameManager : MonoBehaviour
 
     public bool CheckHasInternet()
     {
-        if (Application.internetReachability == NetworkReachability.NotReachable)
+        if (GameMode == GameMode.ONLINE)
         {
-            OpenErrorMessagePanel("No internet");
-            return false;
+            if (Application.internetReachability == NetworkReachability.NotReachable)
+            {
+                OpenErrorMessagePanel("No internet");
+                return false;
+            }
         }
+
         return true;
     }
 }

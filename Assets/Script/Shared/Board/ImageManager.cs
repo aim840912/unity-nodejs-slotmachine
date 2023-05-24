@@ -23,7 +23,7 @@ public class ImageManager : MonoBehaviour
     {
         for (int i = 0; i < _imageControls.Length; i++)
         {
-            StartCoroutine(_imageControls[i].SetTimeToStopSpin(boardNum[i]));
+            StartCoroutine(_imageControls[i].StopRoutine(boardNum[i]));
         }
 
         StartCoroutine(WaitCanNextStep());

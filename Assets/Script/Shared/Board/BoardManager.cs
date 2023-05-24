@@ -25,7 +25,7 @@ public class BoardManager : MonoBehaviour
 
     public IEnumerator Stop(BackendData backendData)
     {
-        StartCoroutine(SetBtn());
+        SetButton(false, "STOP");
 
         _imageManager.Stop(backendData.BoardNum);
 
@@ -39,18 +39,15 @@ public class BoardManager : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
+        SetButton(true, "SPIN");
         IsOver = true;
     }
 
-    private IEnumerator SetBtn()
+
+    private void SetButton(bool isInteractable, string btnName)
     {
-        _spinBtn.interactable = false;
-        ChangeBtnName("STOP");
-
-        yield return new WaitUntil(() => IsOver == true);
-
-        _spinBtn.interactable = true;
-        ChangeBtnName("SPIN");
+        _spinBtn.interactable = isInteractable;
+        ChangeBtnName(btnName);
     }
 
     private void ChangeBtnName(string btnName) => _buttonText.text = btnName;
