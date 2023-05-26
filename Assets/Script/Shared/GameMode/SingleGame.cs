@@ -10,6 +10,7 @@ public class SingleGame : MonoBehaviour, IGameMode
 
     [SerializeField] private string _fileName;
     [SerializeField] private bool _encryptData;
+    [SerializeField] private string _filePath = "idbfs/aim841104fsdfsdfsdagf";
 
     #region Data Modify
 
@@ -34,7 +35,8 @@ public class SingleGame : MonoBehaviour, IGameMode
     {
         if (GameManager.Instance.GameMode == GameMode.SINGLE_GAME)
         {
-            _fileDataHandler = new FileDataHandler(Application.persistentDataPath, _fileName, _encryptData);
+            // _fileDataHandler = new FileDataHandler(Application.persistentDataPath, _fileName, _encryptData);
+            _fileDataHandler = new FileDataHandler(_filePath, _fileName, _encryptData);
             _singleGameHandler.LoadGame(_fileDataHandler);
         }
     }

@@ -60,5 +60,11 @@
     "Prefs",
     "Scriptable"
   ],
-  "commentTranslate.hover.enabled": true
+  "commentTranslate.hover.enabled": true,
+  "cSpell.ignoreWords": [
+    "asdasdasdsddfwefewwfwef",
+    "dfwefewwfwef",
+    "fsdfsdfsdagf",
+    "idbfs"
+  ]
 }

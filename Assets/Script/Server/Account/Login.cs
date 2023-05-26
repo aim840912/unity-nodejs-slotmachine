@@ -40,7 +40,7 @@ public class Login : AccountBase
         else if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
         {
             // OpenPanel(www.downloadHandler.text);
-            OpenMessagePanel("Error");
+            OpenMessagePanel(www.downloadHandler.text);
         }
 
         www.Dispose();
