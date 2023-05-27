@@ -9,9 +9,9 @@ public class ImageControlRenew : MonoBehaviour
     [SerializeField] private Data _imageData;
     [SerializeField] private float _minDuration = .2f;
     [SerializeField] private float _maxDuration = .5f;
-    [SerializeField] private float _stopTime;
 
-    private float _DotweenLocalMoveDuration;
+    private float _randomDuration { get { return Random.Range(.2f, .5f); } }
+
     private float _topPoint;
     private float _bottomPoint;
 
@@ -20,15 +20,13 @@ public class ImageControlRenew : MonoBehaviour
     private void Start()
     {
         SetDotween();
-
-        _stopTime = Random.Range(0, 2);
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
-            Spin();
+            Rotate();
         }
         if (Input.GetKeyDown(KeyCode.D))
         {
@@ -43,11 +41,9 @@ public class ImageControlRenew : MonoBehaviour
 
         _topPoint = imageHeight;
         _bottomPoint = imageHeight * -1f;
-
-        _DotweenLocalMoveDuration = Random.Range(_minDuration, _maxDuration);
     }
 
-    public void Spin()
+    public void Rotate()
     {
         for (int i = 0; i < _image.Length; i++)
         {
@@ -57,15 +53,14 @@ public class ImageControlRenew : MonoBehaviour
 
     public void Stop(int[] boardNum)
     {
-
-        StartCoroutine(StopRoutine(boardNum));
-
+        StartCoroutine(StopRotate(boardNum));
     }
 
     #region Spin
     private void StartLoop(Image image)
     {
         IsOver = false;
+
         image.transform.DOLocalMoveY(_bottomPoint, Random.Range(_minDuration, _maxDuration), true)
        .SetEase(Ease.InCubic)
        .OnComplete(() => Loop(image));
@@ -89,7 +84,7 @@ public class ImageControlRenew : MonoBehaviour
     #endregion
 
     #region Stop
-    private IEnumerator StopRoutine(int[] boardNum)
+    private IEnumerator StopRotate(int[] boardNum)
     {
         for (var i = 0; i < _image.Length; i++)
         {
@@ -104,7 +99,7 @@ public class ImageControlRenew : MonoBehaviour
     {
         image.transform.DOKill();
 
-        image.transform.DOLocalMoveY(_bottomPoint, _DotweenLocalMoveDuration, true)
+        image.transform.DOLocalMoveY(_bottomPoint, Random.Range(_minDuration, _maxDuration), true)
        .SetEase(Ease.Linear)
        .OnComplete(() => TopPointToOriginPoint(image, boardNum));
     }
