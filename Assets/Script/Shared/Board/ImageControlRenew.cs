@@ -9,8 +9,7 @@ public class ImageControlRenew : MonoBehaviour
     [SerializeField] private Data _imageData;
     [SerializeField] private float _minDuration = .2f;
     [SerializeField] private float _maxDuration = .5f;
-
-    private float _randomDuration { get { return Random.Range(.2f, .5f); } }
+    [SerializeField] private LineControlRenew _lineControl;
 
     private float _topPoint;
     private float _bottomPoint;
@@ -22,19 +21,6 @@ public class ImageControlRenew : MonoBehaviour
         SetDotween();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            Rotate();
-        }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            int[] af = new int[9] { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
-            Stop(af);
-        }
-    }
-
     private void SetDotween()
     {
         float imageHeight = _image[0].rectTransform.rect.size.y;
@@ -43,7 +29,7 @@ public class ImageControlRenew : MonoBehaviour
         _bottomPoint = imageHeight * -1f;
     }
 
-    public void Rotate()
+    public void Spin()
     {
         for (int i = 0; i < _image.Length; i++)
         {
@@ -91,6 +77,8 @@ public class ImageControlRenew : MonoBehaviour
             yield return new WaitForSeconds(Random.Range(0, 0.25f));
             LoopStop(_image[i], boardNum[i]);
         }
+
+        yield return new WaitForSeconds(1.5f);
 
         IsOver = true;
     }
