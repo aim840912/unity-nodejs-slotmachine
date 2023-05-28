@@ -6,7 +6,7 @@ public class SpinRenew : MonoBehaviour
     [SerializeField] private BetButtonControl _betControl;
     [SerializeField] private AutoButtonControl _autoControl;
 
-    [SerializeField] private BoardManager _boardManager;
+    [SerializeField] private BoardManagerRenew _boardManagerRenew;
     private IGameMode _gameMode;
 
     private Coroutine _coroutine = null;
@@ -27,18 +27,18 @@ public class SpinRenew : MonoBehaviour
     {
         _loopStopTime = GetAutoValue() < 1 ? 5f : 2f;
 
-        if (_boardManager.IsOver == true)
+        if (_boardManagerRenew.IsOver == true)
         {
             Rotate();
             yield return new WaitForSeconds(_loopStopTime);
         }
 
-        if (_boardManager.IsOver == false)
+        if (_boardManagerRenew.IsOver == false)
         {
             StopRotate();
         }
 
-        yield return new WaitUntil(() => _boardManager.IsOver == true);
+        yield return new WaitUntil(() => _boardManagerRenew.IsOver == true);
 
         _autoControl.LoopOverOneTime();
 
@@ -55,12 +55,12 @@ public class SpinRenew : MonoBehaviour
             return;
         }
         StartCoroutine(_gameMode.GetServerData(GetBetValue()));
-        _boardManager.Spin();
+        _boardManagerRenew.Spin();
     }
 
     private void StopRotate()
     {
-        StartCoroutine(_boardManager.Stop(_gameMode.BackendData));
+        StartCoroutine(_boardManagerRenew.Stop(_gameMode.BackendData));
     }
 
     private int GetAutoValue() => _autoControl.CurrentValue;

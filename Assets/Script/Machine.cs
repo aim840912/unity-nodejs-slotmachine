@@ -16,6 +16,8 @@ public class Machine : MonoBehaviour
     [SerializeField] private BetButtonControl _betControl;
     [SerializeField] private AutoButtonControl _autoControl;
 
+    [SerializeField] private SpinRenew _spinRenew;
+
     private void Start()
     {
         Init();
@@ -38,6 +40,8 @@ public class Machine : MonoBehaviour
             return;
 
         SpinType().SpinHandler();
+
+        _spinRenew.Spin(GetGameMode());
     }
 
 }
