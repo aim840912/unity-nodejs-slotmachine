@@ -5,54 +5,62 @@ using System.Collections;
 
 public class ImageControl : MonoBehaviour
 {
-    [SerializeField] private Image _image;
+    [SerializeField] private Image[] _image;
     [SerializeField] private Data _imageData;
     [SerializeField] private float _minDuration = .2f;
     [SerializeField] private float _maxDuration = .5f;
-    [SerializeField] private float _stopTime;
 
-    private float _DotweenLocalMoveDuration;
     private float _topPoint;
     private float _bottomPoint;
 
-    public bool IsOver = false;
+    public bool IsOver { get; private set; } = false;
 
     private void Start()
     {
         SetDotween();
-
-        _stopTime = Random.Range(0, 2);
-
-        _image = GetComponent<Image>();
     }
 
     private void SetDotween()
     {
-        float imageHeight = _image.rectTransform.rect.size.y;
+        float imageHeight = _image[0].rectTransform.rect.size.y;
 
         _topPoint = imageHeight;
         _bottomPoint = imageHeight * -1f;
+    }
 
-        _DotweenLocalMoveDuration = Random.Range(_minDuration, _maxDuration);
+    public void Spin()
+    {
+        for (int i = 0; i < _image.Length; i++)
+        {
+            StartLoop(_image[i]);
+        }
+    }
+
+    public void Stop(int[] boardNum)
+    {
+        StartCoroutine(StopRotate(boardNum));
     }
 
     #region Spin
-    public Tween StartLoop()
+    private void StartLoop(Image image)
     {
         IsOver = false;
-        return _image.transform.DOLocalMoveY(_bottomPoint, _DotweenLocalMoveDuration, true)
-        .SetEase(Ease.InCubic)
-        .OnComplete(() => Loop());
+
+        image.transform.DOLocalMoveY(_bottomPoint, SetDuration(_minDuration, _maxDuration), true)
+       .SetEase(Ease.InCubic)
+       .OnComplete(() => Loop(image));
     }
-    private void Loop()
+
+    private void Loop(Image image)
     {
-        _image.transform.localPosition = new Vector3(0, _topPoint, 0);
-        _image.transform
-            .DOLocalMoveY(_bottomPoint, _DotweenLocalMoveDuration, true)
+        image.transform.localPosition = new Vector3(0, _topPoint, 0);
+        image.transform
+            .DOLocalMoveY(_bottomPoint, SetDuration(_minDuration, _maxDuration), true)
             .SetEase(Ease.Linear)
             .SetLoops(-1)
-            .OnStepComplete(() => ChangeSprite(_image));
+            .OnStepComplete(() => ChangeSprite(image));
     }
+
     private void ChangeSprite(Image image)
     {
         int imageIndex = Random.Range(0, _imageData.RollingImage.Length);
@@ -62,27 +70,34 @@ public class ImageControl : MonoBehaviour
     #endregion
 
     #region Stop
-    public IEnumerator StopRoutine(int boardNum)
+    private IEnumerator StopRotate(int[] boardNum)
     {
-        yield return new WaitForSeconds(_stopTime);
-        LoopStop(boardNum);
+        for (var i = 0; i < _image.Length; i++)
+        {
+            yield return new WaitForSeconds(Random.Range(0, 0.25f));
+            LoopStop(_image[i], boardNum[i]);
+        }
+
+        yield return new WaitForSeconds(1.5f);
+
+        IsOver = true;
     }
 
-    private Tween LoopStop(int boardNum)
+    private void LoopStop(Image image, int boardNum)
     {
-        _image.transform.DOKill();
+        image.transform.DOKill();
 
-        return _image.transform.DOLocalMoveY(_bottomPoint, _DotweenLocalMoveDuration, true)
-        .SetEase(Ease.Linear)
-        .OnComplete(() => TopPointToOriginPoint(boardNum));
+        image.transform.DOLocalMoveY(_bottomPoint, SetDuration(_minDuration, _maxDuration), true)
+       .SetEase(Ease.Linear)
+       .OnComplete(() => TopPointToOriginPoint(image, boardNum));
     }
 
-    private void TopPointToOriginPoint(int boardNum)
+    private void TopPointToOriginPoint(Image image, int boardNum)
     {
-        ChangeFinalSprite(_image, boardNum);
-        _image.transform
-            .DOLocalMoveY(0, Random.Range(1, 1.5f), true)
-            .SetEase(Ease.OutBack).OnComplete(() => IsOver = true);
+        ChangeFinalSprite(image, boardNum);
+        image.transform
+            .DOLocalMoveY(0, SetDuration(1, 1.5f), true)
+            .SetEase(Ease.OutBack);
     }
 
     private void ChangeFinalSprite(Image eachImage, int boardNum)
@@ -92,5 +107,8 @@ public class ImageControl : MonoBehaviour
     }
 
     #endregion
+
+    private float SetDuration(float min, float max) => Random.Range(min, max);
+
 
 }

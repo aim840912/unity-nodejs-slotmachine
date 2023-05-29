@@ -8,8 +8,8 @@ public class SingleGame : MonoBehaviour, IGameMode
     private FileDataHandler _fileDataHandler;
     private CalcMultiple _calcMultiple = new CalcMultiple();
 
-    [SerializeField] private string _fileName;
-    [SerializeField] private bool _encryptData;
+    [SerializeField] private string _fileName = "slotMachine";
+    [SerializeField] private bool _encryptData = true;
     [SerializeField] private string _filePath = "idbfs/aim841104fsdfsdfsdagf";
 
     #region Data Modify
@@ -50,7 +50,7 @@ public class SingleGame : MonoBehaviour, IGameMode
         yield return null;
     }
 
-    void GenerateGameBoard(int min, int max)
+    private void GenerateGameBoard(int min, int max)
     {
         int[] slotNumber = new int[9];
 
@@ -62,7 +62,7 @@ public class SingleGame : MonoBehaviour, IGameMode
         BackendData.BoardNum = slotNumber;
     }
 
-    void CalcMoney(int betInputValue)
+    private void CalcMoney(int betInputValue)
     {
         int winMoney = 0;
         int currentMoney = PlayerManager.instance.PlayerData.Money;
@@ -87,7 +87,7 @@ public class SingleGame : MonoBehaviour, IGameMode
             _singleGameHandler.SaveGame(PlayerManager.instance.PlayerData, _fileDataHandler);
     }
 
-    int GetMultiple(int[] boardNum)
+    private int GetMultiple(int[] boardNum)
     {
         int multiple = _calcMultiple.GetMultiples(boardNum);
 

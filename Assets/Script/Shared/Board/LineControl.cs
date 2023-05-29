@@ -1,40 +1,52 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Serializable]
+public struct Line
+{
+    public Image LineImage;
+    public int[] LineIndex;
+}
 public class LineControl : MonoBehaviour
 {
-    [SerializeField] private int[] _lineIndex;
-    [SerializeField] private Image _lineImage;
+    [SerializeField] private Line[] _lineObjs;
 
-    private void Start()
+    public void Spin()
     {
-        _lineImage = GetComponent<Image>();
+        LineDisabled();
     }
 
-    private Odds[] TurnToOddsArray(int[] boardNum)
+    public void Stop(int[] boardNum)
     {
-        Odds[] oddsArray = new Odds[_lineIndex.Length];
+        LineEnabled(boardNum);
+    }
 
-        for (int i = 0; i < _lineIndex.Length; i++)
+    private void LineEnabled(int[] boardNum)
+    {
+        Odds[] newLineIndex;
+        for (int i = 0; i < _lineObjs.Length; i++)
         {
-            oddsArray[i] = (Odds)boardNum[_lineIndex[i]];
+            newLineIndex = new Odds[_lineObjs[i].LineIndex.Length];
+
+            for (var j = 0; j < newLineIndex.Length; j++)
+            {
+                newLineIndex[j] = (Odds)boardNum[_lineObjs[i].LineIndex[j]];
+            }
+
+            _lineObjs[i].LineImage.enabled = IsLineEnabled(newLineIndex);
         }
-
-        return oddsArray;
     }
 
 
-    public void LineEnabled(int[] boardNum)
+    private void LineDisabled()
     {
-        _lineImage.enabled = IsLineEnabled(TurnToOddsArray(boardNum));
+        for (int i = 0; i < _lineObjs.Length; i++)
+        {
+            _lineObjs[i].LineImage.enabled = false;
+        }
     }
 
-    public void LineDisabled()
-    {
-        _lineImage.enabled = false;
-    }
-
-    private bool IsLineEnabled(params Odds[] lineIndex)
+    private bool IsLineEnabled(Odds[] lineIndex)
     {
         if (lineIndex[0] == Odds.hololive)
         {
@@ -44,7 +56,7 @@ public class LineControl : MonoBehaviour
         {
             return true;
         }
-        else if (IsAnyOddsEqualsQuantity(lineIndex))
+        else if (CheckHaveAnyOddsType(lineIndex))
         {
             return true;
         }
@@ -52,10 +64,11 @@ public class LineControl : MonoBehaviour
         return false;
     }
 
-    private bool IsAnyOddsEqualsQuantity(Odds[] odds)
+    private bool CheckHaveAnyOddsType(Odds[] odds)
     {
         int anySevenQuantity = 0;
         int anyBarQuantity = 0;
+        int anyTypeAmount = odds.Length;
 
         for (int i = 0; i < odds.Length; i++)
         {
@@ -69,7 +82,7 @@ public class LineControl : MonoBehaviour
             }
         }
 
-        if (anySevenQuantity == 3 || anyBarQuantity == 3)
+        if (anySevenQuantity == anyTypeAmount || anyBarQuantity == anyTypeAmount)
             return true;
 
         return false;

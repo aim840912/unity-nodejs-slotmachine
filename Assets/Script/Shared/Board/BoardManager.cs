@@ -5,8 +5,8 @@ using TMPro;
 
 public class BoardManager : MonoBehaviour
 {
-    [SerializeField] private ImageManager _imageManager;
-    [SerializeField] private LineManager _lineManager;
+    [SerializeField] private ImageControl _imageControl;
+    [SerializeField] private LineControl _lineControl;
     [SerializeField] private Button _spinBtn;
     [SerializeField] private UiManager _uiManager;
     [SerializeField] private TMP_Text _buttonText;
@@ -15,23 +15,25 @@ public class BoardManager : MonoBehaviour
 
     public void Spin()
     {
-        _imageManager.Spin();
-        _lineManager.Spin();
+        _imageControl.Spin();
+        _lineControl.Spin();
 
         _uiManager.SetWinToZero();
+
+        SetButton(true, "STOP");
 
         IsOver = false;
     }
 
     public IEnumerator Stop(BackendData backendData)
     {
-        SetButton(false, "STOP");
+        SetButton(false, "SPIN");
 
-        _imageManager.Stop(backendData.BoardNum);
+        _imageControl.Stop(backendData.BoardNum);
 
-        yield return new WaitUntil(() => _imageManager.CanNextStep == true);
+        yield return new WaitUntil(() => _imageControl.IsOver == true);
 
-        _lineManager.Stop(backendData.BoardNum);
+        _lineControl.Stop(backendData.BoardNum);
 
         yield return new WaitForSeconds(2f);
 
@@ -40,6 +42,7 @@ public class BoardManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         SetButton(true, "SPIN");
+
         IsOver = true;
     }
 
