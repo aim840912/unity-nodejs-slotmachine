@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Machine : MonoBehaviour
 {
-    [SerializeField] private SingleGame _singleGame;
+    private SingleGame _singleGame = new SingleGame();
     private Online _online = new Online();
 
     [SerializeField] private SpinControl _spinControl;

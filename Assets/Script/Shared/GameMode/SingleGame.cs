@@ -1,53 +1,28 @@
 using System.Collections;
 using UnityEngine;
 
-public class SingleGame : MonoBehaviour, IGameMode
+public class SingleGame : IGameMode
 {
     public BackendData BackendData { get; set; } = new BackendData();
-    private SingleGameHandler _singleGameHandler = new SingleGameHandler();
     private FileDataHandler _fileDataHandler;
     private CalcMultiple _calcMultiple = new CalcMultiple();
 
-    [SerializeField] private string _fileName = "slotMachine";
-    [SerializeField] private bool _encryptData = true;
-    [SerializeField] private string _filePath = "idbfs/aim841104fsdfsdfsdagf";
+    private string _fileName = "slotMachine";
+    private bool _encryptData = true;
+    private string _filePath = "idbfs/aim841104fsdfsdfsdagf";
 
-    #region Data Modify
-
-    [ContextMenu("Delete save file")]
-    private void DeleteSavedData()
+    public SingleGame()
     {
-        _fileDataHandler = new FileDataHandler(Application.persistentDataPath, _fileName, _encryptData);
-        _fileDataHandler.Delete();
-    }
-
-    [ContextMenu("Reset file")]
-    private void ResetSavedData()
-    {
-        PlayerManager.instance.PlayerData.Money = 10000;
-        _singleGameHandler.SaveGame(PlayerManager.instance.PlayerData, _fileDataHandler);
-    }
-
-    #endregion
-
-
-    private void Start()
-    {
-        if (GameManager.Instance.GameMode == GameMode.SINGLE_GAME)
-        {
-            // _fileDataHandler = new FileDataHandler(Application.persistentDataPath, _fileName, _encryptData);
-            _fileDataHandler = new FileDataHandler(_filePath, _fileName, _encryptData);
-            _singleGameHandler.LoadGame(_fileDataHandler);
-        }
+        _fileDataHandler = new FileDataHandler(_filePath, _fileName, _encryptData);
     }
 
     public IEnumerator GetServerData(int betInputValue)
     {
         GenerateGameBoard(0, 10);
 
-        CalcMoney(betInputValue);
-
         yield return null;
+
+        CalcMoney(betInputValue);
     }
 
     private void GenerateGameBoard(int min, int max)
@@ -77,15 +52,9 @@ public class SingleGame : MonoBehaviour, IGameMode
 
         PlayerManager.instance.PlayerData.Money = currentMoney;
 
-        _singleGameHandler.SaveGame(PlayerManager.instance.PlayerData, _fileDataHandler);
+        _fileDataHandler.Save(PlayerManager.instance.PlayerData);
     }
 
-
-    private void OnApplicationQuit()
-    {
-        if (GameManager.Instance.GameMode == GameMode.SINGLE_GAME)
-            _singleGameHandler.SaveGame(PlayerManager.instance.PlayerData, _fileDataHandler);
-    }
 
     private int GetMultiple(int[] boardNum)
     {
