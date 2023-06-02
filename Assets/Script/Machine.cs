@@ -2,12 +2,20 @@ using UnityEngine;
 
 public class Machine : MonoBehaviour
 {
-    private SingleGame _singleGame = new SingleGame();
-    private Online _online = new Online();
-
+    private IGameMode _gameMode;
     [SerializeField] private SpinControl _spinControl;
 
-    private IGameMode GetGameMode() => GameManager.Instance.GameMode == GameMode.ONLINE ? _online : _singleGame;
+    private void Start()
+    {
+        if (GameManager.Instance.GameMode == GameMode.ONLINE)
+        {
+            _gameMode = new Online();
+        }
+        else
+        {
+            _gameMode = new SingleGame();
+        }
+    }
 
     public void Spin()
     {
@@ -16,6 +24,6 @@ public class Machine : MonoBehaviour
             return;
         }
 
-        _spinControl.Spin(GetGameMode());
+        _spinControl.Spin(_gameMode);
     }
 }

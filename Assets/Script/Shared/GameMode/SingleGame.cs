@@ -11,6 +11,9 @@ public class SingleGame : IGameMode
     private bool _encryptData = true;
     private string _filePath = "idbfs/aim841104fsdfsdfsdagf";
 
+    private bool _isGetNum = false;
+    private int[] _boardNum = new int[9];
+
     public SingleGame()
     {
         _fileDataHandler = new FileDataHandler(_filePath, _fileName, _encryptData);
@@ -20,32 +23,29 @@ public class SingleGame : IGameMode
     {
         GenerateGameBoard(0, 10);
 
-        yield return null;
+        yield return new WaitUntil(() => _isGetNum == true);
 
         CalcMoney(betInputValue);
     }
 
     private void GenerateGameBoard(int min, int max)
     {
-        int[] slotNumber = new int[9];
-
-        for (var i = 0; i < slotNumber.Length; i++)
+        _isGetNum = false;
+        for (var i = 0; i < _boardNum.Length; i++)
         {
-            slotNumber[i] = Random.Range(min, max);
+            _boardNum[i] = Random.Range(min, max);
         }
-
-        BackendData.BoardNum = slotNumber;
+        BackendData.BoardNum = _boardNum;
+        _isGetNum = true;
     }
 
     private void CalcMoney(int betInputValue)
     {
-        int winMoney = 0;
-        int currentMoney = PlayerManager.instance.PlayerData.Money;
+        int currentMoney = PlayerManager.instance.GetPlayerMoney();
 
-        winMoney = GetMultiple(BackendData.BoardNum) * betInputValue / 8 - betInputValue;
+        int winMoney = GetMultiple(BackendData.BoardNum) * betInputValue / 8 - betInputValue;
 
         currentMoney += winMoney;
-
 
         BackendData.WinMoney = winMoney;
         BackendData.Money = currentMoney;

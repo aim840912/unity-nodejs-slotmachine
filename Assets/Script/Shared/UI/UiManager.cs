@@ -10,7 +10,7 @@ public class UiManager : MonoBehaviour
 
     private void Start()
     {
-        _playerMoneyText.text = $"{PlayerManager.instance.PlayerMoney}";
+        _playerMoneyText.text = $"{PlayerManager.instance.GetPlayerMoney()}";
     }
 
     public void UpdatedPlayerUI(BackendData backendData)

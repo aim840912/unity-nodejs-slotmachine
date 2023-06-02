@@ -31,7 +31,7 @@ public class Login : AccountBase
         {
             _playerData = JsonUtility.FromJson<PlayerData>(www.downloadHandler.text);
 
-            PlayerManager.instance.UpdatePlayerManager(_playerData);
+            PlayerManager.instance.SetPlayerData(_playerData);
 
             yield return new WaitUntil(() => HasGetPlayerData());
 
@@ -39,7 +39,6 @@ public class Login : AccountBase
         }
         else if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
         {
-            // OpenPanel(www.downloadHandler.text);
             OpenMessagePanel(www.downloadHandler.text);
         }
 

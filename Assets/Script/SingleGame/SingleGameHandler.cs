@@ -46,15 +46,12 @@ public class SingleGameHandler : MonoBehaviour
 
         _isGetData = true;
 
-        PlayerManager.instance.UpdatePlayerManager(PlayerData);
+        PlayerManager.instance.SetPlayerData(PlayerData);
     }
 
     private void NewGame(FileDataHandler fileDataHandler)
     {
         PlayerData = new PlayerData();
-        PlayerData.UserId = "UserId";
-        PlayerData.Name = "Name";
-        PlayerData.Money = 10000;
         SaveGame(PlayerData, fileDataHandler);
     }
 

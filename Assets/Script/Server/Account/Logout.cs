@@ -5,6 +5,6 @@ public class Logout : MonoBehaviour
 {
     public void LogOut()
     {
-        PlayerManager.instance.ResetPlayerManager();
+        PlayerManager.instance.ResetPlayerData();
     }
 }

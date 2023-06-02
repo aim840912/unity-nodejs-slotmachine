@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
-using UnityEngine.SceneManagement;
 
 public abstract class AccountBase : MonoBehaviour
 {
@@ -27,5 +26,4 @@ public abstract class AccountBase : MonoBehaviour
         _messagePanel.SetActive(true);
         _message.text = message;
     }
-
 }
