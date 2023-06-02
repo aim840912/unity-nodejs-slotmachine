@@ -11,8 +11,10 @@ public class SingleGame : IGameMode
     private bool _encryptData = true;
     private string _filePath = "idbfs/aim841104fsdfsdfsdagf";
 
-    private bool _isGetNum = false;
     private int[] _boardNum = new int[9];
+
+    private int _min = 0;
+    private int _max = 10;
 
     public SingleGame()
     {
@@ -21,32 +23,21 @@ public class SingleGame : IGameMode
 
     public IEnumerator GetServerData(int betInputValue)
     {
-        GenerateGameBoard(0, 10);
-
-        yield return new WaitUntil(() => _isGetNum == true);
+        yield return null;
 
         CalcMoney(betInputValue);
     }
 
-    private void GenerateGameBoard(int min, int max)
-    {
-        _isGetNum = false;
-        for (var i = 0; i < _boardNum.Length; i++)
-        {
-            _boardNum[i] = Random.Range(min, max);
-        }
-        BackendData.BoardNum = _boardNum;
-        _isGetNum = true;
-    }
-
     private void CalcMoney(int betInputValue)
     {
-        int currentMoney = PlayerManager.instance.GetPlayerMoney();
+        int[] boardNum = GenerateBoard();
 
-        int winMoney = GetMultiple(BackendData.BoardNum) * betInputValue / 8 - betInputValue;
+        int currentMoney = PlayerManager.instance.GetPlayerMoney();
+        int winMoney = GetMultiple(boardNum) * betInputValue / 8 - betInputValue;
 
         currentMoney += winMoney;
 
+        BackendData.BoardNum = boardNum;
         BackendData.WinMoney = winMoney;
         BackendData.Money = currentMoney;
 
@@ -54,6 +45,17 @@ public class SingleGame : IGameMode
 
         _fileDataHandler.Save(PlayerManager.instance.PlayerData);
     }
+
+
+    private int[] GenerateBoard()
+    {
+        for (var i = 0; i < _boardNum.Length; i++)
+        {
+            _boardNum[i] = Random.Range(_min, _max);
+        }
+        return _boardNum;
+    }
+
 
 
     private int GetMultiple(int[] boardNum)
