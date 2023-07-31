@@ -9,15 +9,11 @@ public class BackendData
 
 public class PlayerData
 {
+    public BackendData BackendData;
     public string UserId;
     public string Name;
     public int Money = 10000;
-    public PlayerData(string userId = "userId", string name = "name", int money = 10000)
-    {
-        this.UserId = userId;
-        this.Name = name;
-        this.Money = money;
-    }
+
 }
 
 public class PlayerManager : MonoBehaviour
@@ -38,6 +34,7 @@ public class PlayerManager : MonoBehaviour
     }
 
     public int GetPlayerMoney() => PlayerData.Money;
+    public string GetPlayerId() => PlayerData.UserId;
 
     public void SetPlayerData(PlayerData playerData)
     {

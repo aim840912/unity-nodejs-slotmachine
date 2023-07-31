@@ -9,6 +9,9 @@ public class ImageControl : MonoBehaviour
     [SerializeField] private Data _imageData;
     [SerializeField] private float _minDuration = .2f;
     [SerializeField] private float _maxDuration = .5f;
+    [SerializeField] private float _stopMinDuration = 1f;
+    [SerializeField] private float _stopMaxDuration = 1.5f;
+    [SerializeField] private float _stopRotateTime = 0.25f;
 
     private float _topPoint;
     private float _bottomPoint;
@@ -46,9 +49,10 @@ public class ImageControl : MonoBehaviour
     {
         IsOver = false;
 
-        image.transform.DOLocalMoveY(_bottomPoint, SetDuration(_minDuration, _maxDuration), true)
-       .SetEase(Ease.InCubic)
-       .OnComplete(() => Loop(image));
+        image.transform
+        .DOLocalMoveY(_bottomPoint, SetDuration(_minDuration, _maxDuration), true)
+        .SetEase(Ease.InCubic)
+        .OnComplete(() => Loop(image));
     }
 
     private void Loop(Image image)
@@ -74,7 +78,7 @@ public class ImageControl : MonoBehaviour
     {
         for (var i = 0; i < _image.Length; i++)
         {
-            yield return new WaitForSeconds(Random.Range(0, 0.25f));
+            yield return new WaitForSeconds(Random.Range(0, _stopRotateTime));
             LoopStop(_image[i], boardNum[i]);
         }
 
@@ -83,20 +87,21 @@ public class ImageControl : MonoBehaviour
         IsOver = true;
     }
 
-    private void LoopStop(Image image, int boardNum)
+    private void LoopStop(Image eachImage, int boardNum)
     {
-        image.transform.DOKill();
+        eachImage.transform.DOKill();
 
-        image.transform.DOLocalMoveY(_bottomPoint, SetDuration(_minDuration, _maxDuration), true)
-       .SetEase(Ease.Linear)
-       .OnComplete(() => TopPointToOriginPoint(image, boardNum));
+        eachImage.transform
+         .DOLocalMoveY(_bottomPoint, SetDuration(_minDuration, _maxDuration), true)
+         .SetEase(Ease.Linear)
+         .OnComplete(() => TopPointToOriginPoint(eachImage, boardNum));
     }
 
-    private void TopPointToOriginPoint(Image image, int boardNum)
+    private void TopPointToOriginPoint(Image eachImage, int boardNum)
     {
-        ChangeFinalSprite(image, boardNum);
-        image.transform
-            .DOLocalMoveY(0, SetDuration(1, 1.5f), true)
+        ChangeFinalSprite(eachImage, boardNum);
+        eachImage.transform
+            .DOLocalMoveY(0, SetDuration(_stopMinDuration, _stopMaxDuration), true)
             .SetEase(Ease.OutBack);
     }
 

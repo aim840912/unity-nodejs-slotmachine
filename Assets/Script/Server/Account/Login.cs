@@ -2,10 +2,19 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
+using TMPro;
 using UnityEngine.SceneManagement;
 
-public class Login : AccountBase
+public class Login : MonoBehaviour
 {
+    [HeaderAttribute("Input Field")]
+    [SerializeField] private TMP_InputField _email;
+    [SerializeField] private TMP_InputField _password;
+
+    [HeaderAttribute("Message")]
+    [SerializeField] private GameObject _messagePanel;
+    [SerializeField] private TMP_Text _message;
+
     private PlayerData _playerData;
     [SerializeField] private Toggle _rememberToggle;
     [SerializeField] private SceneEnum _nextScene;
@@ -15,9 +24,14 @@ public class Login : AccountBase
         _email.text = PlayerPrefs.GetString("email");
     }
 
-    protected override IEnumerator connectToServer()
+    public void ClickToConnectServer()
     {
-        RememberLoginInform();
+        StartCoroutine(connectToServer());
+    }
+
+    private IEnumerator connectToServer()
+    {
+        RememberAccountNumber();
         WWWForm form = new WWWForm();
 
         form.AddField("email", _email.text);
@@ -45,12 +59,10 @@ public class Login : AccountBase
         www.Dispose();
     }
 
-    private bool HasGetPlayerData()
-    {
-        return PlayerManager.instance.PlayerData.UserId == "" ? false : true;
-    }
+    private bool HasGetPlayerData() => PlayerManager.instance.GetPlayerId() == "" ? false : true;
 
-    private void RememberLoginInform()
+
+    private void RememberAccountNumber()
     {
         if (_rememberToggle.isOn)
             PlayerPrefs.SetString("email", _email.text);
@@ -61,5 +73,11 @@ public class Login : AccountBase
     private void LoadToNextScene(SceneEnum sceneEnum)
     {
         SceneManager.LoadScene((int)sceneEnum);
+    }
+
+    private void OpenMessagePanel(string message)
+    {
+        _messagePanel.SetActive(true);
+        _message.text = message;
     }
 }

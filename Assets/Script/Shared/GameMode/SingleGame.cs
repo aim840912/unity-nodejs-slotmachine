@@ -21,14 +21,14 @@ public class SingleGame : IGameMode
         _fileDataHandler = new FileDataHandler(_filePath, _fileName, _encryptData);
     }
 
-    public IEnumerator GetServerData(int betInputValue)
+    public IEnumerator GetBackendData(int betInputValue)
     {
         yield return null;
 
-        CalcMoney(betInputValue);
+        GetData(betInputValue);
     }
 
-    private void CalcMoney(int betInputValue)
+    private void GetData(int betInputValue)
     {
         int[] boardNum = GenerateBoard();
 

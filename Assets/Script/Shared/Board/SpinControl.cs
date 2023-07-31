@@ -48,7 +48,7 @@ public class SpinControl : MonoBehaviour
 
     private void Rotate()
     {
-        StartCoroutine(_gameMode.GetServerData(GetBetValue()));
+        StartCoroutine(_gameMode.GetBackendData(GetBetValue()));
         _boardManager.Spin();
     }
 

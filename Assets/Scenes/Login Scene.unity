@@ -2016,7 +2016,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9ab4ed7625a58c4fab7c3785294df73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: {fileID: 0}
   _email: {fileID: 961332776}
   _password: {fileID: 125117760}
   _messagePanel: {fileID: 278616885}
@@ -2124,8 +2123,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1326706274}
-        m_TargetAssemblyTypeName: SceneSwitch, Assembly-CSharp
-        m_MethodName: LoadToScene
+        m_TargetAssemblyTypeName: SignUp, Assembly-CSharp
+        m_MethodName: OpenUrl
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2182,12 +2181,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1326706269}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fa953b7ad117d347b3c714bb9a355f5, type: 3}
+  m_Script: {fileID: 11500000, guid: 2015a1d7ac4f1e8479d0c95af72ed24d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameMode: 0
-  _button: {fileID: 1326706271}
-  _sceneEnum: 1
 --- !u!1 &1366594445
 GameObject:
   m_ObjectHideFlags: 0

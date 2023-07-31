@@ -6,12 +6,12 @@ public class Online : IGameMode
 {
     public BackendData BackendData { get; set; } = new BackendData();
 
-    public IEnumerator GetServerData(int betInputValue)
+    public IEnumerator GetBackendData(int betInputValue)
     {
         WWWForm form = new WWWForm();
 
         form.AddField("InputValue", betInputValue);
-        form.AddField("userId", PlayerManager.instance.PlayerData.UserId);
+        form.AddField("userId", PlayerManager.instance.GetPlayerId());
 
         UnityWebRequest www = UnityWebRequest.Post(GameManager.Instance.UrlData.MachineUrl, form);
         yield return www.SendWebRequest();
