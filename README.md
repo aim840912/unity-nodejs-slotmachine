@@ -1,3 +1,6 @@
+* 拉霸機
+  * 有分為線上與單機模式
+
 ```csharp
 [ContextMenu("Reset file")]
 private void ResetSavedData()
