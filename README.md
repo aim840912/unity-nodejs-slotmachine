@@ -14,9 +14,9 @@ private void ResetSavedData()
 ```
 ## 技術與結構
 * 前端 (Unity)：
- *  使用 C# 編寫遊戲邏輯。
- * 結合 Unity UI、ShaderLab、HLSL 製作拉霸視覺效果。
+     *  使用 C# 編寫遊戲邏輯。
+     * 結合 Unity UI、ShaderLab、HLSL 製作拉霸視覺效果。
 * 後端 (Node.js)：
- * 提供玩家資料處理與遊戲邏輯服務端功能。
+     * 提供玩家資料處理與遊戲邏輯服務端功能。
 * 資料儲存機制：
- * 單機模式下透過 FileDataHandler 將遊戲資料儲存在本機檔案系統。
+     * 單機模式下透過 FileDataHandler 將遊戲資料儲存在本機檔案系統。
